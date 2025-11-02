@@ -1,29 +1,36 @@
-
-import React from 'react';
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// src/App.jsx
+import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import SplashScreen from './components/SplashScreen';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import StarsBackground from './components/StarsBackground';
 
-function App() {
+export default function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSplash(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <BrowserRouter>
-      <StarsBackground />
-      <div className="app-root" style={{position:'relative',zIndex:1}}>
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <>
+      <AnimatePresence mode="wait">
+        {showSplash && <SplashScreen />}
+      </AnimatePresence>
+
+      {!showSplash && (
+        <>
+          <StarsBackground />
+          <Navbar />
+          <Home />
+          <Footer />
+          <ScrollToTop />
+        </>
+      )}
+    </>
   );
 }
-
-export default App

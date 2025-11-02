@@ -1,78 +1,52 @@
-import React, { useRef, useEffect } from 'react';
+// src/components/Navbar.jsx
+import { useState, useEffect } from 'react';
+import { Moon, Sun } from 'lucide-react';
 
-const STAR_COUNT = 120;
-const STAR_COLOR = 'white';
-const STAR_ACCENT = 'red';
-const STAR_SIZE = [1, 2];
-const STAR_SPEED = [0.1, 0.5];
-
-function randomBetween(a, b) {
-  return a + Math.random() * (b - a);
-}
-
-function createStars(width, height) {
-  return Array.from({ length: STAR_COUNT }, () => ({
-    x: Math.random() * width,
-    y: Math.random() * height,
-    r: randomBetween(STAR_SIZE[0], STAR_SIZE[1]),
-    speed: randomBetween(STAR_SPEED[0], STAR_SPEED[1]),
-    color: Math.random() > 0.8 ? STAR_ACCENT : STAR_COLOR,
-  }));
-}
-
-export default function StarsBackground() {
-  const canvasRef = useRef();
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-    let stars = createStars(width, height);
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      for (let star of stars) {
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
-        ctx.fillStyle = star.color;
-        ctx.globalAlpha = star.color === STAR_ACCENT ? 0.7 : 0.9;
-        ctx.fill();
-        ctx.globalAlpha = 1;
-        star.x += star.speed;
-        if (star.x > width) star.x = 0;
-      }
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    function handleResize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-      stars = createStars(width, height);
-    }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.classList.toggle('dark', dark);
+  }, [dark]);
+
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        zIndex: 0,
-        pointerEvents: 'none',
-        background: 'black',
-      }}
-      aria-hidden="true"
-    />
+    <header style={{
+      position: 'fixed', top: 0, width: '100%', zIndex: 1000,
+      padding: scrolled ? '0.8rem 0' : '1.5rem 0',
+      background: scrolled ? 'rgba(10,15,28,0.95)' : 'transparent',
+      transition: 'all 0.5s ease', backdropFilter: 'blur(15px)',
+      borderBottom: scrolled ? '1px solid rgba(255,255,255,0.1)' : 'none'
+    }}>
+      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <img src="/logo.png" alt="ENSA" style={{ height: '45px' }} />
+          <span style={{ fontWeight: 'bold', fontSize: '1.5rem', color: '#F9B233' }}>Forum ENSA 2025</span>
+        </a>
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '2.2rem' }}>
+          {['Accueil', 'À propos', 'Programme', 'Conférenciers', 'Jury CV', 'Partenaires', 'Contact'].map(item => (
+            <a key={item} href={`#${item.toLowerCase().replace(/ /g, '-')}`} style={{
+              color: '#e2e8f0', textDecoration: 'none', fontWeight: '500',
+              position: 'relative', transition: 'all 0.3s'
+            }}>
+              {item}
+              <span style={{
+                position: 'absolute', bottom: '-8px', left: 0, width: 0, height: '2px',
+                background: '#F9B233', transition: 'width 0.4s'
+              }}></span>
+            </a>
+          ))}
+          <button onClick={() => setDark(!dark)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+            {dark ? <Sun color="#F9B233" size={22} /> : <Moon color="#004AAD" size={22} />}
+          </button>
+        </nav>
+      </div>
+    </header>
   );
 }

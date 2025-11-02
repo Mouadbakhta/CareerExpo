@@ -1,9 +1,7 @@
-import React from 'react'
-
-export default function Button({ children, onClick, type = 'button', className = '' }) {
+export default function Button({ children, variant = 'primary', ...props }) {
   return (
-    <button type={type} onClick={onClick} className={`ce-btn ${className}`} style={{padding:'0.5rem 1rem',borderRadius:6}}>
+    <button className={`btn ${variant === 'outline' ? 'btn-outline' : ''}`} {...props}>
       {children}
     </button>
-  )
+  );
 }
