@@ -9,9 +9,9 @@ export default function Footer() {
       marginTop: '4rem',
       borderTop: '1px solid #333'
     }}>
-      <p>© 2025 Forum ENSA Marrakech. Tous droits réservés.</p>
+      <p>© 2025 Forum CareerExpo Marrakech. Tous droits réservés.</p>
       <p style={{ marginTop: '0.5rem', fontSize: '0.9rem' }}>
-        Développé avec passion par les étudiants de l'ENSA
+        ÉCOLE NATIONALE DES SCIENCES APPLIQUÉES DE MARRAKECH
       </p>
     </footer>
   );

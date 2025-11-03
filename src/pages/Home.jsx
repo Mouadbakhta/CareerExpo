@@ -3,14 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import CountdownTimer from '../components/CountdownTimer';
 import InscriptionModal from '../components/InscriptionModal';
+import ensaBackground from '../assets/ENSA.jpg';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
 
   const partners = [
-    "OCP Group", "Maroc Telecom", "Attijariwafa Bank", "BMCE Bank",
-    "Capgemini", "IBM", "Huawei", "Dell", "Vivo Energy", "Sopra Steria"
-  ].map(name => ({ name, logo: `https://logo.clearbit.com/${name.toLowerCase().replace(/ /g, '')}.com` }));
+    { name: "Stellantis", logo: "/logos/Stellantis.jpg" },
+    { name: "Oracle", logo: "/logos/Oracle.png" }
+  ];
 
   const schedule = [
     { time: "09:00", event: "Accueil & Inscription" },
@@ -38,14 +39,57 @@ export default function Home() {
   return (
     <main style={{ paddingTop: '100px' }}>
 
-      {/* ACCUEIL ROYAL */}
-      <section id="accueil" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+      {/* ACCUEIL ROYAL - AVEC IMAGE EN ARRIÈRE-PLAN */}
+      <section id="accueil" style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        position: 'relative',
+        paddingTop: '2rem',
+        backgroundImage: `url(${ensaBackground})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
+        {/* Overlay léger pour rendre le texte lisible sans trop assombrir */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(to bottom, rgba(10, 15, 28, 0.5) 0%, rgba(10, 15, 28, 0.65) 50%, rgba(10, 15, 28, 0.75) 100%)',
+          zIndex: 1
+        }}></div>
+
         <motion.div
           initial={{ opacity: 0, y: 80 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
+          style={{ position: 'relative', zIndex: 2 }}
         >
-          <h1 className="royal-title">Forum ENSA 2025</h1>
+          <h1 className="royal-title">Forum CareerExpo 2025</h1>
+          <p style={{
+            marginTop: '0.6rem',
+            fontSize: '0.95rem',
+            color: '#94a3b8',
+            letterSpacing: '1px',
+            fontWeight: '600'
+          }}>
+            École Nationale des Sciences AppliquéS  de Marrakech
+          </p>
+          <p style={{
+            marginTop: '0.4rem',
+            fontSize: '1rem',
+            color: '#F9B233',
+            fontWeight: '700',
+            textTransform: 'uppercase'
+          }}>
+            Rendez-vous le 15 et 16 Novembre 2025
+          </p>
           <p style={{
             fontSize: '1.7rem',
             color: '#94a3b8',
@@ -56,7 +100,7 @@ export default function Home() {
           }}>
             <strong>500+ talents</strong> • <strong>30 entreprises leaders</strong> • <strong>1 jour d’opportunités</strong>
           </p>
-          <CountdownTimer />
+          <CountdownTimer targetDate={new Date('2025-11-15T09:00:00')} />
           <div style={{
             display: 'flex',
             gap: '1.5rem',
@@ -87,40 +131,140 @@ export default function Home() {
       {/* À PROPOS */}
       <section id="à-propos" style={{ padding: '7rem 1.5rem' }}>
         <h2 className="section-title">À propos</h2>
-        <p style={{
-          textAlign: 'center',
-          maxWidth: '900px',
-          margin: '0 auto 3rem',
-          color: '#94a3b8',
-          fontSize: '1.1rem',
-          lineHeight: '1.8'
-        }}>
-          <strong>500+ étudiants</strong> • <strong>30 entreprises leaders</strong> • Conférences • Ateliers • Entretiens directs
-        </p>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '2rem'
-        }}>
-          {['Innovation', 'Réseau', 'Opportunités', 'Excellence'].map((item, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.08, rotate: 2 }}
-              className="card"
-              style={{ textAlign: 'center', padding: '2.5rem' }}
-            >
-              <div style={{
-                fontSize: '3.5rem',
-                marginBottom: '1rem',
-                color: '#F9B233',
-                filter: 'drop-shadow(0 0 15px rgba(249,178,51,0.5))'
-              }}>
-                Star
-              </div>
-              <h3 style={{ fontWeight: 'bold', color: '#F9B233', fontSize: '1.4rem' }}>{item}</h3>
-            </motion.div>
-          ))}
-        </div>
+
+        {/* Zone pour les photos */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{
+            maxWidth: '1100px',
+            margin: '0 auto 4rem',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.5rem'
+          }}
+        >
+          {/* Photo 1 */}
+          <div className="card" style={{
+            padding: '0',
+            overflow: 'hidden',
+            height: '250px',
+            background: 'linear-gradient(135deg, rgba(0,74,173,0.3), rgba(249,178,51,0.3))'
+          }}>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '3rem',
+              color: '#F9B233',
+              fontWeight: 'bold'
+            }}>
+              Photo 1
+            </div>
+          </div>
+
+          {/* Photo 2 */}
+          <div className="card" style={{
+            padding: '0',
+            overflow: 'hidden',
+            height: '250px',
+            background: 'linear-gradient(135deg, rgba(249,178,51,0.3), rgba(0,74,173,0.3))'
+          }}>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '3rem',
+              color: '#F9B233',
+              fontWeight: 'bold'
+            }}>
+              Photo 2
+            </div>
+          </div>
+
+          {/* Photo 3 */}
+          <div className="card" style={{
+            padding: '0',
+            overflow: 'hidden',
+            height: '250px',
+            background: 'linear-gradient(135deg, rgba(0,74,173,0.3), rgba(249,178,51,0.3))'
+          }}>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '3rem',
+              color: '#F9B233',
+              fontWeight: 'bold'
+            }}>
+              Photo 3
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Texte détaillé */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="card"
+          style={{
+            maxWidth: '1100px',
+            margin: '0 auto',
+            padding: '3rem',
+            textAlign: 'left'
+          }}
+        >
+          <h3 style={{
+            fontSize: '2rem',
+            fontWeight: '700',
+            color: '#F9B233',
+            marginBottom: '1.5rem',
+            textAlign: 'center'
+          }}>
+            Forum CareerExpo Marrakech 2025
+          </h3>
+
+          <div style={{
+            fontSize: '1.1rem',
+            lineHeight: '1.9',
+            color: '#94a3b8'
+          }}>
+            <p style={{ marginBottom: '1.5rem' }}>
+              Le <strong style={{ color: '#F9B233' }}>Forum CareerExpo Marrakech 2025</strong> est l'événement incontournable qui réunit
+              <strong style={{ color: '#F9B233' }}> plus de 500 étudiants</strong> et <strong style={{ color: '#F9B233' }}>30 entreprises leaders</strong> du
+              Maroc et de l'international. Organisé par l'École Nationale des Sciences Appliquées de Marrakech (ENSA-M),
+              cet événement offre une plateforme unique pour connecter les talents de demain avec les opportunités professionnelles d'aujourd'hui.
+            </p>
+
+            <p style={{ marginBottom: '1.5rem' }}>
+              Notre forum se distingue par sa diversité d'activités : des <strong style={{ color: '#F9B233' }}>conférences inspirantes</strong> animées
+              par des experts de l'industrie, des <strong style={{ color: '#F9B233' }}>ateliers pratiques</strong> sur le développement de carrière,
+              des <strong style={{ color: '#F9B233' }}>sessions de coaching CV</strong> personnalisées, et des <strong style={{ color: '#F9B233' }}>entretiens
+              directs</strong> avec les recruteurs des plus grandes entreprises.
+            </p>
+
+            <p style={{ marginBottom: '1.5rem' }}>
+              Que vous soyez étudiant en quête de votre premier stage, jeune diplômé à la recherche d'opportunités, ou professionnel
+              souhaitant élargir votre réseau, le Forum CareerExpo est l'occasion idéale pour <strong style={{ color: '#F9B233' }}>booster votre
+              carrière</strong>, découvrir les tendances du marché de l'emploi, et rencontrer les acteurs clés de votre secteur.
+            </p>
+
+            <p style={{ marginBottom: '0' }}>
+              Rejoignez-nous le <strong style={{ color: '#F9B233' }}>15 novembre 2025</strong> pour une journée d'échanges, d'apprentissage
+              et d'opportunités qui pourrait transformer votre avenir professionnel !
+            </p>
+          </div>
+        </motion.div>
       </section>
 
       {/* PROGRAMME */}
@@ -224,41 +368,264 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ÉDITIONS PRÉCÉDENTES */}
+      <section id="éditions" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
+        <h2 className="section-title">Éditions Précédentes</h2>
+        <p style={{
+          textAlign: 'center',
+          color: '#94a3b8',
+          fontSize: '1.1rem',
+          maxWidth: '700px',
+          margin: '0 auto 4rem',
+          lineHeight: '1.8'
+        }}>
+          Découvrez les moments forts de nos éditions passées
+        </p>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '2.5rem',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          {[
+            { year: '2020', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500' },
+            { year: '2021', image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=500' },
+            { year: '2022', image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500' },
+            { year: '2023', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=500' },
+            { year: '2024', image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=500' }
+          ].map((edition, i) => (
+            <motion.a
+              key={edition.year}
+              href={`/edition-${edition.year}`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              whileHover={{ scale: 1.05, y: -10 }}
+              className="card"
+              style={{
+                padding: '0',
+                overflow: 'hidden',
+                height: '320px',
+                position: 'relative',
+                cursor: 'pointer',
+                textDecoration: 'none',
+                display: 'block'
+              }}
+            >
+              <img
+                src={edition.image}
+                alt={`Édition ${edition.year}`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                  transition: 'transform 0.5s ease'
+                }}
+              />
+              {/* Overlay avec année */}
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                padding: '2rem',
+                background: 'linear-gradient(to top, rgba(10, 15, 28, 0.95), transparent)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <h3 style={{
+                  color: '#F9B233',
+                  fontSize: '2.5rem',
+                  fontWeight: '900',
+                  margin: 0,
+                  textShadow: '0 2px 10px rgba(249, 178, 51, 0.5)'
+                }}>
+                  {edition.year}
+                </h3>
+                <p style={{
+                  color: '#e2e8f0',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  marginTop: '0.5rem'
+                }}>
+                  Voir l'édition →
+                </p>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+      </section>
+
+      {/* ADMIN - CONNEXION */}
+      <section id="admin" style={{ padding: '7rem 1.5rem' }}>
+        <h2 className="section-title">Espace Admin</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{
+            maxWidth: '500px',
+            margin: '0 auto',
+            padding: '3rem',
+            background: 'rgba(255,255,255,0.08)',
+            backdropFilter: 'blur(15px)',
+            borderRadius: '20px',
+            border: '2px solid rgba(249, 178, 51, 0.3)',
+            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.4)'
+          }}
+        >
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <div style={{
+              width: '80px',
+              height: '80px',
+              margin: '0 auto 1.5rem',
+              background: 'linear-gradient(135deg, #F9B233, #f39c12)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 10px 30px rgba(249, 178, 51, 0.4)'
+            }}>
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0A0F1C" strokeWidth="2.5">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <h3 style={{ color: '#F9B233', fontSize: '1.8rem', fontWeight: '700', marginBottom: '0.5rem' }}>
+              Connexion Admin
+            </h3>
+            <p style={{ color: '#94a3b8', fontSize: '0.95rem' }}>
+              Accédez au tableau de bord administrateur
+            </p>
+          </div>
+
+          <form style={{ display: 'grid', gap: '1.5rem' }}>
+            <div>
+              <label style={{
+                display: 'block',
+                color: '#e2e8f0',
+                marginBottom: '0.5rem',
+                fontWeight: '600',
+                fontSize: '0.95rem'
+              }}>
+                Nom d'utilisateur
+              </label>
+              <input
+                type="text"
+                placeholder="Entrez votre nom d'utilisateur"
+                required
+                style={{
+                  ...inputStyle,
+                  width: '100%'
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{
+                display: 'block',
+                color: '#e2e8f0',
+                marginBottom: '0.5rem',
+                fontWeight: '600',
+                fontSize: '0.95rem'
+              }}>
+                Mot de passe
+              </label>
+              <input
+                type="password"
+                placeholder="Entrez votre mot de passe"
+                required
+                style={{
+                  ...inputStyle,
+                  width: '100%'
+                }}
+              />
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              className="btn btn-gold"
+              style={{
+                width: '100%',
+                marginTop: '1rem',
+                padding: '1.1rem',
+                fontSize: '1.1rem',
+                fontWeight: '700',
+                borderRadius: '50px',
+                background: 'linear-gradient(45deg, #F9B233, #f39c12)',
+                color: '#0A0F1C',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 10px 30px rgba(249, 178, 51, 0.5)',
+                transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)'
+              }}
+            >
+              Connexion
+            </motion.button>
+
+            <p style={{
+              textAlign: 'center',
+              color: '#94a3b8',
+              fontSize: '0.9rem',
+              marginTop: '0.5rem'
+            }}>
+              Mot de passe oublié ? <a href="#" style={{ color: '#F9B233', textDecoration: 'underline' }}>Réinitialiser</a>
+            </p>
+          </form>
+        </motion.div>
+      </section>
+
       {/* PARTENAIRES */}
-      <section id="partenaires" style={{ padding: '7rem 1.5rem' }}>
+      <section id="partenaires" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
         <h2 className="section-title">Partenaires</h2>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-          gap: '2rem',
-          maxWidth: '1100px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '2.5rem',
+          maxWidth: '800px',
           margin: '0 auto'
         }}>
           {partners.map((p, i) => (
             <motion.div
               key={i}
-              whileHover={{ scale: 1.25, rotate: 8 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.2, duration: 0.6 }}
+              whileHover={{ scale: 1.05, y: -5 }}
               className="card"
-              style={{ textAlign: 'center', padding: '1.8rem' }}
+              style={{
+                padding: '0',
+                overflow: 'hidden',
+                height: '200px',
+                position: 'relative'
+              }}
             >
               <img
                 src={p.logo}
                 alt={p.name}
                 style={{
-                  height: '60px',
-                  objectFit: 'contain',
-                  marginBottom: '0.8rem',
-                  filter: 'brightness(0) invert(1)'
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block'
                 }}
               />
-              <p style={{ fontWeight: '600', color: '#F9B233' }}>{p.name}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* CONTACT - UCA MARRAKECH */}
-      <section id="contact" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
+      <section id="contact" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.05)' }}>
         <h2 className="section-title">Contact</h2>
         <div style={{
           maxWidth: '900px',

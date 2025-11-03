@@ -20,6 +20,20 @@ body {
   color: var(--text);
   overflow-x: hidden;
   position: relative;
+  transition: all 0.5s ease;
+}
+
+/* Dark mode (default) */
+body {
+  background: var(--navy);
+}
+
+/* Light mode (gris clair) */
+body.light {
+  /* gris clair neutre */
+  background: #f3f4f6; /* light gray */
+  /* texte sombre pour bon contraste sur fond clair */
+  color: #1f2937;
 }
 
 /* ÉTOILES + PARTICULES */
@@ -168,4 +182,296 @@ body {
   transform: translateY(-15px) scale(1.03);
   box-shadow: 0 30px 60px rgba(0, 74, 173, 0.5);
   border-color: #F9B233;
+}
+
+/* Responsive rules for tablets / mobiles */
+@media (max-width: 1024px) {
+  .royal-title {
+    font-size: 4.2rem;
+  }
+
+  .section-title {
+    font-size: 2.6rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .main-nav {
+    gap: 1.2rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .royal-title {
+    font-size: 3rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .main-nav {
+    gap: 0.8rem !important;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .main-nav a {
+    font-size: 0.95rem;
+  }
+
+  .countdown {
+    gap: 0.9rem;
+  }
+
+  .countdown-box {
+    min-width: 64px !important;
+    font-size: 1.4rem !important;
+    padding: 0.6rem !important;
+    border-radius: 12px !important;
+  }
+
+  /* Stack hero buttons on mobile */
+  section#accueil .btn {
+    width: 100%;
+    max-width: 360px;
+    display: block;
+    margin: 0.6rem auto;
+  }
+}
+
+/* Mobile nav styles */
+@media (max-width: 768px) {
+  .site-header .container { display: flex; align-items: center; gap: 1rem; }
+
+  .mobile-toggle { display: inline-flex !important; }
+
+  .nav-items { display: none; }
+  .nav-items.open {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    background: rgba(10,15,28,0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem 0 1.2rem 0;
+    z-index: 999;
+    align-items: center;
+  }
+
+  .nav-items.open a {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    width: 90%;
+    text-align: center;
+    border-radius: 10px;
+    background: transparent;
+    color: #e2e8f0;
+    margin: 0.2rem 0;
+  }
+
+  .nav-items.open a:hover { background: rgba(249,178,51,0.06); }
+
+  /* Light mode mobile nav */
+  body.light .nav-items.open {
+    background: rgba(243,244,246,0.95);
+  }
+
+  body.light .nav-items.open a {
+    color: #1f2937;
+  }
+
+  body.light .nav-items.open a:hover {
+    background: rgba(249,178,51,0.15);
+  }
+}
+
+@media (max-width: 420px) {
+  .royal-title {
+    font-size: 2.2rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .countdown-box {
+    min-width: 56px !important;
+    font-size: 1.1rem !important;
+    padding: 0.5rem !important;
+  }
+}
+
+/* Improve nav spacing on desktop and prevent wrapping */
+.main-nav a {
+  white-space: nowrap;
+  display: inline-block;
+  padding: 0 0.6rem;
+}
+
+@media (min-width: 1025px) {
+  .main-nav {
+    gap: 2.4rem !important;
+  }
+
+  .main-nav a {
+    margin: 0 0.6rem;
+    font-size: 1.05rem;
+    letter-spacing: 0.2px;
+  }
+}
+
+/* Center hero content on mobile for better visual balance */
+@media (max-width: 768px) {
+  section#accueil {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* Make inner wrapper centered with max-width so content stays centered on small devices */
+  section#accueil > div {
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Ensure the school line and date don't overflow */
+  section#accueil p {
+    max-width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ========================================
+   LIGHT MODE STYLES
+   ======================================== */
+
+/* Light mode card styles */
+body.light .card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 74, 173, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  color: #1f2937;
+}
+
+body.light .card:hover {
+  box-shadow: 0 30px 60px rgba(0, 74, 173, 0.2);
+}
+
+/* Light mode section titles */
+body.light .section-title {
+  color: #004AAD;
+}
+
+/* Light mode text colors */
+body.light h1,
+body.light h2,
+body.light h3,
+body.light h4,
+body.light h5,
+body.light h6 {
+  color: #1f2937;
+}
+
+body.light p {
+  color: #374151;
+}
+
+/* Light mode for countdown timer */
+body.light .countdown-box {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid rgba(0, 74, 173, 0.3) !important;
+  color: #004AAD !important;
+  box-shadow: 0 8px 25px rgba(0, 74, 173, 0.2) !important;
+}
+
+body.light .countdown small {
+  color: #6b7280 !important;
+}
+
+/* Light mode for input fields */
+body.light input,
+body.light textarea,
+body.light select {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(0, 74, 173, 0.2);
+  color: #1f2937;
+}
+
+body.light input::placeholder,
+body.light textarea::placeholder {
+  color: #6b7280;
+}
+
+/* Light mode for buttons - keep gold buttons visible */
+body.light .btn-gold {
+  background: linear-gradient(45deg, #F9B233, #f39c12);
+  color: #0A0F1C;
+  box-shadow: 0 10px 30px rgba(249, 178, 51, 0.4);
+}
+
+body.light .btn-gold:hover {
+  box-shadow: 0 20px 50px rgba(249, 178, 51, 0.6);
+}
+
+/* Light mode for footer */
+body.light footer {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-top: 1px solid rgba(0, 74, 173, 0.2) !important;
+  color: #1f2937 !important;
+}
+
+body.light footer p {
+  color: #1f2937 !important;
+}
+
+/* Light mode for links */
+body.light a {
+  color: #004AAD;
+}
+
+body.light a:hover {
+  color: #F9B233;
+}
+
+/* Light mode for modal overlay */
+body.light .modal-overlay {
+  background: rgba(243, 244, 246, 0.85) !important;
+}
+
+/* Light mode for modal inputs */
+body.light .card input,
+body.light .card textarea,
+body.light .card select {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid rgba(0, 74, 173, 0.2) !important;
+  color: #1f2937 !important;
+}
+
+body.light .card input::placeholder,
+body.light .card textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+body.light .card label {
+  color: #004AAD !important;
+}
+
+body.light .card h2 {
+  color: #F9B233 !important;
 }

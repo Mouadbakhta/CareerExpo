@@ -1,11 +1,11 @@
 // src/components/CountdownTimer.jsx
 import { useState, useEffect } from 'react';
 
-export default function CountdownTimer() {
+export default function CountdownTimer({ targetDate }) {
   const [time, setTime] = useState({ d: 0, h: 0, m: 0, s: 0 });
 
   useEffect(() => {
-    const target = new Date('2025-04-15T09:00:00');
+    const target = targetDate instanceof Date ? targetDate : new Date(targetDate || '2025-11-15T09:00:00');
     const interval = setInterval(() => {
       const diff = target - new Date();
       if (diff > 0) {
@@ -18,13 +18,14 @@ export default function CountdownTimer() {
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [targetDate]);
 
   return (
-    <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', margin: '2rem 0', flexWrap: 'wrap' }}>
+    <div className="countdown" style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', margin: '2rem 0', flexWrap: 'wrap' }}>
       {Object.entries(time).map(([unit, value]) => (
         <div key={unit} style={{ textAlign: 'center' }}>
           <div
+            className="countdown-box"
             style={{
               background: '#004AAD',
               color: 'white',

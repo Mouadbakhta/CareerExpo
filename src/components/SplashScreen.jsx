@@ -23,31 +23,17 @@ export default function SplashScreen() {
     >
       <motion.img
         src="/logo.png"
-        alt="Forum ENSA"
+        alt="Forum CareerExpo"
         initial={{ scale: 0, rotate: 0 }}
         animate={{ scale: 1.3, rotate: 360 }}
         transition={{ duration: 2, ease: 'easeInOut' }}
         style={{
-          width: '180px',  // PLUS GRAND
+          width: '180px',
           height: '180px',
           objectFit: 'contain',
           filter: 'drop-shadow(0 0 30px #F9B233)',
         }}
       />
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        style={{
-          marginTop: '2rem',
-          fontSize: '1.8rem',
-          fontWeight: '700',
-          color: '#F9B233',
-          letterSpacing: '1px',
-        }}
-      >
-        Forum ENSA Marrakech 2025
-      </motion.p>
     </motion.div>
   );
 }

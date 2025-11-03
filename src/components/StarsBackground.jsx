@@ -1,52 +1,69 @@
-// src/components/Navbar.jsx
-import { useState, useEffect } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import React, { useEffect, useRef } from "react";
 
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [dark, setDark] = useState(false);
+export default function StarsBackground({ dark = true }) {
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
 
-  useEffect(() => {
-    document.body.classList.toggle('dark', dark);
+    let stars = [];
+    const numStars = 180;
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Créer des étoiles aléatoires
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.3,
+        speedY: Math.random() * 0.25 + 0.05,
+      });
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Use white stars in dark mode, and dark/black stars in light mode
+      ctx.fillStyle = dark ? 'white' : 'rgba(0,0,0,0.4)';
+
+      stars.forEach((star) => {
+        star.y += star.speedY;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => window.removeEventListener("resize", resizeCanvas);
   }, [dark]);
 
   return (
-    <header style={{
-      position: 'fixed', top: 0, width: '100%', zIndex: 1000,
-      padding: scrolled ? '0.8rem 0' : '1.5rem 0',
-      background: scrolled ? 'rgba(10,15,28,0.95)' : 'transparent',
-      transition: 'all 0.5s ease', backdropFilter: 'blur(15px)',
-      borderBottom: scrolled ? '1px solid rgba(255,255,255,0.1)' : 'none'
-    }}>
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/logo.png" alt="ENSA" style={{ height: '45px' }} />
-          <span style={{ fontWeight: 'bold', fontSize: '1.5rem', color: '#F9B233' }}>Forum ENSA 2025</span>
-        </a>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '2.2rem' }}>
-          {['Accueil', 'À propos', 'Programme', 'Conférenciers', 'Jury CV', 'Partenaires', 'Contact'].map(item => (
-            <a key={item} href={`#${item.toLowerCase().replace(/ /g, '-')}`} style={{
-              color: '#e2e8f0', textDecoration: 'none', fontWeight: '500',
-              position: 'relative', transition: 'all 0.3s'
-            }}>
-              {item}
-              <span style={{
-                position: 'absolute', bottom: '-8px', left: 0, width: 0, height: '2px',
-                background: '#F9B233', transition: 'width 0.4s'
-              }}></span>
-            </a>
-          ))}
-          <button onClick={() => setDark(!dark)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-            {dark ? <Sun color="#F9B233" size={22} /> : <Moon color="#004AAD" size={22} />}
-          </button>
-        </nav>
-      </div>
-    </header>
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        zIndex: -1, // pour être derrière le contenu
+        width: "100%",
+        height: "100%",
+        backgroundColor: "transparent",
+      }}
+    />
   );
 }
