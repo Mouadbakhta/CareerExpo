@@ -1,9 +1,10 @@
 // src/pages/Home.jsx
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CountdownTimer from '../components/CountdownTimer';
 import InscriptionModal from '../components/InscriptionModal';
-import ensaBackground from '../assets/ENSA.jpg';
+
 import { authenticateAdmin, login } from '../utils/auth';
 
 export default function Home({ onAdminLogin }) {
@@ -39,8 +40,17 @@ export default function Home({ onAdminLogin }) {
   };
 
   const partners = [
-    { name: "Stellantis", logo: "/logos/Stellantis.jpg" },
-    { name: "Oracle", logo: "/logos/Oracle.png" }
+    { name: "Stellantis", logo: "/Logos/Stellantis.jpg", website: "https://www.stellantis.com/" },
+    { name: "Oracle", logo: "/Logos/Oracle.png", website: "https://www.oracle.com/" },
+    { name: "Akkodis", logo: "/Logos/akkodis.jpg", website: "https://www.akkodis.com/" },
+    { name: "AVL", logo: "/Logos/avl.png", website: "https://www.avl.com/" },
+    { name: "Bank of Africa", logo: "/Logos/BankOfAfrica.png", website: "https://www.bankofafrica.ma/" },
+    { name: "Capgemini", logo: "/Logos/capgemini.png", website: "https://www.capgemini.com/" },
+    { name: "Inwi", logo: "/Logos/inwi0.jpg", website: "https://www.inwi.ma/" },
+    { name: "Leyton", logo: "/Logos/Leyton.jpg", website: "https://www.leyton.com/" },
+    { name: "Maroc Telecom", logo: "/Logos/MAROCTELECOM.jpg", website: "https://www.iam.ma/" },
+    { name: "OCP Group", logo: "/Logos/ocpjpg.jpg", website: "https://www.ocpgroup.ma/" },
+    { name: "Safy", logo: "/Logos/safy.png", website: "https://www.safy.ma/" }
   ];
 
   const schedule = [
@@ -79,7 +89,7 @@ export default function Home({ onAdminLogin }) {
         textAlign: 'center',
         position: 'relative',
         paddingTop: '2rem',
-        backgroundImage: `url(${ensaBackground})`,
+        backgroundImage: `url(/Logos/ENSAM.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'scroll',
@@ -420,15 +430,14 @@ export default function Home({ onAdminLogin }) {
           margin: '0 auto'
         }}>
           {[
-            { year: '2020', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500' },
-            { year: '2021', image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=500' },
-            { year: '2022', image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500' },
-            { year: '2023', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=500' },
-            { year: '2024', image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=500' }
+            { year: '2020', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500', route: '/edition-2020' },
+            { year: '2021', image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=500', route: '/edition-2021' },
+            { year: '2022', image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500', route: '/edition-2022' },
+            { year: '2023', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=500', route: '/edition-2023' },
+            { year: '2024', image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=500', route: '/edition-2024' }
           ].map((edition, i) => (
-            <motion.a
+            <motion.div
               key={edition.year}
-              href={`/edition-${edition.year}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -440,9 +449,7 @@ export default function Home({ onAdminLogin }) {
                 overflow: 'hidden',
                 height: '320px',
                 position: 'relative',
-                cursor: 'pointer',
-                textDecoration: 'none',
-                display: 'block'
+                cursor: 'pointer'
               }}
             >
               <img
@@ -456,7 +463,6 @@ export default function Home({ onAdminLogin }) {
                   transition: 'transform 0.5s ease'
                 }}
               />
-              {/* Overlay avec année */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
@@ -478,16 +484,41 @@ export default function Home({ onAdminLogin }) {
                 }}>
                   {edition.year}
                 </h3>
-                <p style={{
-                  color: '#e2e8f0',
-                  fontSize: '1rem',
-                  fontWeight: '600',
-                  marginTop: '0.5rem'
-                }}>
-                  Voir l'édition →
-                </p>
               </div>
-            </motion.a>
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'rgba(0, 0, 0, 0.7)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <motion.a
+                  href={edition.route}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{
+                    background: '#F9B233',
+                    color: '#0A0F1C',
+                    padding: '0.8rem 1.5rem',
+                    borderRadius: '25px',
+                    textDecoration: 'none',
+                    fontWeight: '600',
+                    fontSize: '1rem',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Consulter
+                </motion.a>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -495,11 +526,21 @@ export default function Home({ onAdminLogin }) {
       {/* PARTENAIRES */}
       <section id="partenaires" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
         <h2 className="section-title">Partenaires</h2>
+        
+        {/* Logo carousel */}
+        <div className="logo-carousel">
+          <div className="logo-scroll">
+            {partners.concat(partners).map((p, i) => (
+              <img key={i} src={p.logo} alt={p.name} />
+            ))}
+          </div>
+        </div>
+
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '2.5rem',
-          maxWidth: '800px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '1.5rem',
+          maxWidth: '1000px',
           margin: '0 auto'
         }}>
           {partners.map((p, i) => (
@@ -514,8 +555,9 @@ export default function Home({ onAdminLogin }) {
               style={{
                 padding: '0',
                 overflow: 'hidden',
-                height: '200px',
-                position: 'relative'
+                height: '120px',
+                position: 'relative',
+                cursor: 'pointer'
               }}
             >
               <img
@@ -524,10 +566,48 @@ export default function Home({ onAdminLogin }) {
                 style={{
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover',
-                  display: 'block'
+                  objectFit: p.name === 'AVL' ? 'contain' : p.name === 'Safy' ? 'contain' : 'cover',
+                  display: 'block',
+                  backgroundColor: p.name === 'AVL' ? '#f8f9fa' : 'transparent',
+                  padding: p.name === 'Safy' ? '1rem' : '0'
                 }}
               />
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'rgba(0, 0, 0, 0.7)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <motion.a
+                  href={p.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{
+                    background: '#F9B233',
+                    color: '#0A0F1C',
+                    padding: '0.8rem 1.5rem',
+                    borderRadius: '25px',
+                    textDecoration: 'none',
+                    fontWeight: '600',
+                    fontSize: '1rem',
+                    border: 'none',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Consulter
+                </motion.a>
+              </motion.div>
             </motion.div>
           ))}
         </div>

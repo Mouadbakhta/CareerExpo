@@ -66,18 +66,20 @@ body.light {
   font-family: 'Playfair Display', serif;
   font-size: 5.5rem;
   font-weight: 900;
-  background: linear-gradient(90deg, #004AAD, #F9B233, #004AAD);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 200%;
-  animation: gradientText 6s ease infinite;
-  text-shadow: 0 0 30px rgba(249, 178, 51, 0.5);
+  color: #F9B233;
+  animation: blinkGlow 2s ease-in-out infinite alternate;
+  text-shadow: 0 0 20px rgba(249, 178, 51, 0.8), 0 0 40px rgba(249, 178, 51, 0.6), 0 4px 8px rgba(0, 0, 0, 0.8);
 }
 
-@keyframes gradientText {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes blinkGlow {
+  0% { 
+    opacity: 0.8;
+    text-shadow: 0 0 20px rgba(249, 178, 51, 0.6), 0 0 40px rgba(249, 178, 51, 0.4), 0 4px 8px rgba(0, 0, 0, 0.8);
+  }
+  100% { 
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(249, 178, 51, 1), 0 0 60px rgba(249, 178, 51, 0.8), 0 4px 8px rgba(0, 0, 0, 0.8);
+  }
 }
 
 /* SECTION TITLE */
@@ -104,6 +106,41 @@ body.light {
   background: linear-gradient(90deg, transparent, #F9B233, transparent);
   border-radius: 3px;
   box-shadow: 0 0 15px #F9B233;
+}
+
+/* Logo carousel animation */
+.logo-carousel {
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 2rem 0;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem 0;
+  border-radius: 10px;
+}
+
+.logo-scroll {
+  display: inline-flex;
+  animation: scroll 15s linear infinite;
+  gap: 4rem;
+  align-items: center;
+  min-width: 200%;
+}
+
+.logo-scroll img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0.8) contrast(1.2);
+  flex-shrink: 0;
+}
+
+.logo-scroll img:hover {
+  filter: brightness(1) contrast(1);
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* BOUTONS ROYAUX */
@@ -306,6 +343,22 @@ body.light {
     font-size: 1.1rem !important;
     padding: 0.5rem !important;
   }
+
+  /* Extra small screens perfect centering */
+  section {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  section#accueil > div {
+    padding: 0 0.5rem;
+  }
+
+  /* Ensure no horizontal overflow */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 /* Improve nav spacing on desktop and prevent wrapping */
@@ -327,20 +380,44 @@ body.light {
   }
 }
 
-/* Center hero content on mobile for better visual balance */
+/* Perfect mobile centering for all sections */
 @media (max-width: 768px) {
+  /* Ensure body and html take full width */
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Main container centering */
+  main {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* All sections perfect centering */
+  section {
+    width: 100%;
+    margin: 0;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    box-sizing: border-box;
+  }
+
+  /* Hero section specific centering */
   section#accueil {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
+    width: 100% !important;
+    margin: 0 !important;
   }
 
-  /* Make inner wrapper centered with max-width so content stays centered on small devices */
   section#accueil > div {
     width: 100%;
-    max-width: 920px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     padding: 0 1rem;
     box-sizing: border-box;
     display: flex;
@@ -349,11 +426,45 @@ body.light {
     text-align: center;
   }
 
-  /* Ensure the school line and date don't overflow */
-  section#accueil p {
-    max-width: 92%;
-    margin-left: auto;
-    margin-right: auto;
+  /* Text elements centering */
+  section#accueil p,
+  section#accueil h1 {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  /* Button container centering */
+  section#accueil > div > div:last-child {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Grid layouts mobile centering */
+  section div[style*="grid"],
+  section div[style*="display: grid"] {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* Cards and content centering */
+  .card {
+    width: 100%;
+    margin: 0 auto 1.5rem;
+    box-sizing: border-box;
+  }
+
+  /* Section titles centering */
+  .section-title {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto 3rem;
   }
 }
 
