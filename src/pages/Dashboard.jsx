@@ -1,361 +1,243 @@
-import { useState } from 'react';
+// src/pages/Dashboard.jsx
 import { motion } from 'framer-motion';
-import api from '../api/api';
+import { useState, useEffect } from 'react';
+import { logout } from '../utils/auth';
 
-export default function Dashboard() {
-  const [formData, setFormData] = useState({
-    nom: '',
-    prenom: '',
-    niveau: '',
-    filiere: '',
-    ecole: '',
-    email: '',
-    telephone: '',
-  });
+export default function Dashboard({ onLogout }) {
+  const [inscriptions, setInscriptions] = useState([]);
 
-  const [cvFile, setCvFile] = useState(null);
-  const [errors, setErrors] = useState({});
-  const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const filieres = [
-    'Génie Informatique',
-    'Génie Industriel',
-    'Génie Civil',
-    'Génie Électrique',
-    'Data Science & IA',
-    'Cybersécurité',
-    'Management',
-  ];
-
-  const niveaux = [
-    '1ère année',
-    '2ème année',
-    '3ème année',
-    '4ème année',
-    '5ème année',
-    'Master',
-    'Doctorat',
-  ];
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      if (file.type !== 'application/pdf') {
-        setErrors(prev => ({ ...prev, cv: 'Seul le format PDF est autorisé' }));
-        setCvFile(null);
-        return;
-      }
-      if (file.size > 5 * 1024 * 1024) {
-        setErrors(prev => ({ ...prev, cv: 'Le CV ne doit pas dépasser 5 Mo' }));
-        setCvFile(null);
-        return;
-      }
-      setCvFile(file);
-      setErrors(prev => ({ ...prev, cv: '' }));
+  useEffect(() => {
+    // Load inscriptions from localStorage or API
+    const storedInscriptions = localStorage.getItem('careerExpoInscriptions');
+    if (storedInscriptions) {
+      setInscriptions(JSON.parse(storedInscriptions));
     }
-  };
+  }, []);
 
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.nom) newErrors.nom = 'Nom requis';
-    if (!formData.prenom) newErrors.prenom = 'Prénom requis';
-    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email invalide';
-    if (!formData.telephone || formData.telephone.length < 10) newErrors.telephone = 'Téléphone invalide';
-    if (!formData.niveau) newErrors.niveau = 'Niveau requis';
-    if (!formData.filiere) newErrors.filiere = 'Filière requise';
-    if (!formData.ecole) newErrors.ecole = 'École requise';
-    if (!cvFile) newErrors.cv = 'CV (PDF) requis';
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validate()) return;
-
-    setLoading(true);
-    const data = new FormData();
-    data.append('etudiant', new Blob([JSON.stringify(formData)], { type: 'application/json' }));
-    data.append('cv', cvFile);
-
-    try {
-      await api.post('/etudiants', data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-      setSuccess(true);
-      setFormData({
-        nom: '', prenom: '', niveau: '', filiere: '', ecole: '', email: '', telephone: ''
-      });
-      setCvFile(null);
-      setTimeout(() => setSuccess(false), 5000);
-    } catch (err) {
-      alert('Erreur lors de l\'inscription. Veuillez réessayer.');
-    } finally {
-      setLoading(false);
-    }
+  const handleLogout = () => {
+    logout();
+    onLogout();
   };
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="min-h-screen py-20"
-      style={{ paddingTop: '100px' }}
-    >
-      <div className="container">
-        <h1 className="text-center text-4xl font-bold mb-2" style={{
-          background: 'linear-gradient(90deg, #fff, var(--gold))',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent'
-        }}>
-          Inscription Étudiant
-        </h1>
-        <p className="text-center text-lg mb-12" style={{ color: 'var(--muted)' }}>
-          Remplissez le formulaire et déposez votre CV (PDF)
-        </p>
-
-        <motion.form
-          onSubmit={handleSubmit}
-          className="max-w-2xl mx-auto"
-          style={{
-            background: 'var(--card)',
-            padding: '2.5rem',
-            borderRadius: 'var(--radius)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(33, 150, 243, 0.2)'
-          }}
-        >
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+    <main style={{ paddingTop: '100px', minHeight: '100vh', background: '#0A0F1C' }}>
+      {/* HEADER DASHBOARD */}
+      <section style={{ padding: '3rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
             <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', color: '#fff', fontWeight: '500' }}>
-                Nom <span style={{ color: '#f87171' }}>*</span>
-              </label>
-              <input
-                type="text"
-                name="nom"
-                value={formData.nom}
-                onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  borderRadius: '12px',
-                  border: errors.nom ? '2px solid #f87171' : '1px solid rgba(33, 150, 243, 0.5)',
-                  background: '#fff',
-                  color: '#0a1747',
-                  fontSize: '1rem'
-                }}
-              />
-              {errors.nom && <p style={{ color: '#f87171', fontSize: '0.875rem', marginTop: '0.25rem' }}>{errors.nom}</p>}
+              <h1 style={{ color: '#F9B233', fontSize: '2.5rem', fontWeight: '900', marginBottom: '0.5rem' }}>
+                Tableau de Bord Admin
+              </h1>
+              <p style={{ color: '#94a3b8', fontSize: '1.1rem' }}>
+                Gestion des inscriptions CareerExpo 2025
+              </p>
             </div>
-
-            <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', color: '#fff', fontWeight: '500' }}>
-                Prénom <span style={{ color: '#f87171' }}>*</span>
-              </label>
-              <input
-                type="text"
-                name="prenom"
-                value={formData.prenom}
-                onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  borderRadius: '12px',
-                  border: errors.prenom ? '2px solid #f87171' : '1px solid rgba(33, 150, 243, 0.5)',
-                  background: '#fff',
-                  color: '#0a1747'
-                }}
-              />
-              {errors.prenom && <p style={{ color: '#f87171', fontSize: '0.875rem', marginTop: '0.25rem' }}>{errors.prenom}</p>}
-            </div>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', color: '#fff', fontWeight: '500' }}>
-                Niveau <span style={{ color: '#f87171' }}>*</span>
-              </label>
-              <select
-                name="niveau"
-                value={formData.niveau}
-                onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  borderRadius: '12px',
-                  border: errors.niveau ? '2px solid #f87171' : '1px solid rgba(33, 150, 243, 0.5)',
-                  background: '#fff',
-                  color: '#0a1747'
-                }}
-              >
-                <option value="">Sélectionner</option>
-                {niveaux.map(n => <option key={n} value={n}>{n}</option>)}
-              </select>
-              {errors.niveau && <p style={{ color: '#f87171', fontSize: '0.875rem', marginTop: '0.25rem' }}>{errors.niveau}</p>}
-            </div>
-
-            <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', color: '#fff', fontWeight: '500' }}>
-                Filière <span style={{ color: '#f87171' }}>*</span>
-              </label>
-              <select
-                name="filiere"
-                value={formData.filiere}
-                onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  borderRadius: '12px',
-                  border: errors.filiere ? '2px solid #f87171' : '1px solid rgba(33, 150, 243, 0.5)',
-                  background: '#fff',
-                  color: '#0a1747'
-                }}
-              >
-                <option value="">Sélectionner</option>
-                {filieres.map(f => <option key={f} value={f}>{f}</option>)}
-              </select>
-              {errors.filiere && <p style={{ color: '#f87171', fontSize: '0.875rem', marginTop: '0.25rem' }}>{errors.filiere}</p>}
-            </div>
-          </div>
-
-          <div style={{ marginTop: '1.5rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#fff', fontWeight: '500' }}>
-              École <span style={{ color: '#f87171' }}>*</span>
-            </label>
-            <input
-              type="text"
-              name="ecole"
-              value={formData.ecole}
-              onChange={handleChange}
-              placeholder="ex: ENSIAS, EMI, EMSI"
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleLogout}
               style={{
-                width: '100%',
-                padding: '0.75rem 1rem',
-                borderRadius: '12px',
-                border: errors.ecole ? '2px solid #f87171' : '1px solid rgba(33, 150, 243, 0.5)',
-                background: '#fff',
-                color: '#0a1747'
-              }}
-            />
-            {errors.ecole && <p style={{ color: '#f87171', fontSize: '0.875rem', marginTop: '0.25rem' }}>{errors.ecole}</p>}
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', color: '#fff', fontWeight: '500' }}>
-                Email <span style={{ color: '#f87171' }}>*</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  borderRadius: '12px',
-                  border: errors.email ? '2px solid #f87171' : '1px solid rgba(33, 150, 243, 0.5)',
-                  background: '#fff',
-                  color: '#0a1747'
-                }}
-              />
-              {errors.email && <p style={{ color: '#f87171', fontSize: '0.875rem', marginTop: '0.25rem' }}>{errors.email}</p>}
-            </div>
-
-            <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', color: '#fff', fontWeight: '500' }}>
-                Téléphone <span style={{ color: '#f87171' }}>*</span>
-              </label>
-              <input
-                type="tel"
-                name="telephone"
-                value={formData.telephone}
-                onChange={handleChange}
-                placeholder="06 XX XX XX XX"
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  borderRadius: '12px',
-                  border: errors.telephone ? '2px solid #f87171' : '1px solid rgba(33, 150, 243, 0.5)',
-                  background: '#fff',
-                  color: '#0a1747'
-                }}
-              />
-              {errors.telephone && <p style={{ color: '#f87171', fontSize: '0.875rem', marginTop: '0.25rem' }}>{errors.telephone}</p>}
-            </div>
-          </div>
-
-          <div style={{ marginTop: '1.5rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#fff', fontWeight: '500' }}>
-              CV (PDF uniquement, max 5 Mo) <span style={{ color: '#f87171' }}>*</span>
-            </label>
-            <input
-              type="file"
-              accept=".pdf"
-              onChange={handleFileChange}
-              style={{
-                width: '100%',
-                padding: '0.75rem',
-                borderRadius: '12px',
-                border: errors.cv ? '2px solid #f87171' : '1px dashed rgba(33, 150, 243, 0.5)',
-                background: 'rgba(33, 150, 243, 0.05)',
-                color: '#fff'
-              }}
-            />
-            {cvFile && <p style={{ color: '#60a5fa', fontSize: '0.875rem', marginTop: '0.5rem' }}>Fichier : {cvFile.name}</p>}
-            {errors.cv && <p style={{ color: '#f87171', fontSize: '0.875rem', marginTop: '0.25rem' }}>{errors.cv}</p>}
-          </div>
-
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            type="submit"
-            disabled={loading}
-            style={{
-              marginTop: '2rem',
-              width: '100%',
-              padding: '1rem',
-              fontSize: '1.2rem',
-              fontWeight: '600',
-              borderRadius: '50px',
-              background: 'linear-gradient(135deg, var(--gold), #e69c1f)',
-              color: '#0a1747',
-              border: 'none',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              opacity: loading ? 0.7 : 1
-            }}
-          >
-            {loading ? 'Envoi en cours...' : 'Soumettre mon inscription'}
-          </motion.button>
-
-          {success && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              style={{
-                marginTop: '1.5rem',
-                padding: '1rem',
-                background: 'rgba(34, 197, 94, 0.2)',
-                border: '1px solid #22c55e',
-                borderRadius: '12px',
-                color: '#22c55e',
-                textAlign: 'center',
-                fontWeight: '500'
+                background: 'linear-gradient(45deg, #F9B233, #f39c12)',
+                color: '#0A0F1C',
+                border: 'none',
+                padding: '1rem 2rem',
+                borderRadius: '50px',
+                fontSize: '1rem',
+                fontWeight: '700',
+                cursor: 'pointer',
+                boxShadow: '0 10px 30px rgba(249, 178, 51, 0.5)',
+                transition: 'all 0.3s'
               }}
             >
-              Inscription réussie ! Votre badge sera envoyé par email.
+              Déconnexion
+            </motion.button>
+          </div>
+
+          {/* STATS */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '2rem',
+            marginBottom: '3rem'
+          }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="card"
+              style={{
+                textAlign: 'center',
+                padding: '2rem',
+                background: 'linear-gradient(135deg, rgba(249,178,51,0.1), rgba(249,178,51,0.05))',
+                border: '1px solid rgba(249,178,51,0.3)'
+              }}
+            >
+              <h3 style={{ color: '#F9B233', fontSize: '3rem', fontWeight: '900', marginBottom: '0.5rem' }}>
+                {inscriptions.length}
+              </h3>
+              <p style={{ color: '#94a3b8', fontSize: '1.1rem', fontWeight: '600' }}>
+                Inscriptions Totales
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="card"
+              style={{
+                textAlign: 'center',
+                padding: '2rem',
+                background: 'linear-gradient(135deg, rgba(0,74,173,0.1), rgba(0,74,173,0.05))',
+                border: '1px solid rgba(0,74,173,0.3)'
+              }}
+            >
+              <h3 style={{ color: '#004AAD', fontSize: '3rem', fontWeight: '900', marginBottom: '0.5rem' }}>
+                {new Set(inscriptions.map(i => i.filiere)).size}
+              </h3>
+              <p style={{ color: '#94a3b8', fontSize: '1.1rem', fontWeight: '600' }}>
+                Spécialités
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="card"
+              style={{
+                textAlign: 'center',
+                padding: '2rem',
+                background: 'linear-gradient(135deg, rgba(34,197,94,0.1), rgba(34,197,94,0.05))',
+                border: '1px solid rgba(34,197,94,0.3)'
+              }}
+            >
+              <h3 style={{ color: '#22c55e', fontSize: '3rem', fontWeight: '900', marginBottom: '0.5rem' }}>
+                {inscriptions.length > 0 ? '100%' : '0%'}
+              </h3>
+              <p style={{ color: '#94a3b8', fontSize: '1.1rem', fontWeight: '600' }}>
+                Taux de Réussite
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* TABLE INSCRIPTIONS */}
+      <section style={{ padding: '3rem 1.5rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h2 style={{ color: '#F9B233', fontSize: '2rem', fontWeight: '700', marginBottom: '2rem' }}>
+            Liste des Inscriptions
+          </h2>
+
+          {inscriptions.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="card"
+              style={{
+                textAlign: 'center',
+                padding: '4rem 2rem',
+                background: 'rgba(255,255,255,0.05)',
+                backdropFilter: 'blur(10px)'
+              }}
+            >
+              <h3 style={{ color: '#94a3b8', fontSize: '1.5rem', marginBottom: '1rem' }}>
+                Aucune inscription pour le moment
+              </h3>
+              <p style={{ color: '#64748b' }}>
+                Les inscriptions apparaîtront ici une fois que les étudiants se seront inscrits via le formulaire.
+              </p>
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="card"
+              style={{
+                overflow: 'hidden',
+                background: 'rgba(255,255,255,0.05)',
+                backdropFilter: 'blur(10px)'
+              }}
+            >
+              <div style={{
+                overflowX: 'auto',
+                maxHeight: '600px',
+                overflowY: 'auto'
+              }}>
+                <table style={{
+                  width: '100%',
+                  borderCollapse: 'collapse',
+                  fontSize: '0.95rem'
+                }}>
+                  <thead>
+                    <tr style={{
+                      background: 'rgba(249,178,51,0.1)',
+                      position: 'sticky',
+                      top: 0,
+                      zIndex: 1
+                    }}>
+                      <th style={{ padding: '1.5rem 1rem', textAlign: 'left', color: '#F9B233', fontWeight: '700' }}>Nom</th>
+                      <th style={{ padding: '1.5rem 1rem', textAlign: 'left', color: '#F9B233', fontWeight: '700' }}>Prénom</th>
+                      <th style={{ padding: '1.5rem 1rem', textAlign: 'left', color: '#F9B233', fontWeight: '700' }}>Email</th>
+                      <th style={{ padding: '1.5rem 1rem', textAlign: 'left', color: '#F9B233', fontWeight: '700' }}>Téléphone</th>
+                      <th style={{ padding: '1.5rem 1rem', textAlign: 'left', color: '#F9B233', fontWeight: '700' }}>École</th>
+                      <th style={{ padding: '1.5rem 1rem', textAlign: 'left', color: '#F9B233', fontWeight: '700' }}>Niveau</th>
+                      <th style={{ padding: '1.5rem 1rem', textAlign: 'left', color: '#F9B233', fontWeight: '700' }}>Filière</th>
+                      <th style={{ padding: '1.5rem 1rem', textAlign: 'left', color: '#F9B233', fontWeight: '700' }}>CV</th>
+                      <th style={{ padding: '1.5rem 1rem', textAlign: 'left', color: '#F9B233', fontWeight: '700' }}>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {inscriptions.map((inscription, i) => (
+                      <motion.tr
+                        key={inscription.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5 + i * 0.1 }}
+                        style={{
+                          borderBottom: '1px solid rgba(255,255,255,0.1)',
+                          transition: 'background 0.3s'
+                        }}
+                        onMouseEnter={(e) => e.target.closest('tr').style.background = 'rgba(255,255,255,0.05)'}
+                        onMouseLeave={(e) => e.target.closest('tr').style.background = 'transparent'}
+                      >
+                        <td style={{ padding: '1.5rem 1rem', color: '#e2e8f0', fontWeight: '600' }}>{inscription.nom}</td>
+                        <td style={{ padding: '1.5rem 1rem', color: '#e2e8f0', fontWeight: '600' }}>{inscription.prenom}</td>
+                        <td style={{ padding: '1.5rem 1rem', color: '#94a3b8' }}>{inscription.email}</td>
+                        <td style={{ padding: '1.5rem 1rem', color: '#94a3b8' }}>{inscription.telephone}</td>
+                        <td style={{ padding: '1.5rem 1rem', color: '#94a3b8' }}>{inscription.ecole}</td>
+                        <td style={{ padding: '1.5rem 1rem', color: '#94a3b8' }}>{inscription.niveau}</td>
+                        <td style={{ padding: '1.5rem 1rem', color: '#94a3b8' }}>{inscription.filiere}</td>
+                        <td style={{ padding: '1.5rem 1rem' }}>
+                          {inscription.cv ? (
+                            <a
+                              href={inscription.cv}
+                              download
+                              style={{
+                                color: '#F9B233',
+                                textDecoration: 'underline',
+                                fontWeight: '600'
+                              }}
+                            >
+                              Télécharger
+                            </a>
+                          ) : (
+                            <span style={{ color: '#64748b' }}>Non fourni</span>
+                          )}
+                        </td>
+                        <td style={{ padding: '1.5rem 1rem', color: '#94a3b8' }}>{inscription.date}</td>
+                      </motion.tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </motion.div>
           )}
-        </motion.form>
-      </div>
-    </motion.section>
+        </div>
+      </section>
+    </main>
   );
 }

@@ -32,7 +32,7 @@ export default function Navbar({ dark, setDark }) {
   // NOTE: theme is now controlled in App (passed via props).
   // Keep Navbar purely presentational and use `dark` / `setDark` from props.
 
-  // Menu items (SANS "S'inscrire")
+  // Menu items (SANS "S'inscrire" et "Admin" pour le dissimuler)
   const menuItems = [
     { label: 'Accueil', id: 'accueil' },
     { label: 'À propos', id: 'à-propos' },
@@ -40,7 +40,6 @@ export default function Navbar({ dark, setDark }) {
     { label: 'Conférenciers', id: 'conférenciers' },
     { label: 'Jury CV', id: 'jury-cv' },
     { label: 'Éditions', id: 'éditions' },
-    { label: 'Admin', id: 'admin' },
     { label: 'Partenaires', id: 'partenaires' },
     { label: 'Contact', id: 'contact' },
   ];

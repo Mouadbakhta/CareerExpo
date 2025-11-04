@@ -1,12 +1,42 @@
 // src/pages/Home.jsx
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CountdownTimer from '../components/CountdownTimer';
 import InscriptionModal from '../components/InscriptionModal';
 import ensaBackground from '../assets/ENSA.jpg';
+import { authenticateAdmin, login } from '../utils/auth';
 
-export default function Home() {
+export default function Home({ onAdminLogin }) {
   const [showModal, setShowModal] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [adminEmail, setAdminEmail] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+
+  // Raccourci clavier pour afficher/masquer la section admin
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.ctrlKey && e.key === 'B' ) {
+        e.preventDefault();
+        setShowAdmin(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const inputStyle = {
+    padding: '1rem 1.2rem',
+    borderRadius: '14px',
+    border: '2px solid rgba(255,255,255,0.2)',
+    background: 'rgba(255,255,255,0.1)',
+    color: 'white',
+    fontSize: '1rem',
+    outline: 'none',
+    transition: 'all 0.3s',
+    backdropFilter: 'blur(5px)'
+  };
 
   const partners = [
     { name: "Stellantis", logo: "/logos/Stellantis.jpg" },
@@ -52,7 +82,8 @@ export default function Home() {
         backgroundImage: `url(${ensaBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'scroll',
+        backgroundRepeat: 'no-repeat'
       }}>
         {/* Overlay léger pour rendre le texte lisible sans trop assombrir */}
         <div style={{
@@ -98,7 +129,7 @@ export default function Home() {
             lineHeight: '1.8',
             fontWeight: '500'
           }}>
-            <strong>500+ talents</strong> • <strong>30 entreprises leaders</strong> • <strong>1 jour d’opportunités</strong>
+            <strong>500+ talents</strong> • <strong>30 entreprises leaders</strong> • <strong>2 jours d’opportunités</strong>
           </p>
           <CountdownTimer targetDate={new Date('2025-11-15T09:00:00')} />
           <div style={{
@@ -461,128 +492,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ADMIN - CONNEXION */}
-      <section id="admin" style={{ padding: '7rem 1.5rem' }}>
-        <h2 className="section-title">Espace Admin</h2>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          style={{
-            maxWidth: '500px',
-            margin: '0 auto',
-            padding: '3rem',
-            background: 'rgba(255,255,255,0.08)',
-            backdropFilter: 'blur(15px)',
-            borderRadius: '20px',
-            border: '2px solid rgba(249, 178, 51, 0.3)',
-            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.4)'
-          }}
-        >
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <div style={{
-              width: '80px',
-              height: '80px',
-              margin: '0 auto 1.5rem',
-              background: 'linear-gradient(135deg, #F9B233, #f39c12)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 10px 30px rgba(249, 178, 51, 0.4)'
-            }}>
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0A0F1C" strokeWidth="2.5">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </div>
-            <h3 style={{ color: '#F9B233', fontSize: '1.8rem', fontWeight: '700', marginBottom: '0.5rem' }}>
-              Connexion Admin
-            </h3>
-            <p style={{ color: '#94a3b8', fontSize: '0.95rem' }}>
-              Accédez au tableau de bord administrateur
-            </p>
-          </div>
-
-          <form style={{ display: 'grid', gap: '1.5rem' }}>
-            <div>
-              <label style={{
-                display: 'block',
-                color: '#e2e8f0',
-                marginBottom: '0.5rem',
-                fontWeight: '600',
-                fontSize: '0.95rem'
-              }}>
-                Nom d'utilisateur
-              </label>
-              <input
-                type="text"
-                placeholder="Entrez votre nom d'utilisateur"
-                required
-                style={{
-                  ...inputStyle,
-                  width: '100%'
-                }}
-              />
-            </div>
-
-            <div>
-              <label style={{
-                display: 'block',
-                color: '#e2e8f0',
-                marginBottom: '0.5rem',
-                fontWeight: '600',
-                fontSize: '0.95rem'
-              }}>
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                placeholder="Entrez votre mot de passe"
-                required
-                style={{
-                  ...inputStyle,
-                  width: '100%'
-                }}
-              />
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              className="btn btn-gold"
-              style={{
-                width: '100%',
-                marginTop: '1rem',
-                padding: '1.1rem',
-                fontSize: '1.1rem',
-                fontWeight: '700',
-                borderRadius: '50px',
-                background: 'linear-gradient(45deg, #F9B233, #f39c12)',
-                color: '#0A0F1C',
-                border: 'none',
-                cursor: 'pointer',
-                boxShadow: '0 10px 30px rgba(249, 178, 51, 0.5)',
-                transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)'
-              }}
-            >
-              Connexion
-            </motion.button>
-
-            <p style={{
-              textAlign: 'center',
-              color: '#94a3b8',
-              fontSize: '0.9rem',
-              marginTop: '0.5rem'
-            }}>
-              Mot de passe oublié ? <a href="#" style={{ color: '#F9B233', textDecoration: 'underline' }}>Réinitialiser</a>
-            </p>
-          </form>
-        </motion.div>
-      </section>
-
       {/* PARTENAIRES */}
       <section id="partenaires" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
         <h2 className="section-title">Partenaires</h2>
@@ -663,6 +572,178 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ADMIN - CONNEXION */}
+      {showAdmin && (
+        <section id="admin" style={{ padding: '7rem 1.5rem' }}>
+          <h2 className="section-title">Espace Admin</h2>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            style={{
+              maxWidth: '500px',
+              margin: '0 auto',
+              padding: '3rem',
+              background: 'rgba(255,255,255,0.08)',
+              backdropFilter: 'blur(15px)',
+              borderRadius: '20px',
+              border: '2px solid rgba(249, 178, 51, 0.3)',
+              boxShadow: '0 15px 40px rgba(0, 0, 0, 0.4)',
+              position: 'relative'
+            }}
+          >
+            <button
+              onClick={() => setShowAdmin(false)}
+              style={{
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#F9B233',
+                fontSize: '1.5rem',
+                fontWeight: 'bold'
+              }}
+              aria-label="Fermer la section admin"
+            >
+              ×
+            </button>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+              <div style={{
+                width: '80px',
+                height: '80px',
+                margin: '0 auto 1.5rem',
+                background: 'linear-gradient(135deg, #F9B233, #f39c12)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 10px 30px rgba(249, 178, 51, 0.4)'
+              }}>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0A0F1C" strokeWidth="2.5">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+              <h3 style={{ color: '#F9B233', fontSize: '1.8rem', fontWeight: '700', marginBottom: '0.5rem' }}>
+                Connexion Admin
+              </h3>
+              <p style={{ color: '#94a3b8', fontSize: '0.95rem' }}>
+                Accédez au tableau de bord administrateur
+              </p>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setLoginError('');
+                if (authenticateAdmin(adminEmail, adminPassword)) {
+                  login();
+                  onAdminLogin();
+                  setShowAdmin(false);
+                  setAdminEmail('');
+                  setAdminPassword('');
+                } else {
+                  setLoginError('Email ou mot de passe incorrect');
+                }
+              }}
+              style={{ display: 'grid', gap: '1.5rem' }}
+            >
+              <div>
+                <label style={{
+                  display: 'block',
+                  color: '#e2e8f0',
+                  marginBottom: '0.5rem',
+                  fontWeight: '600',
+                  fontSize: '0.95rem'
+                }}>
+                  Email
+                </label>
+                <input
+                  type="email"
+                  placeholder="Entrez votre email"
+                  required
+                  value={adminEmail}
+                  onChange={(e) => setAdminEmail(e.target.value)}
+                  style={{
+                    ...inputStyle,
+                    width: '100%'
+                  }}
+                />
+              </div>
+
+              <div>
+                <label style={{
+                  display: 'block',
+                  color: '#e2e8f0',
+                  marginBottom: '0.5rem',
+                  fontWeight: '600',
+                  fontSize: '0.95rem'
+                }}>
+                  Mot de passe
+                </label>
+                <input
+                  type="password"
+                  placeholder="Entrez votre mot de passe"
+                  required
+                  value={adminPassword}
+                  onChange={(e) => setAdminPassword(e.target.value)}
+                  style={{
+                    ...inputStyle,
+                    width: '100%'
+                  }}
+                />
+              </div>
+
+              {loginError && (
+                <p style={{
+                  color: '#f87171',
+                  fontSize: '0.9rem',
+                  textAlign: 'center',
+                  margin: '0'
+                }}>
+                  {loginError}
+                </p>
+              )}
+
+              <motion.button
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="btn btn-gold"
+                style={{
+                  width: '100%',
+                  marginTop: '1rem',
+                  padding: '1.1rem',
+                  fontSize: '1.1rem',
+                  fontWeight: '700',
+                  borderRadius: '50px',
+                  background: 'linear-gradient(45deg, #F9B233, #f39c12)',
+                  color: '#0A0F1C',
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: '0 10px 30px rgba(249, 178, 51, 0.5)',
+                  transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)'
+                }}
+              >
+                Connexion
+              </motion.button>
+
+              <p style={{
+                textAlign: 'center',
+                color: '#94a3b8',
+                fontSize: '0.9rem',
+                marginTop: '0.5rem'
+              }}>
+                Mot de passe oublié ? <a href="#" style={{ color: '#F9B233', textDecoration: 'underline' }}>Réinitialiser</a>
+              </p>
+            </form>
+          </motion.div>
+        </section>
+      )}
+
       {/* MODAL INSCRIPTION */}
       <AnimatePresence>
         {showModal && <InscriptionModal onClose={() => setShowModal(false)} />}
@@ -671,14 +752,4 @@ export default function Home() {
   );
 }
 
-const inputStyle = {
-  padding: '1rem 1.2rem',
-  borderRadius: '14px',
-  border: '2px solid rgba(255,255,255,0.2)',
-  background: 'rgba(255,255,255,0.1)',
-  color: 'white',
-  fontSize: '1rem',
-  outline: 'none',
-  transition: 'all 0.3s',
-  backdropFilter: 'blur(5px)'
-};
+

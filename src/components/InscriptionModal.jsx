@@ -27,7 +27,13 @@ export default function InscriptionModal({ onClose }) {
         exit={{ scale: 0.8 }}
         onClick={e => e.stopPropagation()}
         className="card"
-        style={{ maxWidth: '520px', width: '90%', padding: '2.5rem' }}
+        style={{
+          maxWidth: '520px',
+          width: '90%',
+          padding: '2.5rem',
+          maxHeight: '90vh',
+          overflowY: 'auto'
+        }}
       >
         <button onClick={onClose} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', cursor: 'pointer' }}>
           <X size={26} color="#aaa" />
@@ -36,18 +42,56 @@ export default function InscriptionModal({ onClose }) {
           S’inscrire au Forum
         </h2>
         <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.2rem' }}>
-          <input type="text" placeholder="Nom complet" required style={inputStyle} />
-          <input type="email" placeholder="Email" required style={inputStyle} />
-          <input type="tel" placeholder="Téléphone" required style={inputStyle} />
-          <select required style={inputStyle}>
-            <option value="">Filière</option>
-            <option>GI</option>
-            <option>GE</option>
-            <option>GC</option>
-            <option>IIA</option>
-          </select>
           <div>
-            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#F9B233', fontWeight: '600' }}>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#F9B233', fontWeight: '600', fontSize: '0.95rem' }}>
+              Nom complet
+            </label>
+            <input type="text" placeholder="Entrez votre nom complet" required style={inputStyle} />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#F9B233', fontWeight: '600', fontSize: '0.95rem' }}>
+              Email
+            </label>
+            <input type="email" placeholder="Entrez votre email" required style={inputStyle} />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#F9B233', fontWeight: '600', fontSize: '0.95rem' }}>
+              Téléphone
+            </label>
+            <input type="tel" placeholder="Entrez votre numéro de téléphone" required style={inputStyle} />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#F9B233', fontWeight: '600', fontSize: '0.95rem' }}>
+              Établissement
+            </label>
+            <select required style={inputStyle}>
+              <option value="">Sélectionnez votre établissement</option>
+              <option>FST</option>
+              <option>ENSA</option>
+              <option>ENS</option>
+              <option>FLSH</option>
+              <option>FSS</option>
+              <option>FSJES</option>
+              <option>FLA</option>
+              <option>FP</option>
+              <option>EST</option>
+            </select>
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#F9B233', fontWeight: '600', fontSize: '0.95rem' }}>
+              Niveau d'études
+            </label>
+            <select required style={inputStyle}>
+              <option value="">Sélectionnez votre niveau</option>
+              <option>BAC + 1</option>
+              <option>BAC + 2</option>
+              <option>BAC + 3</option>
+              <option>BAC + 4</option>
+              <option>BAC + 5</option>
+            </select>
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#F9B233', fontWeight: '600', fontSize: '0.95rem' }}>
               CV (PDF)
             </label>
             <input type="file" accept=".pdf" required style={{ ...inputStyle, padding: '0.8rem' }} />
