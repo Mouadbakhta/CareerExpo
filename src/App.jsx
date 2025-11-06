@@ -6,8 +6,6 @@ import SplashScreen from './components/SplashScreen';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
-import Edition2020 from './pages/Edition2020';
-import Edition2021 from './pages/Edition2021';
 import Edition2022 from './pages/Edition2022';
 import Edition2023 from './pages/Edition2023';
 import Edition2024 from './pages/Edition2024';
@@ -56,8 +54,6 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home onAdminLogin={handleAdminLogin} />} />
             <Route path="/dashboard" element={<Dashboard onLogout={handleAdminLogout} />} />
-            <Route path="/edition-2020" element={<Edition2020 />} />
-            <Route path="/edition-2021" element={<Edition2021 />} />
             <Route path="/edition-2022" element={<Edition2022 />} />
             <Route path="/edition-2023" element={<Edition2023 />} />
             <Route path="/edition-2024" element={<Edition2024 />} />

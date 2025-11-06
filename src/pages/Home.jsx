@@ -53,7 +53,9 @@ export default function Home({ onAdminLogin }) {
     { name: "Safy", logo: "/Logos/safy.png", website: "https://www.safy.ma/" }
   ];
 
-  const schedule = [
+  const [activeDay, setActiveDay] = useState(1);
+
+  const scheduleDay1 = [
     { time: "09:00", event: "Accueil & Inscription" },
     { time: "10:00", event: "Mot d'ouverture", speaker: "Directeur ENSA" },
     { time: "10:30", event: "IA & Innovation", speaker: "Dr. Amine El Khayati" },
@@ -64,10 +66,32 @@ export default function Home({ onAdminLogin }) {
     { time: "17:00", event: "Clôture" },
   ];
 
+  const scheduleDay2 = [
+    { time: "09:00", event: "Accueil participants" },
+    { time: "09:30", event: "Conférence Innovation", speaker: "Alexis Todoskoff" },
+    { time: "10:30", event: "Table ronde" },
+    { time: "11:00", event: "Pause" },
+    { time: "11:30", event: "Ateliers pratiques" },
+    { time: "14:00", event: "Job Dating" },
+    { time: "15:30", event: "Networking" },
+    { time: "16:30", event: "Clôture & Remise certificats" },
+  ];
+
+  const currentSchedule = activeDay === 1 ? scheduleDay1 : scheduleDay2;
+
   const speakers = [
-    { name: "Dr. Amine El Khayati", role: "Expert IA", company: "ENSIAS", photo: "https://i.pravatar.cc/150?img=1" },
-    { name: "Mme. Salma Benali", role: "DRH", company: "OCP Group", photo: "https://i.pravatar.cc/150?img=2" },
-    { name: "M. Youssef Alaoui", role: "CTO", company: "Maroc Telecom", photo: "https://i.pravatar.cc/150?img=3" },
+    { 
+      name: "Alexis Todoskoff", 
+      title: "- Responsable 5a/M2 Qualité Logiciel et SdF\n- Responsable M2 ITVL\n- Coordinateur ENSA-Maroc\n- Polytech Angers\n- Responsable GT Ingénierie des Exigences\n- Responsable des Relations Extérieures\n- CFTL", 
+      photo: "/Conferenciers/Conferiencier1.png",
+      linkedin: "https://www.linkedin.com/in/alexis-todoskoff/"
+    },
+    { 
+      name: "Kamal Reklaoui", 
+      title: "Directeur de l'École Nationale des Sciences Appliquées de Tétouan", 
+      photo: "/Conferenciers/Conferencier2.jpeg",
+      linkedin: "https://www.linkedin.com/in/kamal-reklaoui-b4aaa782/"
+    }
   ];
 
   const jury = [
@@ -281,29 +305,38 @@ export default function Home({ onAdminLogin }) {
             color: '#94a3b8'
           }}>
             <p style={{ marginBottom: '1.5rem' }}>
-              Le <strong style={{ color: '#F9B233' }}>Forum CareerExpo Marrakech 2025</strong> est l'événement incontournable qui réunit
-              <strong style={{ color: '#F9B233' }}> plus de 500 étudiants</strong> et <strong style={{ color: '#F9B233' }}>30 entreprises leaders</strong> du
-              Maroc et de l'international. Organisé par l'École Nationale des Sciences Appliquées de Marrakech (ENSA-M),
-              cet événement offre une plateforme unique pour connecter les talents de demain avec les opportunités professionnelles d'aujourd'hui.
+             Dans le cadre de sa mission d’excellence et d’insertion professionnelle, <strong style={{ color: '#F9B233' }}>l’École Nationale des Sciences Appliquées de Marrakech (ENSA-M)</strong>, à travers ses Clubs étudiants, organise la <strong style={{ color: '#F9B233' }}>cinquième édition du Forum CareerExpo</strong>, les <strong style={{ color: '#F9B233' }}>15 et 16 novembre 2025</strong>, sur le campus de l’établissement.<br /><br />
+             Cet événement d’envergure régionale vise à rapprocher les étudiants ingénieurs de haut niveau des entreprises nationales et internationales, tout en mettant en lumière <strong style={{ color: '#F9B233' }}>les compétences techniques, l’innovation et le professionnalisme</strong> qui caractérisent les diplômés de l’ENSA-M. Plus de <strong style={{ color: '#F9B233' }}>500 étudiants</strong> et <strong style={{ color: '#F9B233' }}>30 entreprises leaders</strong> du Maroc et de l’international se réuniront pour connecter les talents de demain aux opportunités d’aujourd’hui.
             </p>
 
-            <p style={{ marginBottom: '1.5rem' }}>
-              Notre forum se distingue par sa diversité d'activités : des <strong style={{ color: '#F9B233' }}>conférences inspirantes</strong> animées
-              par des experts de l'industrie, des <strong style={{ color: '#F9B233' }}>ateliers pratiques</strong> sur le développement de carrière,
-              des <strong style={{ color: '#F9B233' }}>sessions de coaching CV</strong> personnalisées, et des <strong style={{ color: '#F9B233' }}>entretiens
-              directs</strong> avec les recruteurs des plus grandes entreprises.
-            </p>
+            <h3 style={{ color: '#F9B233', marginBottom: '1rem' }}>Objectifs stratégiques du forum</h3>
 
-            <p style={{ marginBottom: '1.5rem' }}>
-              Que vous soyez étudiant en quête de votre premier stage, jeune diplômé à la recherche d'opportunités, ou professionnel
-              souhaitant élargir votre réseau, le Forum CareerExpo est l'occasion idéale pour <strong style={{ color: '#F9B233' }}>booster votre
-              carrière</strong>, découvrir les tendances du marché de l'emploi, et rencontrer les acteurs clés de votre secteur.
-            </p>
+            <ol style={{ marginBottom: '1.5rem', paddingLeft: '1.5rem' }}>
+            <li style={{ marginBottom: '0.75rem' }}>
+            <strong style={{ color: '#F9B233' }}>Préparer les étudiants à une insertion professionnelle réussie</strong> → Ateliers sur la rédaction de CV, entretiens d’embauche, personal branding, entrepreneuriat et planification de carrière.
+            </li>
+            <li style={{ marginBottom: '0.75rem' }}>
+            <strong style={{ color: '#F9B233' }}>Créer des ponts durables entre étudiants, alumni et recruteurs</strong> → Rencontres directes avec des ingénieurs en poste, DRH, chefs d’entreprise et anciens diplômés pour des échanges concrets sur les métiers et les opportunités.
+           </li>
+           <li style={{ marginBottom: '0.75rem' }}>
+           <strong style={{ color: '#F9B233' }}>Valoriser l’excellence de la formation ENSA-M auprès des entreprises</strong> → Présentation des projets de fin d’études (PFE), travaux de recherche appliquée, startups étudiantes et compétences techniques pointues (IA, cybersécurité, génie industriel, génie électrique, etc.).
+          </li>
+          <li style={{ marginBottom: '0.75rem' }}>
+          <strong style={{ color: '#F9B233' }}>Faciliter le recrutement et les stages</strong> → Stands d’entreprises, job dating, offres de stages et d’emplois, sessions de recrutement express.
+         </li>
+         </ol>
 
-            <p style={{ marginBottom: '0' }}>
-              Rejoignez-nous le <strong style={{ color: '#F9B233' }}>15 novembre 2025</strong> pour une journée d'échanges, d'apprentissage
-              et d'opportunités qui pourrait transformer votre avenir professionnel !
-            </p>
+         <p style={{ marginBottom: '1.5rem' }}>
+          Notre forum se distingue par sa diversité d’activités : des <strong style={{ color: '#F9B233' }}>conférences inspirantes</strong> animées par des experts de l’industrie, des <strong style={{ color: '#F9B233' }}>ateliers pratiques</strong> sur le développement de carrière, des <strong style={{ color: '#F9B233' }}>sessions de coaching CV</strong> personnalisées, et des <strong style={{ color: '#F9B233' }}>entretiens directs</strong> avec les recruteurs des plus grandes entreprises.
+        </p>
+
+        <p style={{ marginBottom: '1.5rem' }}>
+        Que vous soyez étudiant en quête de votre premier stage, jeune diplômé à la recherche d’opportunités, ou professionnel souhaitant élargir votre réseau, le <strong style={{ color: '#F9B233' }}>Forum CareerExpo</strong> est l’occasion idéale pour <strong style={{ color: '#F9B233' }}>booster votre carrière</strong>, découvrir les tendances du marché de l’emploi, et rencontrer les acteurs clés de votre secteur.
+       </p>
+
+       <p style={{ marginBottom: '0' }}>
+       Rejoignez-nous le <strong style={{ color: '#F9B233' }}>15 et 16 novembre 2025</strong> pour deux journées d’échanges, d’apprentissage et d’opportunités qui pourrait transformer votre avenir professionnel !
+      </p>
           </div>
         </motion.div>
       </section>
@@ -311,36 +344,91 @@ export default function Home({ onAdminLogin }) {
       {/* PROGRAMME */}
       <section id="programme" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
         <h2 className="section-title">Programme</h2>
+        
+        {/* Onglets Jour 1 / Jour 2 */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '3rem',
+          gap: '1rem'
+        }}>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setActiveDay(1)}
+            style={{
+              padding: '1rem 2rem',
+              borderRadius: '25px',
+              border: 'none',
+              background: activeDay === 1 ? '#F9B233' : 'rgba(255,255,255,0.1)',
+              color: activeDay === 1 ? '#0A0F1C' : '#F9B233',
+              fontWeight: '600',
+              fontSize: '1rem',
+              cursor: 'pointer',
+              transition: 'all 0.3s'
+            }}
+          >
+            Jour 1 - 15 Nov
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setActiveDay(2)}
+            style={{
+              padding: '1rem 2rem',
+              borderRadius: '25px',
+              border: 'none',
+              background: activeDay === 2 ? '#F9B233' : 'rgba(255,255,255,0.1)',
+              color: activeDay === 2 ? '#0A0F1C' : '#F9B233',
+              fontWeight: '600',
+              fontSize: '1rem',
+              cursor: 'pointer',
+              transition: 'all 0.3s'
+            }}
+          >
+            Jour 2 - 16 Nov
+          </motion.button>
+        </div>
+
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          {schedule.map((item, i) => (
+          <AnimatePresence mode="wait">
             <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="card"
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '1.2rem',
-                padding: '1.8rem',
-                position: 'relative'
-              }}
+              key={activeDay}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
             >
-              <div>
-                <strong style={{ color: '#004AAD', fontSize: '1.2rem' }}>{item.time}</strong>
-                <span style={{ margin: '0 1rem', color: '#F9B233' }}>→</span>
-                <span style={{ fontWeight: '600' }}>{item.event}</span>
-              </div>
-              {item.speaker && (
-                <em style={{ color: '#F9B233', fontStyle: 'italic', fontWeight: '500' }}>
-                  {item.speaker}
-                </em>
-              )}
+              {currentSchedule.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -60 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.6 }}
+                  className="card"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '1.2rem',
+                    padding: '1.8rem',
+                    position: 'relative'
+                  }}
+                >
+                  <div>
+                    <strong style={{ color: '#004AAD', fontSize: '1.2rem' }}>{item.time}</strong>
+                    <span style={{ margin: '0 1rem', color: '#F9B233' }}>→</span>
+                    <span style={{ fontWeight: '600' }}>{item.event}</span>
+                  </div>
+                  {item.speaker && (
+                    <em style={{ color: '#F9B233', fontStyle: 'italic', fontWeight: '500' }}>
+                      {item.speaker}
+                    </em>
+                  )}
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
+          </AnimatePresence>
         </div>
       </section>
 
@@ -349,31 +437,81 @@ export default function Home({ onAdminLogin }) {
         <h2 className="section-title">Conférenciers</h2>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '2.5rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))',
+          gap: '2rem',
+          maxWidth: '1200px',
+          margin: '0 auto'
         }}>
           {speakers.map((s, i) => (
             <motion.div
               key={i}
-              whileHover={{ y: -15, scale: 1.02 }}
-              className="card text-center"
+              whileHover={{ y: -5, scale: 1.01 }}
+              className="card"
+              style={{ 
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '1.5rem',
+                padding: '2rem'
+              }}
             >
-              <motion.img
-                whileHover={{ scale: 1.15 }}
-                src={s.photo}
-                alt={s.name}
-                style={{
-                  width: '140px',
-                  height: '140px',
-                  borderRadius: '50%',
-                  margin: '0 auto 1.5rem',
-                  border: '5px solid #F9B233',
-                  objectFit: 'cover',
-                  boxShadow: '0 0 25px rgba(249,178,51,0.6)'
-                }}
-              />
-              <h3 style={{ color: '#F9B233', fontWeight: 'bold', fontSize: '1.3rem' }}>{s.name}</h3>
-              <p style={{ color: '#94a3b8', fontSize: '1rem' }}>{s.role} • {s.company}</p>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <motion.img
+                  whileHover={{ scale: 1.1 }}
+                  src={s.photo}
+                  alt={s.name}
+                  style={{
+                    width: '150px',
+                    height: '150px',
+                    borderRadius: '50%',
+                    border: '4px solid #F9B233',
+                    objectFit: 'cover',
+                    boxShadow: '0 0 20px rgba(249,178,51,0.4)',
+                    marginBottom: '1rem'
+                  }}
+                />
+                <motion.a
+                  href={s.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    background: '#0077B5',
+                    color: 'white',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '20px',
+                    textDecoration: 'none',
+                    fontWeight: '600',
+                    fontSize: '0.8rem',
+                    transition: 'all 0.3s'
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                  LinkedIn
+                </motion.a>
+              </div>
+              <div style={{ flex: 1 }}>
+                <h3 style={{ 
+                  color: '#F9B233', 
+                  fontWeight: 'bold', 
+                  fontSize: '1.4rem', 
+                  margin: '0 0 1rem 0',
+                  textAlign: 'left'
+                }}>{s.name}</h3>
+                <p style={{ 
+                  color: '#94a3b8', 
+                  fontSize: '0.9rem', 
+                  lineHeight: '1.4',
+                  margin: 0,
+                  textAlign: 'left',
+                  whiteSpace: 'pre-line'
+                }}>{s.title}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -426,14 +564,12 @@ export default function Home({ onAdminLogin }) {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '2.5rem',
-          maxWidth: '1200px',
+          maxWidth: '1000px',
           margin: '0 auto'
         }}>
           {[
-            { year: '2020', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500', route: '/edition-2020' },
-            { year: '2021', image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=500', route: '/edition-2021' },
-            { year: '2022', image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500', route: '/edition-2022' },
-            { year: '2023', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=500', route: '/edition-2023' },
+            { year: '2022', image: '/editions/Edition2022Poster.png', route: '/edition-2022' },
+            { year: '2023', image: '/editions/Edition2023.png', route: '/edition-2023' },
             { year: '2024', image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=500', route: '/edition-2024' }
           ].map((edition, i) => (
             <motion.div

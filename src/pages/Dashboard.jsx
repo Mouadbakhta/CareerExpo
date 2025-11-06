@@ -23,13 +23,30 @@ export default function Dashboard({ onLogout }) {
     { id: 3, url: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400", title: "Photo 3" }
   ]);
   const [editions, setEditions] = useState([
-    { id: 1, year: "2020", photos: [] },
-    { id: 2, year: "2021", photos: [] },
-    { id: 3, year: "2022", photos: [] },
-    { id: 4, year: "2023", photos: [] },
-    { id: 5, year: "2024", photos: [] }
+    { id: 1, year: "2022", photos: [] },
+    { id: 2, year: "2023", photos: [] }
   ]);
   const [cvs, setCvs] = useState([]);
+  const [scheduleDay1, setScheduleDay1] = useState([
+    { id: 1, time: "09:00", event: "Accueil & Inscription", speaker: "" },
+    { id: 2, time: "10:00", event: "Mot d'ouverture", speaker: "Directeur ENSA" },
+    { id: 3, time: "10:30", event: "IA & Innovation", speaker: "Dr. Amine El Khayati" },
+    { id: 4, time: "11:30", event: "Pause Café", speaker: "" },
+    { id: 5, time: "12:00", event: "Atelier CV", speaker: "Recruteurs OCP" },
+    { id: 6, time: "14:00", event: "Entretiens rapides", speaker: "" },
+    { id: 7, time: "16:00", event: "Remise des prix", speaker: "" },
+    { id: 8, time: "17:00", event: "Clôture", speaker: "" }
+  ]);
+  const [scheduleDay2, setScheduleDay2] = useState([
+    { id: 1, time: "09:00", event: "Accueil participants", speaker: "" },
+    { id: 2, time: "09:30", event: "Conférence Innovation", speaker: "Alexis Todoskoff" },
+    { id: 3, time: "10:30", event: "Table ronde", speaker: "" },
+    { id: 4, time: "11:00", event: "Pause", speaker: "" },
+    { id: 5, time: "11:30", event: "Ateliers pratiques", speaker: "" },
+    { id: 6, time: "14:00", event: "Job Dating", speaker: "" },
+    { id: 7, time: "15:30", event: "Networking", speaker: "" },
+    { id: 8, time: "16:30", event: "Clôture & Remise certificats", speaker: "" }
+  ]);
 
   useEffect(() => {
     // Load CVs from localStorage
@@ -122,6 +139,7 @@ export default function Dashboard({ onLogout }) {
         <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
           {[
             { key: 'cvs', label: 'CVs Étudiants' },
+            { key: 'program', label: 'Programme' },
             { key: 'partners', label: 'Partenaires' },
             { key: 'about', label: 'Photos À Propos' },
             { key: 'editions', label: 'Éditions' }
@@ -146,6 +164,97 @@ export default function Dashboard({ onLogout }) {
 
         {/* Content */}
         <div className="card">
+          {/* Program Tab */}
+          {activeTab === 'program' && (
+            <div>
+              <h2 style={{ color: '#F9B233', marginBottom: '2rem' }}>Gestion du Programme</h2>
+              
+              {/* Day 1 */}
+              <div style={{ marginBottom: '3rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                  <h3 style={{ color: '#F9B233' }}>Jour 1 - 15 Novembre ({scheduleDay1.length} créneaux)</h3>
+                  <button 
+                    onClick={() => {
+                      const time = prompt("Heure (ex: 09:00):");
+                      const event = prompt("Événement:");
+                      const speaker = prompt("Intervenant (optionnel):") || "";
+                      if (time && event) {
+                        setScheduleDay1([...scheduleDay1, { id: Date.now(), time, event, speaker }]);
+                      }
+                    }}
+                    className="btn btn-gold"
+                  >
+                    + Ajouter Créneau
+                  </button>
+                </div>
+                <div style={{ display: 'grid', gap: '1rem' }}>
+                  {scheduleDay1.map(item => (
+                    <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
+                      <div>
+                        <strong style={{ color: '#004AAD' }}>{item.time}</strong>
+                        <span style={{ margin: '0 1rem', color: '#F9B233' }}>→</span>
+                        <span>{item.event}</span>
+                        {item.speaker && <em style={{ color: '#F9B233', marginLeft: '1rem' }}>({item.speaker})</em>}
+                      </div>
+                      <button 
+                        onClick={() => {
+                          if (confirm("Supprimer ce créneau?")) {
+                            setScheduleDay1(scheduleDay1.filter(s => s.id !== item.id));
+                          }
+                        }}
+                        style={{ background: '#dc3545', color: 'white', border: 'none', padding: '0.5rem', borderRadius: '5px', cursor: 'pointer' }}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Day 2 */}
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                  <h3 style={{ color: '#F9B233' }}>Jour 2 - 16 Novembre ({scheduleDay2.length} créneaux)</h3>
+                  <button 
+                    onClick={() => {
+                      const time = prompt("Heure (ex: 09:00):");
+                      const event = prompt("Événement:");
+                      const speaker = prompt("Intervenant (optionnel):") || "";
+                      if (time && event) {
+                        setScheduleDay2([...scheduleDay2, { id: Date.now(), time, event, speaker }]);
+                      }
+                    }}
+                    className="btn btn-gold"
+                  >
+                    + Ajouter Créneau
+                  </button>
+                </div>
+                <div style={{ display: 'grid', gap: '1rem' }}>
+                  {scheduleDay2.map(item => (
+                    <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
+                      <div>
+                        <strong style={{ color: '#004AAD' }}>{item.time}</strong>
+                        <span style={{ margin: '0 1rem', color: '#F9B233' }}>→</span>
+                        <span>{item.event}</span>
+                        {item.speaker && <em style={{ color: '#F9B233', marginLeft: '1rem' }}>({item.speaker})</em>}
+                      </div>
+                      <button 
+                        onClick={() => {
+                          if (confirm("Supprimer ce créneau?")) {
+                            setScheduleDay2(scheduleDay2.filter(s => s.id !== item.id));
+                          }
+                        }}
+                        style={{ background: '#dc3545', color: 'white', border: 'none', padding: '0.5rem', borderRadius: '5px', cursor: 'pointer' }}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* CVs Tab */}
           {activeTab === 'cvs' && (
             <div>

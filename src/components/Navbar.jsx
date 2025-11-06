@@ -85,7 +85,7 @@ export default function Navbar({ dark, setDark }) {
             return (
               <a
                 key={item.id}
-                href={`#${item.id}`}
+                href={`/#${item.id}`}
                 style={{
                   color: isActive ? '#F9B233' : (dark ? '#e2e8f0' : '#1f2937'),
                   textDecoration: 'none',
@@ -94,7 +94,18 @@ export default function Navbar({ dark, setDark }) {
                   transition: 'all 0.3s ease',
                   fontSize: '1.05rem'
                 }}
-                onClick={() => setActiveSection(item.id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.location.pathname !== '/') {
+                    window.location.href = `/#${item.id}`;
+                  } else {
+                    const element = document.getElementById(item.id);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                  setActiveSection(item.id);
+                }}
               >
                 {item.label}
 
