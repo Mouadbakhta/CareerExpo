@@ -11,7 +11,7 @@ import Edition2023 from './pages/Edition2023';
 import Edition2024 from './pages/Edition2024';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
-import StarsBackground from './components/StarsBackground';
+
 import { isAuthenticated } from './utils/auth';
 
 export default function App() {
@@ -49,7 +49,7 @@ export default function App() {
 
       {!showSplash && (
         <Router>
-          <StarsBackground dark={dark} />
+
           <Navbar dark={dark} setDark={setDark} />
           <Routes>
             <Route path="/" element={<Home onAdminLogin={handleAdminLogin} />} />

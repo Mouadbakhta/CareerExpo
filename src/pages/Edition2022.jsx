@@ -11,7 +11,7 @@ export default function Edition2022() {
   ];
 
   return (
-    <main style={{ paddingTop: '120px', padding: '2rem 1.5rem' }}>
+    <main style={{ paddingTop: '140px', paddingLeft: '1.5rem', paddingRight: '1.5rem', paddingBottom: '2rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         
         {/* Header with Back Button */}
@@ -23,15 +23,14 @@ export default function Edition2022() {
             display: 'flex', 
             justifyContent: 'space-between', 
             alignItems: 'flex-start', 
-            marginBottom: '3rem', 
-            marginTop: '4rem',
+            marginBottom: '3rem',
             flexWrap: 'wrap',
             gap: '2rem'
           }}
         >
           <h1 style={{ 
-            color: '#F9B233', 
-            fontSize: '2.5rem', 
+            color: '#f0c76e', 
+            fontSize: '1.5rem', 
             fontWeight: '900',
             margin: 0,
             flex: 1,
@@ -44,8 +43,8 @@ export default function Edition2022() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             style={{
-              background: '#F9B233',
-              color: '#0A0F1C',
+              background: '#f0c76e',
+              color: '#0b0b0e',
               border: 'none',
               padding: '0.8rem 1.5rem',
               borderRadius: '25px',
@@ -69,8 +68,8 @@ export default function Edition2022() {
           style={{ textAlign: 'center', marginBottom: '4rem' }}
         >
           <p style={{ 
-            color: '#94a3b8', 
-            fontSize: '1.2rem',
+            color: 'var(--depth-4)', 
+            fontSize: '0.75rem',
             maxWidth: '600px',
             margin: '0 auto'
           }}>
@@ -126,23 +125,23 @@ export default function Edition2022() {
           }}
         >
           <h2 style={{ 
-            color: '#F9B233', 
-            fontSize: '2rem', 
+            color: '#f0c76e', 
+            fontSize: '0.75rem', 
             marginBottom: '2rem',
             textAlign: 'center'
           }}>
             À propos de l'édition 2022
           </h2>
           <div style={{ 
-            color: '#94a3b8', 
-            fontSize: '1.1rem', 
-            lineHeight: '1.8',
+            color: 'var(--depth-4)', 
+            fontSize: '0.65rem', 
+            lineHeight: '1.6',
             textAlign: 'justify'
           }}>
             <p style={{ marginBottom: '1.5rem' }}>
               L'édition 2022 du Forum CareerExpo a marqué un tournant décisif dans l'histoire de notre événement. 
-              Avec plus de <strong style={{ color: '#F9B233' }}>400 participants</strong> et 
-              <strong style={{ color: '#F9B233' }}> 25 entreprises partenaires</strong>, cette édition a battu tous les records de participation.
+              Avec plus de <strong style={{ color: '#f0c76e' }}>400 participants</strong> et 
+              <strong style={{ color: '#f0c76e' }}> 25 entreprises partenaires</strong>, cette édition a battu tous les records de participation.
             </p>
             <p style={{ marginBottom: '1.5rem' }}>
               Les étudiants ont eu l'opportunité de rencontrer des recruteurs de grandes entreprises nationales et internationales, 
@@ -151,8 +150,8 @@ export default function Edition2022() {
             </p>
             <p style={{ marginBottom: '1.5rem' }}>
               Cette édition s'est distinguée par la qualité des échanges entre étudiants et professionnels, 
-              avec un taux de satisfaction de <strong style={{ color: '#F9B233' }}>95%</strong> et plus de 
-              <strong style={{ color: '#F9B233' }}> 150 offres de stage</strong> proposées sur place.
+              avec un taux de satisfaction de <strong style={{ color: '#f0c76e' }}>95%</strong> et plus de 
+              <strong style={{ color: '#f0c76e' }}> 150 offres de stage</strong> proposées sur place.
             </p>
             <p>
               Les moments forts incluaient la conférence d'ouverture sur "L'avenir du travail à l'ère numérique", 
@@ -177,13 +176,13 @@ export default function Edition2022() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '1rem',
-              background: '#F9B233',
-              color: '#0A0F1C',
+              background: '#f0c76e',
+              color: '#0b0b0e',
               padding: '1.2rem 2.5rem',
               borderRadius: '30px',
               textDecoration: 'none',
               fontWeight: '700',
-              fontSize: '1.1rem',
+              fontSize: '0.65rem',
               cursor: 'pointer',
               transition: 'all 0.3s',
               boxShadow: '0 10px 30px rgba(249, 178, 51, 0.3)'

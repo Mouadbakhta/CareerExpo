@@ -129,7 +129,7 @@ export default function Dashboard({ onLogout }) {
     <div style={{ paddingTop: '100px', minHeight: '100vh', padding: '2rem' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-          <h1 style={{ color: '#F9B233', fontSize: '2.5rem', fontWeight: 'bold' }}>Dashboard Admin</h1>
+          <h1 style={{ color: 'var(--violet)', fontSize: '2.5rem', fontWeight: 'bold' }}>Dashboard Admin</h1>
           <button onClick={handleLogout} className="btn btn-gold">
             Déconnexion
           </button>
@@ -151,8 +151,8 @@ export default function Dashboard({ onLogout }) {
                 padding: '0.8rem 1.5rem',
                 borderRadius: '10px',
                 border: 'none',
-                background: activeTab === tab.key ? '#F9B233' : 'rgba(255,255,255,0.1)',
-                color: activeTab === tab.key ? '#0A0F1C' : '#e2e8f0',
+                background: activeTab === tab.key ? 'var(--violet)' : 'rgba(255,255,255,0.1)',
+                color: activeTab === tab.key ? 'var(--bg)' : '#e2e8f0',
                 cursor: 'pointer',
                 fontWeight: '600'
               }}
@@ -167,12 +167,12 @@ export default function Dashboard({ onLogout }) {
           {/* Program Tab */}
           {activeTab === 'program' && (
             <div>
-              <h2 style={{ color: '#F9B233', marginBottom: '2rem' }}>Gestion du Programme</h2>
+              <h2 style={{ color: 'var(--violet)', marginBottom: '2rem' }}>Gestion du Programme</h2>
               
               {/* Day 1 */}
               <div style={{ marginBottom: '3rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h3 style={{ color: '#F9B233' }}>Jour 1 - 15 Novembre ({scheduleDay1.length} créneaux)</h3>
+                  <h3 style={{ color: 'var(--violet)' }}>Jour 1 - 15 Novembre ({scheduleDay1.length} créneaux)</h3>
                   <button 
                     onClick={() => {
                       const time = prompt("Heure (ex: 09:00):");
@@ -191,10 +191,10 @@ export default function Dashboard({ onLogout }) {
                   {scheduleDay1.map(item => (
                     <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
                       <div>
-                        <strong style={{ color: '#004AAD' }}>{item.time}</strong>
-                        <span style={{ margin: '0 1rem', color: '#F9B233' }}>→</span>
+                        <strong style={{ color: 'var(--depth-4)' }}>{item.time}</strong>
+                        <span style={{ margin: '0 1rem', color: 'var(--violet)' }}>→</span>
                         <span>{item.event}</span>
-                        {item.speaker && <em style={{ color: '#F9B233', marginLeft: '1rem' }}>({item.speaker})</em>}
+                        {item.speaker && <em style={{ color: 'var(--violet)', marginLeft: '1rem' }}>({item.speaker})</em>}
                       </div>
                       <button 
                         onClick={() => {
@@ -214,7 +214,7 @@ export default function Dashboard({ onLogout }) {
               {/* Day 2 */}
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h3 style={{ color: '#F9B233' }}>Jour 2 - 16 Novembre ({scheduleDay2.length} créneaux)</h3>
+                  <h3 style={{ color: 'var(--violet)' }}>Jour 2 - 16 Novembre ({scheduleDay2.length} créneaux)</h3>
                   <button 
                     onClick={() => {
                       const time = prompt("Heure (ex: 09:00):");
@@ -233,10 +233,10 @@ export default function Dashboard({ onLogout }) {
                   {scheduleDay2.map(item => (
                     <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
                       <div>
-                        <strong style={{ color: '#004AAD' }}>{item.time}</strong>
-                        <span style={{ margin: '0 1rem', color: '#F9B233' }}>→</span>
+                        <strong style={{ color: 'var(--depth-4)' }}>{item.time}</strong>
+                        <span style={{ margin: '0 1rem', color: 'var(--violet)' }}>→</span>
                         <span>{item.event}</span>
-                        {item.speaker && <em style={{ color: '#F9B233', marginLeft: '1rem' }}>({item.speaker})</em>}
+                        {item.speaker && <em style={{ color: 'var(--violet)', marginLeft: '1rem' }}>({item.speaker})</em>}
                       </div>
                       <button 
                         onClick={() => {
@@ -258,25 +258,25 @@ export default function Dashboard({ onLogout }) {
           {/* CVs Tab */}
           {activeTab === 'cvs' && (
             <div>
-              <h2 style={{ color: '#F9B233', marginBottom: '2rem' }}>Liste des CVs ({cvs.length})</h2>
+              <h2 style={{ color: 'var(--violet)', marginBottom: '2rem' }}>Liste des CVs ({cvs.length})</h2>
               {cvs.length === 0 ? (
-                <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '1.2rem', padding: '3rem' }}>
+                <p style={{ textAlign: 'center', color: 'var(--depth-4)', fontSize: '1.2rem', padding: '3rem' }}>
                   Aucun CV enregistré pour le moment
                 </p>
               ) : (
                 <div style={{ overflowX: 'auto' }}>
                   <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
-                      <tr style={{ borderBottom: '2px solid #F9B233' }}>
-                        <th style={{ padding: '1rem', textAlign: 'left', color: '#F9B233' }}>Nom</th>
-                        <th style={{ padding: '1rem', textAlign: 'left', color: '#F9B233' }}>Prénom</th>
-                        <th style={{ padding: '1rem', textAlign: 'left', color: '#F9B233' }}>Email</th>
-                        <th style={{ padding: '1rem', textAlign: 'left', color: '#F9B233' }}>Téléphone</th>
-                        <th style={{ padding: '1rem', textAlign: 'left', color: '#F9B233' }}>École</th>
-                        <th style={{ padding: '1rem', textAlign: 'left', color: '#F9B233' }}>Niveau</th>
-                        <th style={{ padding: '1rem', textAlign: 'left', color: '#F9B233' }}>Filière</th>
-                        <th style={{ padding: '1rem', textAlign: 'left', color: '#F9B233' }}>CV</th>
-                        <th style={{ padding: '1rem', textAlign: 'left', color: '#F9B233' }}>Date</th>
+                      <tr style={{ borderBottom: '2px solid var(--violet)' }}>
+                        <th style={{ padding: '1rem', textAlign: 'left', color: 'var(--violet)' }}>Nom</th>
+                        <th style={{ padding: '1rem', textAlign: 'left', color: 'var(--violet)' }}>Prénom</th>
+                        <th style={{ padding: '1rem', textAlign: 'left', color: 'var(--violet)' }}>Email</th>
+                        <th style={{ padding: '1rem', textAlign: 'left', color: 'var(--violet)' }}>Téléphone</th>
+                        <th style={{ padding: '1rem', textAlign: 'left', color: 'var(--violet)' }}>École</th>
+                        <th style={{ padding: '1rem', textAlign: 'left', color: 'var(--violet)' }}>Niveau</th>
+                        <th style={{ padding: '1rem', textAlign: 'left', color: 'var(--violet)' }}>Filière</th>
+                        <th style={{ padding: '1rem', textAlign: 'left', color: 'var(--violet)' }}>CV</th>
+                        <th style={{ padding: '1rem', textAlign: 'left', color: 'var(--violet)' }}>Date</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -291,11 +291,11 @@ export default function Dashboard({ onLogout }) {
                           <td style={{ padding: '1rem' }}>{cv.filiere}</td>
                           <td style={{ padding: '1rem' }}>
                             {cv.cv ? (
-                              <a href={cv.cv} style={{ color: '#F9B233', textDecoration: 'underline' }}>
+                              <a href={cv.cv} style={{ color: 'var(--violet)', textDecoration: 'underline' }}>
                                 Télécharger
                               </a>
                             ) : (
-                              <span style={{ color: '#94a3b8' }}>Non fourni</span>
+                              <span style={{ color: 'var(--depth-4)' }}>Non fourni</span>
                             )}
                           </td>
                           <td style={{ padding: '1rem' }}>{cv.date}</td>
@@ -312,7 +312,7 @@ export default function Dashboard({ onLogout }) {
           {activeTab === 'partners' && (
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <h2 style={{ color: '#F9B233' }}>Gestion des Partenaires ({partners.length})</h2>
+                <h2 style={{ color: 'var(--violet)' }}>Gestion des Partenaires ({partners.length})</h2>
                 <button onClick={addPartner} className="btn btn-gold">
                   + Ajouter Partenaire
                 </button>
@@ -321,7 +321,7 @@ export default function Dashboard({ onLogout }) {
                 {partners.map(partner => (
                   <div key={partner.id} className="card" style={{ padding: '1rem' }}>
                     <img src={partner.logo} alt={partner.name} style={{ width: '100%', height: '100px', objectFit: 'contain', marginBottom: '1rem' }} />
-                    <h3 style={{ color: '#F9B233', marginBottom: '0.5rem' }}>{partner.name}</h3>
+                    <h3 style={{ color: 'var(--violet)', marginBottom: '0.5rem' }}>{partner.name}</h3>
                     <p style={{ fontSize: '0.9rem', marginBottom: '1rem', wordBreak: 'break-all' }}>{partner.website}</p>
                     <button onClick={() => deletePartner(partner.id)} style={{ background: '#dc3545', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '5px', cursor: 'pointer' }}>
                       Supprimer
@@ -336,7 +336,7 @@ export default function Dashboard({ onLogout }) {
           {activeTab === 'about' && (
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <h2 style={{ color: '#F9B233' }}>Photos À Propos ({aboutPhotos.length})</h2>
+                <h2 style={{ color: 'var(--violet)' }}>Photos À Propos ({aboutPhotos.length})</h2>
                 <button onClick={addAboutPhoto} className="btn btn-gold">
                   + Ajouter Photo
                 </button>
@@ -345,7 +345,7 @@ export default function Dashboard({ onLogout }) {
                 {aboutPhotos.map(photo => (
                   <div key={photo.id} className="card" style={{ padding: '1rem' }}>
                     <img src={photo.url} alt={photo.title} style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
-                    <h4 style={{ color: '#F9B233', marginBottom: '1rem' }}>{photo.title}</h4>
+                    <h4 style={{ color: 'var(--violet)', marginBottom: '1rem' }}>{photo.title}</h4>
                     <button onClick={() => deleteAboutPhoto(photo.id)} style={{ background: '#dc3545', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '5px', cursor: 'pointer' }}>
                       Supprimer
                     </button>
@@ -359,7 +359,7 @@ export default function Dashboard({ onLogout }) {
           {activeTab === 'editions' && (
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <h2 style={{ color: '#F9B233' }}>Gestion des Éditions ({editions.length})</h2>
+                <h2 style={{ color: 'var(--violet)' }}>Gestion des Éditions ({editions.length})</h2>
                 <button onClick={addEdition} className="btn btn-gold">
                   + Ajouter Édition
                 </button>
@@ -367,7 +367,7 @@ export default function Dashboard({ onLogout }) {
               {editions.map(edition => (
                 <div key={edition.id} style={{ marginBottom: '3rem', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '10px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                    <h3 style={{ color: '#F9B233' }}>Édition {edition.year} ({edition.photos.length} photos)</h3>
+                    <h3 style={{ color: 'var(--violet)' }}>Édition {edition.year} ({edition.photos.length} photos)</h3>
                     <div style={{ display: 'flex', gap: '1rem' }}>
                       <button onClick={() => addEditionPhoto(edition.id)} style={{ background: '#28a745', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '5px', cursor: 'pointer' }}>
                         + Photo
@@ -391,7 +391,7 @@ export default function Dashboard({ onLogout }) {
                       </div>
                     ))}
                     {edition.photos.length === 0 && (
-                      <p style={{ color: '#94a3b8', fontStyle: 'italic' }}>Aucune photo pour cette édition</p>
+                      <p style={{ color: 'var(--depth-4)', fontStyle: 'italic' }}>Aucune photo pour cette édition</p>
                     )}
                   </div>
                 </div>

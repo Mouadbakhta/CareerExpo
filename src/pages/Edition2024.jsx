@@ -11,7 +11,7 @@ export default function Edition2024() {
   ];
 
   return (
-    <main style={{ paddingTop: '120px', padding: '2rem 1.5rem' }}>
+    <main style={{ paddingTop: '140px', paddingLeft: '1.5rem', paddingRight: '1.5rem', paddingBottom: '2rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         
         {/* Header with Back Button */}
@@ -23,15 +23,14 @@ export default function Edition2024() {
             display: 'flex', 
             justifyContent: 'space-between', 
             alignItems: 'flex-start', 
-            marginBottom: '3rem', 
-            marginTop: '4rem',
+            marginBottom: '3rem',
             flexWrap: 'wrap',
             gap: '2rem'
           }}
         >
           <h1 style={{ 
-            color: '#F9B233', 
-            fontSize: '2.5rem', 
+            color: '#f0c76e', 
+            fontSize: '1.5rem', 
             fontWeight: '900',
             margin: 0,
             flex: 1,
@@ -44,8 +43,8 @@ export default function Edition2024() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             style={{
-              background: '#F9B233',
-              color: '#0A0F1C',
+              background: '#f0c76e',
+              color: '#0b0b0e',
               border: 'none',
               padding: '0.8rem 1.5rem',
               borderRadius: '25px',
@@ -69,8 +68,8 @@ export default function Edition2024() {
           style={{ textAlign: 'center', marginBottom: '4rem' }}
         >
           <p style={{ 
-            color: '#94a3b8', 
-            fontSize: '1.2rem',
+            color: 'var(--depth-4)', 
+            fontSize: '0.75rem',
             maxWidth: '600px',
             margin: '0 auto'
           }}>
@@ -126,35 +125,35 @@ export default function Edition2024() {
           }}
         >
           <h2 style={{ 
-            color: '#F9B233', 
-            fontSize: '2rem', 
+            color: '#f0c76e', 
+            fontSize: '0.75rem', 
             marginBottom: '2rem',
             textAlign: 'center'
           }}>
             À propos de l'édition 2024
           </h2>
           <div style={{ 
-            color: '#94a3b8', 
-            fontSize: '1.1rem', 
-            lineHeight: '1.8',
+            color: 'var(--depth-4)', 
+            fontSize: '0.65rem', 
+            lineHeight: '1.6',
             textAlign: 'justify'
           }}>
             <p style={{ marginBottom: '1.5rem' }}>
               L'édition 2024 a établi de nouveaux standards d'excellence avec une participation record de 
-              <strong style={{ color: '#F9B233' }}> 450 étudiants</strong> et la présence de 
-              <strong style={{ color: '#F9B233' }}> 28 entreprises leaders</strong> du secteur technologique et industriel.
+              <strong style={{ color: '#f0c76e' }}> 450 étudiants</strong> et la présence de 
+              <strong style={{ color: '#f0c76e' }}> 28 entreprises leaders</strong> du secteur technologique et industriel.
             </p>
             <p style={{ marginBottom: '1.5rem' }}>
               Cette édition s'est focalisée sur les technologies émergentes avec des ateliers pratiques sur 
-              <strong style={{ color: '#F9B233' }}> l'Intelligence Artificielle</strong>, 
-              <strong style={{ color: '#F9B233' }}> la cybersécurité</strong>, et 
-              <strong style={{ color: '#F9B233' }}> les métiers du futur</strong>. 
+              <strong style={{ color: '#f0c76e' }}> l'Intelligence Artificielle</strong>, 
+              <strong style={{ color: '#f0c76e' }}> la cybersécurité</strong>, et 
+              <strong style={{ color: '#f0c76e' }}> les métiers du futur</strong>. 
               Les étudiants ont pu découvrir les dernières innovations et tendances du marché de l'emploi.
             </p>
             <p style={{ marginBottom: '1.5rem' }}>
               Les points forts de cette édition incluaient la présence d'experts internationaux, 
               des démonstrations technologiques en direct, et des sessions de mentorat personnalisées. 
-              Plus de <strong style={{ color: '#F9B233' }}>200 offres d'emploi et de stage</strong> ont été proposées.
+              Plus de <strong style={{ color: '#f0c76e' }}>200 offres d'emploi et de stage</strong> ont été proposées.
             </p>
             <p>
               L'événement s'est clôturé par une cérémonie de remise de prix récompensant l'innovation étudiante 
@@ -179,13 +178,13 @@ export default function Edition2024() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '1rem',
-              background: '#F9B233',
-              color: '#0A0F1C',
+              background: '#f0c76e',
+              color: '#0b0b0e',
               padding: '1.2rem 2.5rem',
               borderRadius: '30px',
               textDecoration: 'none',
               fontWeight: '700',
-              fontSize: '1.1rem',
+              fontSize: '0.65rem',
               cursor: 'pointer',
               transition: 'all 0.3s',
               boxShadow: '0 10px 30px rgba(249, 178, 51, 0.3)'

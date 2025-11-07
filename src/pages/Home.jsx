@@ -1,4 +1,4 @@
-// src/pages/Home.jsx
+﻿// src/pages/Home.jsx
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -40,41 +40,33 @@ export default function Home({ onAdminLogin }) {
   };
 
   const partners = [
-    { name: "Stellantis", logo: "/Logos/Stellantis.jpg", website: "https://www.stellantis.com/" },
-    { name: "Oracle", logo: "/Logos/Oracle.png", website: "https://www.oracle.com/" },
-    { name: "Akkodis", logo: "/Logos/akkodis.jpg", website: "https://www.akkodis.com/" },
-    { name: "AVL", logo: "/Logos/avl.png", website: "https://www.avl.com/" },
-    { name: "Bank of Africa", logo: "/Logos/BankOfAfrica.png", website: "https://www.bankofafrica.ma/" },
     { name: "Capgemini", logo: "/Logos/capgemini.png", website: "https://www.capgemini.com/" },
-    { name: "Inwi", logo: "/Logos/inwi0.jpg", website: "https://www.inwi.ma/" },
+    { name: "Retain", logo: "/Logos/retain.png", website: "https://www.retain.com/" },
+    { name: "Bank of Africa", logo: "/Logos/BankOfAfrica.png", website: "https://www.bankofafrica.ma/" },
+    { name: "Istya Group", logo: "/Logos/istya.png", website: "https://www.istya.com/" },
+    { name: "Oriless Consulting", logo: "/Logos/oriless.png", website: "https://www.oriless.com/" },
+    { name: "Green Energy Park", logo: "/Logos/greenenergypark.png", website: "https://www.greenenergypark.ma/" },
     { name: "Leyton", logo: "/Logos/Leyton.jpg", website: "https://www.leyton.com/" },
-    { name: "Maroc Telecom", logo: "/Logos/MAROCTELECOM.jpg", website: "https://www.iam.ma/" },
-    { name: "OCP Group", logo: "/Logos/ocpjpg.jpg", website: "https://www.ocpgroup.ma/" },
-    { name: "Safy", logo: "/Logos/safy.png", website: "https://www.safy.ma/" }
+    { name: "Lear", logo: "/Logos/lear.png", website: "https://www.lear.com/" },
+    { name: "Université Cadi Ayyad", logo: "/Logos/uca.png", website: "https://www.uca.ma/" },
+    { name: "ENSA Marrakech", logo: "/Logos/ensa.png", website: "http://www.ensa.ac.ma/" }
   ];
 
   const [activeDay, setActiveDay] = useState(1);
 
   const scheduleDay1 = [
-    { time: "09:00", event: "Accueil & Inscription" },
-    { time: "10:00", event: "Mot d'ouverture", speaker: "Directeur ENSA" },
-    { time: "10:30", event: "IA & Innovation", speaker: "Dr. Amine El Khayati" },
-    { time: "11:30", event: "Pause Café" },
-    { time: "12:00", event: "Atelier CV", speaker: "Recruteurs OCP" },
-    { time: "14:00", event: "Entretiens rapides" },
-    { time: "16:00", event: "Remise des prix" },
-    { time: "17:00", event: "Clôture" },
+    { time: "8:30 – 9:00", event: "Accueil & Check-in des participants" },
+    { time: "9:00 – 9:45", event: "Mot de Monsieur le Président de l'UCA & Mot de Monsieur le Directeur de l'ENSAM", speaker: "Professeur Belaid BOUGADIR & Professeur Hassan AYAD", location: "amphithéâtre" },
+    { time: "9:45 – 10:00", event: "Présentation de l'Office Marocain de la Propriété Industrielle et Commerciale - OMPIC", location: "amphithéâtre" },
+    { time: "10:00 – 11:00", event: "Conférence internationale : L'alternance et la Recherche Appliquée: De nouveau horizons pour les écoles d'ingénieurs", speaker: "REKLAOUI KAMAL & ALEXIS TODOSKOFF", location: "amphithéâtre" },
+    { time: "11:15 – 12:15", event: "PANEL 1: IA et transformation du salariat: révolution ou évolution ?", location: "amphithéâtre" },
+    { time: "12:15 – 13:15", event: "PANEL 2: Innover, entreprendre, évoluer: l'impact de l'IA sur les leaders de demain", location: "amphithéâtre" },
+    { time: "13:15 – 18:00", event: "Sessions de recrutement et entretiens individuels avec les entreprises partenaires", location: "salles / stands dédiés" }
   ];
 
   const scheduleDay2 = [
-    { time: "09:00", event: "Accueil participants" },
-    { time: "09:30", event: "Conférence Innovation", speaker: "Alexis Todoskoff" },
-    { time: "10:30", event: "Table ronde" },
-    { time: "11:00", event: "Pause" },
-    { time: "11:30", event: "Ateliers pratiques" },
-    { time: "14:00", event: "Job Dating" },
-    { time: "15:30", event: "Networking" },
-    { time: "16:30", event: "Clôture & Remise certificats" },
+    { time: "9:00 – 11:30", event: "Compétition des CVS", location: "amphithéâtre" },
+    { time: "9:00 – 11:30", event: "Tables rondes", location: "amphithéâtre" }
   ];
 
   const currentSchedule = activeDay === 1 ? scheduleDay1 : scheduleDay2;
@@ -103,247 +95,361 @@ export default function Home({ onAdminLogin }) {
   return (
     <main style={{ paddingTop: '100px' }}>
 
-      {/* ACCUEIL ROYAL - AVEC IMAGE EN ARRIÈRE-PLAN */}
-      <section id="accueil" style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        position: 'relative',
-        paddingTop: '2rem',
-        backgroundImage: `url(/Logos/ENSAM.png)`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'scroll',
-        backgroundRepeat: 'no-repeat'
-      }}>
-        {/* Overlay léger pour rendre le texte lisible sans trop assombrir */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(to bottom, rgba(10, 15, 28, 0.5) 0%, rgba(10, 15, 28, 0.65) 50%, rgba(10, 15, 28, 0.75) 100%)',
-          zIndex: 1
-        }}></div>
+      {/* MODERN HERO SECTION */}
+     <section
+  id="accueil"
+  style={{
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    position: 'relative',
+    padding: '7rem 2rem',
+    backgroundColor: '#0b0b0e',
+    backgroundImage: `
+      radial-gradient(circle at 20% 30%, rgba(40, 40, 50, 0.7) 0%, rgba(10, 10, 15, 0.95) 80%),
+      url('/Logos/ENSAM.png')
+    `,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed',
+    overflow: 'hidden',
+  }}
+>
+  {/* Elegant animated overlay */}
+  <div
+    style={{
+      position: 'absolute',
+      inset: 0,
+      background:
+        'linear-gradient(135deg, rgba(189,175,255,0.07) 0%, rgba(240,199,110,0.07) 100%)',
+      animation: 'floatBg 10s ease-in-out infinite alternate',
+      zIndex: 0,
+      mixBlendMode: 'soft-light',
+    }}
+  ></div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
-          style={{ position: 'relative', zIndex: 2 }}
-        >
-          <h1 className="royal-title">Forum CareerExpo 2025</h1>
-          <p style={{
-            marginTop: '0.6rem',
-            fontSize: '0.95rem',
-            color: '#94a3b8',
-            letterSpacing: '1px',
-            fontWeight: '600'
-          }}>
-            École Nationale des Sciences AppliquéS  de Marrakech
-          </p>
-          <p style={{
-            marginTop: '0.4rem',
-            fontSize: '1rem',
-            color: '#F9B233',
-            fontWeight: '700',
-            textTransform: 'uppercase'
-          }}>
-            Rendez-vous le 15 et 16 Novembre 2025
-          </p>
-          <p style={{
-            fontSize: '1.7rem',
-            color: '#94a3b8',
-            margin: '2rem auto',
-            maxWidth: '900px',
-            lineHeight: '1.8',
-            fontWeight: '500'
-          }}>
-            <strong>500+ talents</strong> • <strong>30 entreprises leaders</strong> • <strong>2 jours d’opportunités</strong>
-          </p>
-          <CountdownTimer targetDate={new Date('2025-11-15T09:00:00')} />
-          <div style={{
-            display: 'flex',
-            gap: '1.5rem',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            marginTop: '3.5rem'
-          }}>
-            <button onClick={() => setShowModal(true)} className="btn btn-gold">
-              S’inscrire
-            </button>
-            <a
-              href="/guide.pdf"
-              download
-              className="btn"
-              style={{
-                background: 'transparent',
-                border: '2px solid #F9B233',
-                color: '#F9B233',
-                transition: 'all 0.5s'
-              }}
-            >
-              Télécharger le Guide
-            </a>
-          </div>
-        </motion.div>
-      </section>
+  {/* Optional subtle vignette for contrast */}
+  <div
+    style={{
+      position: 'absolute',
+      inset: 0,
+      background: 'radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%)',
+      zIndex: 1,
+    }}
+  ></div>
+
+  {/* Main content */}
+  <motion.div
+    initial={{ opacity: 0, y: 60 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1.2, ease: 'easeOut' }}
+    style={{
+      zIndex: 2,
+      position: 'relative',
+      maxWidth: '900px',
+      width: '100%',
+    }}
+  >
+    <h1
+      style={{
+        fontFamily: "'Playfair Display', serif",
+        fontSize: '4rem',
+        fontWeight: '700',
+        color: '#f0c76e',
+        textTransform: 'uppercase',
+        letterSpacing: '2px',
+        lineHeight: '1.2',
+        marginBottom: '1.5rem',
+      }}
+    >
+      Forum <span style={{ color: '#f0c76e' }}>CareerExpo 2025</span>
+    </h1>
+
+    
+
+    <CountdownTimer targetDate={new Date('2025-11-15T09:00:00')} />
+
+    <div
+      style={{
+        display: 'flex',
+        gap: '1.2rem',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        marginTop: '3rem',
+      }}
+    >
+      <button
+        onClick={() => setShowModal(true)}
+        style={{
+          padding: '0.9rem 2.2rem',
+          background: 'transparent',
+          border: '2px solid #f0c76e',
+          color: '#f0c76e',
+          borderRadius: '8px',
+          fontFamily: "'Poppins', sans-serif",
+          fontWeight: '600',
+          fontSize: '1rem',
+          letterSpacing: '1px',
+          cursor: 'pointer',
+          transition: 'all 0.4s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = '#f0c76e';
+          e.currentTarget.style.color = '#0b0b0e';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'transparent';
+          e.currentTarget.style.color = '#f0c76e';
+        }}
+      >
+        S’inscrire
+      </button>
+
+      <a
+        href="/guide.pdf"
+        download
+        style={{
+          padding: '0.9rem 2.2rem',
+          background: 'transparent',
+          border: '2px solid rgba(255,255,255,0.3)',
+          color: 'rgba(255,255,255,0.9)',
+          borderRadius: '8px',
+          fontFamily: "'Poppins', sans-serif",
+          fontWeight: '600',
+          fontSize: '1rem',
+          letterSpacing: '1px',
+          transition: 'all 0.4s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+          e.currentTarget.style.color = '#f0c76e';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'transparent';
+          e.currentTarget.style.color = 'rgba(255,255,255,0.9)';
+        }}
+      >
+        Télécharger le Guide
+      </a>
+    </div>
+  </motion.div>
+</section>
+
+
 
       {/* À PROPOS */}
       <section id="à-propos" style={{ padding: '7rem 1.5rem' }}>
-        <h2 className="section-title">À propos</h2>
+        <h2 style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: '2rem',
+          fontWeight: '700',
+          color: '#f0c76e',
+          textAlign: 'center',
+          marginBottom: '1rem',
+          textShadow: 'none'
+        }}>
+          À propos
+        </h2>
+        <div style={{
+          width: '100px',
+          height: '2px',
+          background: 'linear-gradient(90deg, transparent, #f0c76e, transparent)',
+          margin: '0 auto 3rem'
+        }}></div>
 
-        {/* Zone pour les photos */}
+        {/* Pourquoi participer */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          style={{
-            maxWidth: '1100px',
-            margin: '0 auto 4rem',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.5rem'
-          }}
+          style={{ marginBottom: '4rem' }}
         >
-          {/* Photo 1 */}
-          <div className="card" style={{
-            padding: '0',
-            overflow: 'hidden',
-            height: '250px',
-            background: 'linear-gradient(135deg, rgba(0,74,173,0.3), rgba(249,178,51,0.3))'
+          <h3 style={{
+            fontSize: '1.25rem',
+            fontWeight: '600',
+            color: '#ffffff',
+            textAlign: 'center',
+            marginBottom: '3rem',
+            fontFamily: 'var(--font-headings)'
           }}>
-            <div style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '3rem',
-              color: '#F9B233',
-              fontWeight: 'bold'
-            }}>
-              Photo 1
-            </div>
-          </div>
-
-          {/* Photo 2 */}
-          <div className="card" style={{
-            padding: '0',
-            overflow: 'hidden',
-            height: '250px',
-            background: 'linear-gradient(135deg, rgba(249,178,51,0.3), rgba(0,74,173,0.3))'
+            Pourquoi devriez-vous participer ?
+          </h3>
+          
+          <div style={{
+            maxWidth: '1200px',
+            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '2rem'
           }}>
-            <div style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '3rem',
-              color: '#F9B233',
-              fontWeight: 'bold'
-            }}>
-              Photo 2
-            </div>
-          </div>
-
-          {/* Photo 3 */}
-          <div className="card" style={{
-            padding: '0',
-            overflow: 'hidden',
-            height: '250px',
-            background: 'linear-gradient(135deg, rgba(0,74,173,0.3), rgba(249,178,51,0.3))'
-          }}>
-            <div style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '3rem',
-              color: '#F9B233',
-              fontWeight: 'bold'
-            }}>
-              Photo 3
-            </div>
+            {[
+              {
+                icon: <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,
+                title: 'Opportunités de carrière',
+                description: 'Rencontrez directement les recruteurs des plus grandes entreprises du Maroc et de l\'international. Décrochez votre stage ou emploi de rêve.'
+              },
+              {
+                icon: <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>,
+                title: 'Développement professionnel',
+                description: 'Participez à des ateliers pratiques sur le CV, l\'entretien d\'embauche et le personal branding pour booster votre profil.'
+              },
+              {
+                icon: <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+                title: 'Networking de qualité',
+                description: 'Élargissez votre réseau professionnel en rencontrant des ingénieurs, DRH, entrepreneurs et alumni expérimentés.'
+              },
+              {
+                icon: <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>,
+                title: 'Innovation et IA',
+                description: 'Découvrez les dernières tendances technologiques et l\'impact de l\'IA sur l\'ingénierie et l\'entrepreneuriat.'
+              },
+              {
+                icon: <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>,
+                title: 'Compétition CV',
+                description: 'Participez au concours de CV et gagnez des prix tout en recevant des conseils d\'experts pour améliorer votre candidature.'
+              },
+              {
+                icon: <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>,
+                title: 'Conférences inspirantes',
+                description: 'Assistez à des conférences de haut niveau animées par des experts reconnus dans leurs domaines d\'expertise.'
+              }
+            ].map((benefit, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                className="card card-3d"
+                style={{
+                  padding: '2rem',
+                  textAlign: 'center'
+                }}
+              >
+                <div style={{
+                  marginBottom: '1rem',
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}>
+                  {benefit.icon}
+                </div>
+                <h4 style={{
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  color: '#ffffff',
+                  marginBottom: '1rem',
+                  fontFamily: 'var(--font-headings)'
+                }}>
+                  {benefit.title}
+                </h4>
+                <p style={{
+                  fontSize: '0.75rem',
+                  color: 'rgba(255,255,255,0.85)',
+                  lineHeight: '1.6',
+                  margin: 0
+                }}>
+                  {benefit.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 
-        {/* Texte détaillé */}
+        {/* Présentation détaillée */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="card"
+          className="card card-3d"
           style={{
-            maxWidth: '1100px',
+            maxWidth: '800px',
             margin: '0 auto',
-            padding: '3rem',
+            padding: '3rem 2rem',
             textAlign: 'left'
           }}
         >
           <h3 style={{
-            fontSize: '2rem',
-            fontWeight: '700',
-            color: '#F9B233',
-            marginBottom: '1.5rem',
-            textAlign: 'center'
+            fontSize: '1.25rem',
+            fontWeight: '600',
+            color: '#ffffff',
+            marginBottom: '2rem',
+            textAlign: 'center',
+            fontFamily: 'var(--font-headings)'
           }}>
             Forum CareerExpo Marrakech 2025
           </h3>
 
-          <div style={{
-            fontSize: '1.1rem',
-            lineHeight: '1.9',
-            color: '#94a3b8'
+          <div className="prose" style={{
+            fontSize: '0.75rem',
+            lineHeight: '1.6',
+            color: 'rgba(255,255,255,0.9)',
+            textAlign: 'justify'
           }}>
             <p style={{ marginBottom: '1.5rem' }}>
-             Dans le cadre de sa mission d’excellence et d’insertion professionnelle, <strong style={{ color: '#F9B233' }}>l’École Nationale des Sciences Appliquées de Marrakech (ENSA-M)</strong>, à travers ses Clubs étudiants, organise la <strong style={{ color: '#F9B233' }}>cinquième édition du Forum CareerExpo</strong>, les <strong style={{ color: '#F9B233' }}>15 et 16 novembre 2025</strong>, sur le campus de l’établissement.<br /><br />
-             Cet événement d’envergure régionale vise à rapprocher les étudiants ingénieurs de haut niveau des entreprises nationales et internationales, tout en mettant en lumière <strong style={{ color: '#F9B233' }}>les compétences techniques, l’innovation et le professionnalisme</strong> qui caractérisent les diplômés de l’ENSA-M. Plus de <strong style={{ color: '#F9B233' }}>500 étudiants</strong> et <strong style={{ color: '#F9B233' }}>30 entreprises leaders</strong> du Maroc et de l’international se réuniront pour connecter les talents de demain aux opportunités d’aujourd’hui.
+             Dans le cadre de sa mission d’excellence et d’insertion professionnelle, <strong style={{ color: '#f0c76e' }}>l’École Nationale des Sciences Appliquées de Marrakech (ENSA-M)</strong>, à travers ses Clubs étudiants, organise la <strong style={{ color: '#f0c76e' }}>cinquième édition du Forum CareerExpo</strong>, les <strong style={{ color: '#f0c76e' }}>15 et 16 novembre 2025</strong>, sur le campus de l’établissement.<br /><br />
+             Cet événement d’envergure régionale vise à rapprocher les étudiants ingénieurs de haut niveau des entreprises nationales et internationales, tout en mettant en lumière <strong style={{ color: '#f0c76e' }}>les compétences techniques, l’innovation et le professionnalisme</strong> qui caractérisent les diplômés de l’ENSA-M. Plus de <strong style={{ color: '#f0c76e' }}>500 étudiants</strong> et <strong style={{ color: '#f0c76e' }}>30 entreprises leaders</strong> du Maroc et de l’international se réuniront pour connecter les talents de demain aux opportunités d’aujourd’hui.
             </p>
 
-            <h3 style={{ color: '#F9B233', marginBottom: '1rem' }}>Objectifs stratégiques du forum</h3>
-
-            <ol style={{ marginBottom: '1.5rem', paddingLeft: '1.5rem' }}>
-            <li style={{ marginBottom: '0.75rem' }}>
-            <strong style={{ color: '#F9B233' }}>Préparer les étudiants à une insertion professionnelle réussie</strong> → Ateliers sur la rédaction de CV, entretiens d’embauche, personal branding, entrepreneuriat et planification de carrière.
-            </li>
-            <li style={{ marginBottom: '0.75rem' }}>
-            <strong style={{ color: '#F9B233' }}>Créer des ponts durables entre étudiants, alumni et recruteurs</strong> → Rencontres directes avec des ingénieurs en poste, DRH, chefs d’entreprise et anciens diplômés pour des échanges concrets sur les métiers et les opportunités.
-           </li>
-           <li style={{ marginBottom: '0.75rem' }}>
-           <strong style={{ color: '#F9B233' }}>Valoriser l’excellence de la formation ENSA-M auprès des entreprises</strong> → Présentation des projets de fin d’études (PFE), travaux de recherche appliquée, startups étudiantes et compétences techniques pointues (IA, cybersécurité, génie industriel, génie électrique, etc.).
-          </li>
-          <li style={{ marginBottom: '0.75rem' }}>
-          <strong style={{ color: '#F9B233' }}>Faciliter le recrutement et les stages</strong> → Stands d’entreprises, job dating, offres de stages et d’emplois, sessions de recrutement express.
-         </li>
-         </ol>
-
+            
          <p style={{ marginBottom: '1.5rem' }}>
-          Notre forum se distingue par sa diversité d’activités : des <strong style={{ color: '#F9B233' }}>conférences inspirantes</strong> animées par des experts de l’industrie, des <strong style={{ color: '#F9B233' }}>ateliers pratiques</strong> sur le développement de carrière, des <strong style={{ color: '#F9B233' }}>sessions de coaching CV</strong> personnalisées, et des <strong style={{ color: '#F9B233' }}>entretiens directs</strong> avec les recruteurs des plus grandes entreprises.
+          Notre forum se distingue par sa diversité d’activités : des <strong style={{ color: '#f0c76e' }}>conférences inspirantes</strong> animées par des experts de l’industrie, des <strong style={{ color: '#f0c76e' }}>ateliers pratiques</strong> sur le développement de carrière, des <strong style={{ color: '#f0c76e' }}>sessions de coaching CV</strong> personnalisées, et des <strong style={{ color: '#f0c76e' }}>entretiens directs</strong> avec les recruteurs des plus grandes entreprises.
         </p>
 
         <p style={{ marginBottom: '1.5rem' }}>
-        Que vous soyez étudiant en quête de votre premier stage, jeune diplômé à la recherche d’opportunités, ou professionnel souhaitant élargir votre réseau, le <strong style={{ color: '#F9B233' }}>Forum CareerExpo</strong> est l’occasion idéale pour <strong style={{ color: '#F9B233' }}>booster votre carrière</strong>, découvrir les tendances du marché de l’emploi, et rencontrer les acteurs clés de votre secteur.
+        Que vous soyez étudiant en quête de votre premier stage, jeune diplômé à la recherche d’opportunités, ou professionnel souhaitant élargir votre réseau, le <strong style={{ color: '#f0c76e' }}>Forum CareerExpo</strong> est l’occasion idéale pour <strong style={{ color: '#f0c76e' }}>booster votre carrière</strong>, découvrir les tendances du marché de l’emploi, et rencontrer les acteurs clés de votre secteur.
        </p>
 
        <p style={{ marginBottom: '0' }}>
-       Rejoignez-nous le <strong style={{ color: '#F9B233' }}>15 et 16 novembre 2025</strong> pour deux journées d’échanges, d’apprentissage et d’opportunités qui pourrait transformer votre avenir professionnel !
+       Rejoignez-nous le <strong style={{ color: '#f0c76e' }}>15 et 16 novembre 2025</strong> pour deux journées d’échanges, d’apprentissage et d’opportunités qui pourrait transformer votre avenir professionnel !
       </p>
           </div>
         </motion.div>
       </section>
 
       {/* PROGRAMME */}
-      <section id="programme" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
-        <h2 className="section-title">Programme</h2>
+      <section id="programme" style={{ padding: '4rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{ textAlign: 'center', marginBottom: '3rem' }}
+        >
+          <h2 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: '2rem',
+            fontWeight: '700',
+            color: '#f0c76e',
+          textAlign: 'center',
+          marginBottom: '1rem',
+          textShadow: 'none'
+        }}>
+            Programme
+          </h2>
+          <div style={{
+            width: '100px',
+            height: '2px',
+            background: 'linear-gradient(90deg, transparent, #f0c76e, transparent)',
+            margin: '0 auto 2rem'
+          }}></div>
+          <div className="card card-3d" style={{
+            maxWidth: '800px',
+            margin: '0 auto',
+            padding: '1.5rem'
+          }}>
+            <h3 style={{ color: '#ffffff', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+              CAREER EXPO 5ème Edition
+            </h3>
+            <p style={{ color: 'var(--depth-4)', fontSize: '0.875rem', lineHeight: '1.4', margin: 0 }}>
+              SOUS LE THÈME : "DE L'INGÉNIERIE À L'ENTREPRENEURIAT: L'IA COMME ACCÉLÉRATEUR D'INNOVATION"
+            </p>
+          </div>
+        </motion.div>
         
         {/* Onglets Jour 1 / Jour 2 */}
         <div style={{
@@ -360,15 +466,15 @@ export default function Home({ onAdminLogin }) {
               padding: '1rem 2rem',
               borderRadius: '25px',
               border: 'none',
-              background: activeDay === 1 ? '#F9B233' : 'rgba(255,255,255,0.1)',
-              color: activeDay === 1 ? '#0A0F1C' : '#F9B233',
+              background: activeDay === 1 ? '#f0c76e' : 'rgba(255,255,255,0.1)',
+              color: activeDay === 1 ? '#0b0b0e' : '#f0c76e',
               fontWeight: '600',
               fontSize: '1rem',
               cursor: 'pointer',
               transition: 'all 0.3s'
             }}
           >
-            Jour 1 - 15 Nov
+            14 Novembre 2025
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -378,15 +484,15 @@ export default function Home({ onAdminLogin }) {
               padding: '1rem 2rem',
               borderRadius: '25px',
               border: 'none',
-              background: activeDay === 2 ? '#F9B233' : 'rgba(255,255,255,0.1)',
-              color: activeDay === 2 ? '#0A0F1C' : '#F9B233',
+              background: activeDay === 2 ? '#f0c76e' : 'rgba(255,255,255,0.1)',
+              color: activeDay === 2 ? '#0b0b0e' : '#f0c76e',
               fontWeight: '600',
               fontSize: '1rem',
               cursor: 'pointer',
               transition: 'all 0.3s'
             }}
           >
-            Jour 2 - 16 Nov
+            15 Novembre 2025
           </motion.button>
         </div>
 
@@ -405,26 +511,134 @@ export default function Home({ onAdminLogin }) {
                   initial={{ opacity: 0, x: -60 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1, duration: 0.6 }}
-                  className="card"
+                  whileHover={{ scale: 1.02, y: -3 }}
+                  className="card card-3d"
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '1.2rem',
-                    padding: '1.8rem',
-                    position: 'relative'
+                    padding: '1rem',
+                    marginBottom: '1rem'
                   }}
                 >
-                  <div>
-                    <strong style={{ color: '#004AAD', fontSize: '1.2rem' }}>{item.time}</strong>
-                    <span style={{ margin: '0 1rem', color: '#F9B233' }}>→</span>
-                    <span style={{ fontWeight: '600' }}>{item.event}</span>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '2rem' }}>
+                    {/* Time Badge with Icon */}
+                    <div style={{
+                      background: 'rgba(255,255,255,0.1)',
+                      color: '#f0c76e',
+                      padding: '1rem 1.5rem',
+                      borderRadius: '15px',
+                      fontWeight: '700',
+                      fontSize: '1.1rem',
+                      minWidth: 'fit-content',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      border: '1px solid rgba(255,255,255,0.1)'
+                    }}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                      </svg>
+                      {item.time}
+                    </div>
+                    
+                    {/* Content */}
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1rem' }}>
+                        {/* Event Icon */}
+                        <div style={{
+                          background: 'rgba(255,255,255,0.05)',
+                          borderRadius: '50%',
+                          width: '40px',
+                          height: '40px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                          border: '1px solid rgba(255,255,255,0.1)'
+                        }}>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5">
+                            {item.event.includes('Accueil') ? 
+                              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/> :
+                             item.event.includes('Mot de') ? 
+                              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/> :
+                             item.event.includes('Présentation') ? 
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8"/> :
+                             item.event.includes('Conférence') ? 
+                              <g><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></g> :
+                             item.event.includes('PANEL') ? 
+                              <g><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></g> :
+                             item.event.includes('Sessions') ? 
+                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/> :
+                             item.event.includes('Compétition') ? 
+                              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M14 20h4.5a2.5 2.5 0 0 0 0-5H14M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM6 2h12"/> :
+                             item.event.includes('Tables') ? 
+                              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/> :
+                              <g><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></g>}
+                          </svg>
+                        </div>
+                        
+                        <div style={{ flex: 1 }}>
+                          <h4 style={{ 
+                            color: 'var(--text)', 
+                            fontWeight: '700', 
+                            margin: '0 0 1rem 0', 
+                            fontSize: '0.875rem',
+                            lineHeight: '1.4'
+                          }}>
+                            {item.event}
+                          </h4>
+                          
+                          {item.speaker && (
+                            <div style={{ 
+                              background: 'rgba(255,255,255,0.05)',
+                              padding: '0.8rem 1.2rem',
+                              borderRadius: '12px',
+                              border: '1px solid rgba(255,255,255,0.1)',
+                              marginBottom: '1rem'
+                            }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
+                                <span style={{ fontSize: '1rem' }}></span>
+                                <span style={{ color: '#ffffff', fontWeight: '600', fontSize: '1rem' }}>Intervenant</span>
+                              </div>
+                              <p style={{ 
+                                color: 'var(--text)', 
+                                fontWeight: '600', 
+                                margin: 0, 
+                                fontSize: '0.875rem'
+                              }}>
+                                {item.speaker}
+                              </p>
+                            </div>
+                          )}
+                          
+                          {item.location && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                              <div style={{
+                                background: 'rgba(240,199,110,0.2)',
+                                borderRadius: '50%',
+                                width: '28px',
+                                height: '28px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                              }}>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2">
+                                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                  <polyline points="9 22 9 12 15 12 15 22"/>
+                                </svg>
+                              </div>
+                              <span style={{ 
+                                color: 'var(--depth-4)', 
+                                fontSize: '0.875rem',
+                                fontWeight: '600'
+                              }}>
+                                {item.location}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  {item.speaker && (
-                    <em style={{ color: '#F9B233', fontStyle: 'italic', fontWeight: '500' }}>
-                      {item.speaker}
-                    </em>
-                  )}
                 </motion.div>
               ))}
             </motion.div>
@@ -433,25 +647,50 @@ export default function Home({ onAdminLogin }) {
       </section>
 
       {/* CONFÉRENCIERS */}
-      <section id="conférenciers" style={{ padding: '7rem 1.5rem' }}>
-        <h2 className="section-title">Conférenciers</h2>
+      <section id="conférenciers" style={{ padding: '4rem 1.5rem' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{ textAlign: 'center', marginBottom: '5rem' }}
+        >
+          <h2 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: '2rem',
+            fontWeight: '700',
+            color: '#f0c76e',
+          textAlign: 'center',
+          marginBottom: '1rem',
+          textShadow: 'none'
+        }}>
+            Conférenciers
+          </h2>
+          <div style={{
+            width: '100px',
+            height: '2px',
+            background: 'linear-gradient(90deg, transparent, #f0c76e, transparent)',
+            margin: '0 auto 3rem'
+          }}></div>
+        </motion.div>
+        
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))',
-          gap: '2rem',
+          gap: '3rem',
           maxWidth: '1200px',
           margin: '0 auto'
         }}>
           {speakers.map((s, i) => (
             <motion.div
               key={i}
-              whileHover={{ y: -5, scale: 1.01 }}
-              className="card"
-              style={{ 
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="card card-3d float-3d"
+              style={{
+                padding: '2rem',
                 display: 'flex',
                 alignItems: 'flex-start',
-                gap: '1.5rem',
-                padding: '2rem'
+                gap: '1.5rem'
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -460,12 +699,12 @@ export default function Home({ onAdminLogin }) {
                   src={s.photo}
                   alt={s.name}
                   style={{
-                    width: '150px',
-                    height: '150px',
+                    width: '130px',
+                    height: '130px',
                     borderRadius: '50%',
-                    border: '4px solid #F9B233',
+                    border: '3px solid #f0c76e',
                     objectFit: 'cover',
-                    boxShadow: '0 0 20px rgba(249,178,51,0.4)',
+                    boxShadow: '0 0 15px rgba(249,178,51,0.3)',
                     marginBottom: '1rem'
                   }}
                 />
@@ -485,7 +724,7 @@ export default function Home({ onAdminLogin }) {
                     borderRadius: '20px',
                     textDecoration: 'none',
                     fontWeight: '600',
-                    fontSize: '0.8rem',
+                    fontSize: '0.875rem',
                     transition: 'all 0.3s'
                   }}
                 >
@@ -497,15 +736,15 @@ export default function Home({ onAdminLogin }) {
               </div>
               <div style={{ flex: 1 }}>
                 <h3 style={{ 
-                  color: '#F9B233', 
-                  fontWeight: 'bold', 
-                  fontSize: '1.4rem', 
-                  margin: '0 0 1rem 0',
+                  color: '#ffffff', 
+                  fontWeight: '600', 
+                  fontSize: '0.875rem', 
+                  margin: '0 0 0.75rem 0',
                   textAlign: 'left'
                 }}>{s.name}</h3>
                 <p style={{ 
-                  color: '#94a3b8', 
-                  fontSize: '0.9rem', 
+                  color: 'var(--depth-4)', 
+                  fontSize: '0.875rem', 
                   lineHeight: '1.4',
                   margin: 0,
                   textAlign: 'left',
@@ -518,8 +757,24 @@ export default function Home({ onAdminLogin }) {
       </section>
 
       {/* JURY CV */}
-      <section id="jury-cv" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
-        <h2 className="section-title">Jury CV</h2>
+      <section id="jury-cv" style={{ padding: '4rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
+        <h2 style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: '2rem',
+          fontWeight: '700',
+          color: '#f0c76e',
+          textAlign: 'center',
+          marginBottom: '1rem',
+          textShadow: 'none'
+        }}>
+          Jury CV
+        </h2>
+        <div style={{
+          width: '100px',
+          height: '2px',
+          background: 'linear-gradient(90deg, transparent, #f0c76e, transparent)',
+          margin: '0 auto 3rem'
+        }}></div>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
@@ -528,8 +783,8 @@ export default function Home({ onAdminLogin }) {
           {jury.map((j, i) => (
             <motion.div
               key={i}
-              whileHover={{ scale: 1.12, rotate: 3 }}
-              className="card text-center"
+              whileHover={{ y: -4 }}
+              className="card card-3d text-center"
             >
               <img
                 src={j.logo}
@@ -540,23 +795,39 @@ export default function Home({ onAdminLogin }) {
                   filter: 'brightness(0) invert(1)'
                 }}
               />
-              <h3 style={{ color: '#F9B233', fontWeight: 'bold' }}>{j.name}</h3>
-              <p style={{ color: '#94a3b8' }}>{j.role} • {j.company}</p>
+              <h4 style={{ color: '#ffffff', fontWeight: '600', fontSize: '0.875rem', margin: '0 0 0.5rem 0' }}>{j.name}</h4>
+              <p style={{ color: 'var(--depth-4)', fontSize: '1rem' }}>{j.role} • {j.company}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* ÉDITIONS PRÉCÉDENTES */}
-      <section id="éditions" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
-        <h2 className="section-title">Éditions Précédentes</h2>
-        <p style={{
+      <section id="éditions" style={{ padding: '4rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
+        <h2 style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: '2rem',
+          fontWeight: '700',
+          color: '#f0c76e',
           textAlign: 'center',
-          color: '#94a3b8',
-          fontSize: '1.1rem',
+          marginBottom: '1rem',
+          textShadow: 'none'
+        }}>
+          Éditions Précédentes
+        </h2>
+        <div style={{
+          width: '100px',
+          height: '2px',
+          background: 'linear-gradient(90deg, transparent, #f0c76e, transparent)',
+          margin: '0 auto 1rem'
+        }}></div>
+        <p style={{
+          textAlign: 'justify',
+          color: 'var(--depth-4)',
+          fontSize: '0.875rem',
           maxWidth: '700px',
           margin: '0 auto 4rem',
-          lineHeight: '1.8'
+          lineHeight: '1.6'
         }}>
           Découvrez les moments forts de nos éditions passées
         </p>
@@ -579,7 +850,7 @@ export default function Home({ onAdminLogin }) {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
               whileHover={{ scale: 1.05, y: -10 }}
-              className="card"
+              className="card card-3d"
               style={{
                 padding: '0',
                 overflow: 'hidden',
@@ -612,7 +883,7 @@ export default function Home({ onAdminLogin }) {
                 justifyContent: 'center'
               }}>
                 <h3 style={{
-                  color: '#F9B233',
+                  color: '#ffffff',
                   fontSize: '2.5rem',
                   fontWeight: '900',
                   margin: 0,
@@ -624,12 +895,10 @@ export default function Home({ onAdminLogin }) {
               <motion.div
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
                 style={{
                   position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
+                  inset: 0,
                   background: 'rgba(0, 0, 0, 0.7)',
                   display: 'flex',
                   alignItems: 'center',
@@ -638,20 +907,27 @@ export default function Home({ onAdminLogin }) {
               >
                 <motion.a
                   href={edition.route}
-                  whileHover={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   style={{
-                    background: '#F9B233',
-                    color: '#0A0F1C',
-                    padding: '0.8rem 1.5rem',
+                    background: '#f0c76e',
+                    color: '#0b0b0e',
+                    padding: '0.8rem 2rem',
                     borderRadius: '25px',
                     textDecoration: 'none',
-                    fontWeight: '600',
+                    fontWeight: '700',
                     fontSize: '1rem',
-                    cursor: 'pointer'
+                    letterSpacing: '0.5px',
+                    textTransform: 'uppercase',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
                   }}
                 >
-                  Consulter
+                  <span>Consulter</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
                 </motion.a>
               </motion.div>
             </motion.div>
@@ -660,138 +936,485 @@ export default function Home({ onAdminLogin }) {
       </section>
 
       {/* PARTENAIRES */}
-      <section id="partenaires" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.03)' }}>
-        <h2 className="section-title">Partenaires</h2>
+      <section id="partenaires" style={{ 
+        padding: '4rem 1.5rem', 
+        background: 'rgba(255,255,255,0.03)'
+      }}>
+
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{ textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 1 }}
+        >
+          <div style={{ display: 'none' }}>
+            <span style={{
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+              background: 'linear-gradient(90deg, #f0c76e, #bdafff)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              Partenaires d'Excellence
+            </span>
+          </div>
+          
+          <h2 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: '2rem',
+            fontWeight: '700',
+            color: '#f0c76e',
+            marginBottom: '0.8rem',
+            textShadow: 'none'
+          }}>
+            Nos Partenaires
+          </h2>
+          
+          <p style={{
+            fontSize: '1rem',
+            color: 'rgba(255,255,255,0.7)',
+            maxWidth: '700px',
+            margin: '0 auto 1.5rem',
+            lineHeight: '1.6',
+            textAlign: 'justify'
+          }}>
+            Ensemble, nous façonnons l'avenir de l'excellence académique et professionnelle
+          </p>
+          
+          <div style={{
+            width: '100px',
+            height: '2px',
+            background: 'linear-gradient(90deg, transparent, #f0c76e, transparent)',
+            margin: '0 auto'
+          }}></div>
+        </motion.div>
         
-        {/* Logo carousel */}
-        <div className="logo-carousel">
+        {/* Luxury Logo Carousel */}
+        <div style={{
+          overflow: 'hidden',
+          margin: '3rem 0',
+          background: 'linear-gradient(135deg, rgba(240,199,110,0.05), rgba(189,175,255,0.05))',
+          padding: '2rem 0',
+          borderRadius: '15px',
+          border: '1px solid rgba(240,199,110,0.2)',
+          position: 'relative',
+          zIndex: 1
+        }}>
           <div className="logo-scroll">
             {partners.concat(partners).map((p, i) => (
-              <img key={i} src={p.logo} alt={p.name} />
+              <img 
+                key={i}
+                src={p.logo} 
+                alt={p.name}
+              />
             ))}
           </div>
         </div>
 
+        {/* Premium Grid */}
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '1.5rem',
-          maxWidth: '1000px',
-          margin: '0 auto'
+          maxWidth: '1200px',
+          margin: '0 auto 4rem',
+          position: 'relative',
+          zIndex: 1
         }}>
-          {partners.map((p, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.2, duration: 0.6 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="card"
-              style={{
-                padding: '0',
-                overflow: 'hidden',
-                height: '120px',
-                position: 'relative',
-                cursor: 'pointer'
-              }}
-            >
-              <img
-                src={p.logo}
-                alt={p.name}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: p.name === 'AVL' ? 'contain' : p.name === 'Safy' ? 'contain' : 'cover',
-                  display: 'block',
-                  backgroundColor: p.name === 'AVL' ? '#f8f9fa' : 'transparent',
-                  padding: p.name === 'Safy' ? '1rem' : '0'
-                }}
-              />
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '2rem'
+          }}>
+            {partners.map((p, i) => (
               <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  background: 'rgba(0, 0, 0, 0.7)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.6 }}
+                whileHover={{ y: -8, scale: 1.03 }}
+                style={{ position: 'relative', cursor: 'pointer' }}
               >
-                <motion.a
-                  href={p.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  style={{
-                    background: '#F9B233',
-                    color: '#0A0F1C',
-                    padding: '0.8rem 1.5rem',
-                    borderRadius: '25px',
-                    textDecoration: 'none',
-                    fontWeight: '600',
-                    fontSize: '1rem',
-                    border: 'none',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Consulter
-                </motion.a>
+                <div style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)',
+                  borderRadius: '15px',
+                  border: '2px solid rgba(240,199,110,0.2)',
+                  overflow: 'hidden',
+                  height: '120px',
+                  position: 'relative',
+                  backdropFilter: 'blur(10px)',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+                  transition: 'all 0.3s ease'
+                }}>
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: '-100%',
+                    width: '100%',
+                    height: '100%',
+                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)',
+                    animation: 'shine 3s infinite',
+                    pointerEvents: 'none'
+                  }}></div>
+                  
+                  <div style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '1.5rem'
+                  }}>
+                    <img
+                      src={p.logo}
+                      alt={p.name}
+                      style={{
+                        maxWidth: '90%',
+                        maxHeight: '90%',
+                        objectFit: 'contain',
+                        filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.2))'
+                      }}
+                    />
+                  </div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: '#f0c76e',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.8rem',
+                      padding: '1rem'
+                    }}
+                  >
+                    <h4 style={{
+                      color: '#0b0b0e',
+                      fontSize: '1rem',
+                      fontWeight: '700',
+                      textAlign: 'center',
+                      margin: 0
+                    }}>
+                      {p.name}
+                    </h4>
+                    
+                    <motion.a
+                      href={p.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      style={{
+                        background: '#0b0b0e',
+                        color: '#f0c76e',
+                        padding: '0.5rem 1.2rem',
+                        borderRadius: '25px',
+                        textDecoration: 'none',
+                        fontWeight: '600',
+                        fontSize: '0.875rem',
+                        letterSpacing: '0.5px',
+                        textTransform: 'uppercase',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.4rem'
+                      }}
+                    >
+                      <span>Voir</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </motion.a>
+                  </motion.div>
+                </div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
+
+
       </section>
 
       {/* CONTACT - UCA MARRAKECH */}
-      <section id="contact" style={{ padding: '7rem 1.5rem', background: 'rgba(255,255,255,0.05)' }}>
-        <h2 className="section-title">Contact</h2>
+      <section id="contact" style={{ padding: '4rem 1.5rem', background: 'rgba(255,255,255,0.05)' }}>
+        <h2 style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: '2rem',
+          fontWeight: '700',
+          color: '#f0c76e',
+          textAlign: 'center',
+          marginBottom: '1rem',
+          textShadow: 'none'
+        }}>
+          Contact
+        </h2>
         <div style={{
-          maxWidth: '900px',
+          width: '100px',
+          height: '2px',
+          background: 'linear-gradient(90deg, transparent, #f0c76e, transparent)',
+          margin: '0 auto 3rem'
+        }}></div>
+        <div style={{
+          maxWidth: '1200px',
           margin: '0 auto',
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           gap: '3rem'
         }}>
           <div>
-            <h3 style={{ color: '#F9B233', marginBottom: '1.5rem', fontSize: '1.6rem', fontWeight: '700' }}>
-              Université Cadi Ayyad
+            <h3 style={{ 
+              color: '#ffffff', 
+              marginBottom: '1.5rem', 
+              fontSize: 'var(--text-xl)', 
+              fontWeight: 'var(--font-semibold)',
+              textAlign: 'center'
+            }}>
+              Informations de Contact
             </h3>
-            <p style={{ color: '#94a3b8', lineHeight: '2', fontSize: '1.05rem' }}>
-              <strong>École Nationale des Sciences Appliquées</strong><br />
-              Avenue Abdelkarim El Khattabi, Guéliz<br />
-              BP 575, Marrakech 40000, Maroc<br /><br />
-              <strong>Tél :</strong> +212 5 24 44 81 37<br />
-              <strong>Email :</strong> ensa@uca.ma<br />
-              <strong>Site :</strong>{' '}
-              <a href="http://www.ensa.ac.ma" style={{ color: '#004AAD', textDecoration: 'underline' }}>
-                www.ensa.ac.ma
-              </a>
-            </p>
+            
+            <motion.div
+              whileHover={{ scale: 1.02, y: -4 }}
+              transition={{ duration: 0.4 }}
+              className="card card-3d"
+              style={{
+                padding: '2rem',
+                height: '440px',
+                display: 'flex',
+                flexDirection: 'column'
+              }}
+            >
+              {/* University Header */}
+              <div style={{
+                textAlign: 'center',
+                marginBottom: '2rem',
+                padding: '1rem',
+                background: 'rgba(255,255,255,0.05)',
+                borderRadius: '10px',
+                border: '1px solid rgba(255,255,255,0.1)'
+              }}>
+                <h4 style={{ 
+                  color: '#f0c76e', 
+                  fontSize: 'var(--text-xl)', 
+                  fontWeight: 'var(--font-semibold)',
+                  margin: '0 0 0.5rem 0'
+                }}>
+                  Université Cadi Ayyad
+                </h4>
+                <p style={{ 
+                  color: 'var(--depth-4)', 
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  margin: 0
+                }}>
+                  École Nationale des Sciences Appliquées
+                </p>
+              </div>
+              
+              {/* Contact Details */}
+              <div style={{ display: 'grid', gap: '1.2rem' }}>
+                {/* Address */}
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    </svg>
+                  <div>
+                    <p style={{ color: 'var(--text)', fontWeight: '600', margin: '0 0 0.3rem 0', fontSize: '0.875rem' }}>Adresse</p>
+                    <p style={{ color: 'var(--depth-4)', fontSize: '0.875rem', lineHeight: '1.5', margin: 0 }}>
+                      Avenue Abdelkarim El Khattabi, Guéliz<br />
+                      BP 575, Marrakech 40000, Maroc
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Phone */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/>
+                    </svg>
+                  <div>
+                    <p style={{ color: 'var(--text)', fontWeight: '600', margin: '0 0 0.3rem 0', fontSize: '0.875rem' }}>Téléphone</p>
+                    <a href="tel:+212524448137" style={{ 
+                      color: '#f0c76e', 
+                      textDecoration: 'none',
+                      fontSize: '0.875rem',
+                      fontWeight: '600'
+                    }}>
+                      +212 5 24 44 81 37
+                    </a>
+                  </div>
+                </div>
+                
+                {/* Email */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2">
+                      <rect x="3" y="5" width="18" height="14" rx="2"/>
+                      <path d="M3 7l9 6 9-6"/>
+                    </svg>
+                  <div>
+                    <p style={{ color: 'var(--text)', fontWeight: '600', margin: '0 0 0.3rem 0', fontSize: '0.875rem' }}>Email</p>
+                    <a href="mailto:ensa@uca.ma" style={{ 
+                      color: '#f0c76e', 
+                      textDecoration: 'none',
+                      fontSize: '0.875rem',
+                      fontWeight: '600'
+                    }}>
+                      ensa@uca.ma
+                    </a>
+                  </div>
+                </div>
+                
+                {/* Website */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0c76e" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="2" y1="12" x2="22" y2="12"/>
+                    </svg>
+                  <div>
+                    <p style={{ color: 'var(--text)', fontWeight: '600', margin: '0 0 0.3rem 0', fontSize: '0.875rem' }}>Site Web</p>
+                    <a href="http://www.ensa.ac.ma" target="_blank" rel="noopener noreferrer" style={{ 
+                      color: '#f0c76e', 
+                      textDecoration: 'none',
+                      fontSize: '0.875rem',
+                      fontWeight: '600'
+                    }}>
+                      www.ensa.ac.ma
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
           <div>
-            <form style={{ display: 'grid', gap: '1.2rem' }}>
-              <input type="text" placeholder="Votre nom" style={inputStyle} />
-              <input type="email" placeholder="Email" style={inputStyle} />
-              <textarea placeholder="Message" rows="5" style={{ ...inputStyle, resize: 'vertical' }}></textarea>
-              <button type="submit" className="btn btn-gold">
-                Envoyer le message
-              </button>
-            </form>
+            <h3 style={{ 
+              color: '#ffffff', 
+              marginBottom: '1.5rem', 
+              fontSize: 'var(--text-xl)', 
+              fontWeight: 'var(--font-semibold)',
+              textAlign: 'center'
+            }}>
+              Notre Localisation
+            </h3>
+            
+            {/* Google Maps Container */}
+            <motion.div
+              whileHover={{ scale: 1.02, y: -4 }}
+              transition={{ duration: 0.4 }}
+              className="card card-3d"
+              style={{
+                padding: '0',
+                overflow: 'hidden',
+                height: '440px',
+                position: 'relative'
+              }}
+            >
+              {/* Map Header */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                background: 'rgba(0,0,0,0.8)',
+                padding: '0.8rem',
+                zIndex: 2,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}>
+                <div style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  background: '#f0c76e'
+                }}></div>
+                <span style={{
+                  color: 'white',
+                  fontWeight: '600',
+                  fontSize: '1rem'
+                }}>ENSA Marrakech - Campus</span>
+              </div>
+              
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3396.524466613466!2d-8.022940425484824!3d31.646868074156284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee9e5e2bd20f%3A0x2cf9300f935096fa!2sENSA%20%3A%20%C3%89cole%20Nationale%20des%20Sciences%20Appliqu%C3%A9es_Marrakech!5e0!3m2!1sfr!2sma!4v1762446374706!5m2!1sfr!2sma"
+                width="100%"
+                height="100%"
+                style={{ 
+                  border: 0, 
+                  marginTop: '40px',
+                  filter: 'contrast(1.1) saturate(1.2)'
+                }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="ENSA Marrakech Location"
+              ></iframe>
+              
+              {/* Map Footer */}
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                background: 'linear-gradient(to top, rgba(10, 15, 28, 0.9), transparent)',
+                padding: '1rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '1rem'
+              }}>
+                <motion.a
+                  href="https://maps.google.com/?q=ENSA+Marrakech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{
+                    background: '#f0c76e',
+                    color: '#0b0b0e',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '20px',
+                    textDecoration: 'none',
+                    fontWeight: '600',
+                    fontSize: '0.875rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.3rem'
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0b0b0e" strokeWidth="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  </svg>
+                  Ouvrir dans Maps
+                </motion.a>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* ADMIN - CONNEXION */}
       {showAdmin && (
-        <section id="admin" style={{ padding: '7rem 1.5rem' }}>
-          <h2 className="section-title">Espace Admin</h2>
+        <section id="admin" style={{ padding: '4rem 1.5rem' }}>
+          <h2 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: '2rem',
+            fontWeight: '700',
+            color: '#f0c76e',
+          textAlign: 'center',
+          marginBottom: '3rem',
+          textShadow: 'none'
+        }}>
+            Espace Admin
+          </h2>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -818,7 +1441,7 @@ export default function Home({ onAdminLogin }) {
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                color: '#F9B233',
+                color: '#ffffff',
                 fontSize: '1.5rem',
                 fontWeight: 'bold'
               }}
@@ -831,22 +1454,22 @@ export default function Home({ onAdminLogin }) {
                 width: '80px',
                 height: '80px',
                 margin: '0 auto 1.5rem',
-                background: 'linear-gradient(135deg, #F9B233, #f39c12)',
+                background: '#f0c76e',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: '0 10px 30px rgba(249, 178, 51, 0.4)'
               }}>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0A0F1C" strokeWidth="2.5">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--bg)" strokeWidth="2.5">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
               </div>
-              <h3 style={{ color: '#F9B233', fontSize: '1.8rem', fontWeight: '700', marginBottom: '0.5rem' }}>
+              <h3 style={{ color: '#ffffff', fontSize: '1.8rem', fontWeight: '700', marginBottom: '0.5rem' }}>
                 Connexion Admin
               </h3>
-              <p style={{ color: '#94a3b8', fontSize: '0.95rem' }}>
+              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1rem' }}>
                 Accédez au tableau de bord administrateur
               </p>
             </div>
@@ -870,10 +1493,10 @@ export default function Home({ onAdminLogin }) {
               <div>
                 <label style={{
                   display: 'block',
-                  color: '#e2e8f0',
+                  color: '#f0c76e',
                   marginBottom: '0.5rem',
                   fontWeight: '600',
-                  fontSize: '0.95rem'
+                  fontSize: '1rem'
                 }}>
                   Email
                 </label>
@@ -893,10 +1516,10 @@ export default function Home({ onAdminLogin }) {
               <div>
                 <label style={{
                   display: 'block',
-                  color: '#e2e8f0',
+                  color: '#f0c76e',
                   marginBottom: '0.5rem',
                   fontWeight: '600',
-                  fontSize: '0.95rem'
+                  fontSize: '1rem'
                 }}>
                   Mot de passe
                 </label>
@@ -916,7 +1539,7 @@ export default function Home({ onAdminLogin }) {
               {loginError && (
                 <p style={{
                   color: '#f87171',
-                  fontSize: '0.9rem',
+                  fontSize: '1rem',
                   textAlign: 'center',
                   margin: '0'
                 }}>
@@ -928,7 +1551,7 @@ export default function Home({ onAdminLogin }) {
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="btn btn-gold"
+                className="btn btn-gold btn-premium luxury-focus loading-luxury"
                 style={{
                   width: '100%',
                   marginTop: '1rem',
@@ -936,8 +1559,8 @@ export default function Home({ onAdminLogin }) {
                   fontSize: '1.1rem',
                   fontWeight: '700',
                   borderRadius: '50px',
-                  background: 'linear-gradient(45deg, #F9B233, #f39c12)',
-                  color: '#0A0F1C',
+                  background: '#f0c76e',
+                  color: 'var(--bg)',
                   border: 'none',
                   cursor: 'pointer',
                   boxShadow: '0 10px 30px rgba(249, 178, 51, 0.5)',
@@ -949,11 +1572,11 @@ export default function Home({ onAdminLogin }) {
 
               <p style={{
                 textAlign: 'center',
-                color: '#94a3b8',
-                fontSize: '0.9rem',
+                color: 'rgba(255,255,255,0.6)',
+                fontSize: '0.875rem',
                 marginTop: '0.5rem'
               }}>
-                Mot de passe oublié ? <a href="#" style={{ color: '#F9B233', textDecoration: 'underline' }}>Réinitialiser</a>
+                Mot de passe oublié ? <a href="#" style={{ color: '#f0c76e', textDecoration: 'none', fontWeight: '600' }}>Réinitialiser</a>
               </p>
             </form>
           </motion.div>
@@ -967,5 +1590,9 @@ export default function Home({ onAdminLogin }) {
     </main>
   );
 }
+
+
+
+
 
 

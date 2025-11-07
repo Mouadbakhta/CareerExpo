@@ -52,22 +52,23 @@ export default function Navbar({ dark, setDark }) {
       zIndex: 1000,
       padding: scrolled ? '0.8rem 0' : '1.5rem 0',
       background: scrolled
-        ? (dark ? 'rgba(10,15,28,0.95)' : 'rgba(243,244,246,0.95)')
+        ? 'rgba(0,0,0,0.95)'
         : 'transparent',
-      transition: 'all 0.5s ease',
-      backdropFilter: 'blur(15px)',
+      transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+      backdropFilter: scrolled ? 'blur(25px)' : 'blur(10px)',
+      WebkitBackdropFilter: scrolled ? 'blur(25px)' : 'blur(10px)',
       borderBottom: scrolled
-        ? (dark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)')
+        ? '1px solid var(--depth-3)'
         : 'none'
     }}>
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', minHeight: '60px' }}>
         {/* Logo */}
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/logo.png" alt="ENSA" style={{ height: '45px' }} />
+          <img src="/logo.png" alt="ENSA" style={{ height: scrolled ? '48px' : '52px', transition: 'all 0.4s ease' }} />
         </a>
 
         {/* Navigation */}
-        <nav className="main-nav" style={{ display: 'flex', alignItems: 'center', gap: '2.2rem' }}>
+        <nav className="main-nav" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           {/* Mobile toggle visible on small screens */}
           <button
             className="mobile-toggle"
@@ -75,10 +76,10 @@ export default function Navbar({ dark, setDark }) {
             aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'none' }}
           >
-            {mobileOpen ? <X color="#F9B233" size={22} /> : <Menu color={dark ? "#e2e8f0" : "#1f2937"} size={22} />}
+            {mobileOpen ? <X color="#f0c76e" size={22} /> : <Menu color="var(--text)" size={22} />}
           </button>
 
-          <div className={`nav-items ${mobileOpen ? 'open' : ''}`}>
+          <div className={`nav-items ${mobileOpen ? 'open' : ''}`} style={{ display: 'flex', gap: '2rem' }}>
           {menuItems.map(item => {
             const isActive = activeSection === item.id;
 
@@ -86,13 +87,13 @@ export default function Navbar({ dark, setDark }) {
               <a
                 key={item.id}
                 href={`/#${item.id}`}
+                className="nav-link nav-link-3d luxury-focus"
                 style={{
-                  color: isActive ? '#F9B233' : (dark ? '#e2e8f0' : '#1f2937'),
+                  color: isActive ? '#f0c76e' : 'var(--text)',
                   textDecoration: 'none',
-                  fontWeight: isActive ? '700' : '500',
+                  fontWeight: isActive ? 600 : 500,
                   position: 'relative',
-                  transition: 'all 0.3s ease',
-                  fontSize: '1.05rem'
+                  transition: 'all 0.3s ease'
                 }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -117,10 +118,10 @@ export default function Navbar({ dark, setDark }) {
                     left: 0,
                     width: isActive ? '100%' : '0',
                     height: '3px',
-                    background: '#F9B233',
+                    background: '#f0c76e',
                     borderRadius: '2px',
                     transition: 'width 0.4s ease',
-                    boxShadow: isActive ? '0 0 10px rgba(249,178,51,0.7)' : 'none'
+                    boxShadow: isActive ? '0 0 15px var(--glow)' : 'none'
                   }}
                 ></span>
 
@@ -132,7 +133,7 @@ export default function Navbar({ dark, setDark }) {
                     left: 0,
                     width: 0,
                     height: '3px',
-                    background: '#F9B233',
+                    background: '#f0c76e',
                     borderRadius: '2px',
                     transition: 'width 0.4s ease',
                   }}
@@ -142,7 +143,6 @@ export default function Navbar({ dark, setDark }) {
               </a>
             );
           })}
-
           </div>
 
           {/* Bouton Mode Sombre */}
@@ -151,8 +151,7 @@ export default function Navbar({ dark, setDark }) {
             style={{ background: 'none', border: 'none', cursor: 'pointer' }}
             aria-label={dark ? 'Activer le mode clair' : 'Activer le mode sombre'}
           >
-            {/* Show Moon when in dark mode, Sun when in light mode */}
-            {dark ? <Moon color="#F9B233" size={22} /> : <Sun color="#1a365d" size={22} />}
+            {dark ? <Moon color="#f0c76e" size={22} /> : <Sun color="#f0c76e" size={22} />}
           </button>
         </nav>
       </div>

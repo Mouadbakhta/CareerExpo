@@ -1,39 +1,96 @@
 /* src/index.css */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap');
+@import './styles/typography.css';
 
 :root {
-  --royal-blue: #004AAD;
-  --gold: #F9B233;
-  --navy: #0A0F1C;
-  --glass: rgba(255, 255, 255, 0.1);
-  --border: rgba(249, 178, 51, 0.3);
-  --text: #e2e8f0;
-  --gray: #94a3b8;
-  --radius: 20px;
+  --bg: #000000;
+  --text: #FFFFFF;
+  --depth-0: #050505;
+  --depth-1: #111111;
+  --depth-2: #1E1E1E;
+  --depth-3: rgba(255, 255, 255, 0.15);
+  --depth-4: rgba(255, 255, 255, 0.7);
+  --depth-5: rgba(255, 255, 255, 0.85);
+  --gold: #f0c76e;
+  --glow: rgba(240, 199, 110, 0.22);
+  --shadow-base: 0 12px 32px rgba(0,0,0,0.7);
+  --shadow-lift: 0 24px 64px rgba(0,0,0,0.85), 0 12px 24px rgba(0,0,0,0.6);
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+html { 
+  scroll-behavior: smooth; 
+  font-size: 16px;
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
-  background: var(--navy);
+  background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
   position: relative;
-  transition: all 0.5s ease;
+  transition: var(--transition);
 }
 
-/* Dark mode (default) */
+/* 3D Starfield Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #FAFAFA, transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(250,250,250,0.1), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(250,250,250,0.08), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(250,250,250,0.06), transparent),
+    radial-gradient(1px 1px at 160px 30px, rgba(250,250,250,0.05), transparent),
+    radial-gradient(1px 1px at 200px 60px, rgba(250,250,250,0.07), transparent),
+    radial-gradient(1px 1px at 250px 20px, rgba(250,250,250,0.09), transparent),
+    radial-gradient(1px 1px at 300px 90px, rgba(250,250,250,0.06), transparent);
+  background-repeat: repeat;
+  background-size: 400px 200px;
+  animation: starfieldDrift 50s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  transform: translateZ(-80px);
+  opacity: 0.3;
+}
+
+@keyframes starfieldDrift {
+  0% { transform: translateY(0px) translateZ(-80px); }
+  100% { transform: translateY(-200px) translateZ(-80px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  body::before {
+    display: none;
+  }
+}
+
+/* Monochrome luxury mode (default) */
 body {
-  background: var(--navy);
+  background: var(--bg);
 }
 
-/* Light mode (gris clair) */
+/* Light mode override */
 body.light {
-  /* gris clair neutre */
-  background: #f3f4f6; /* light gray */
-  /* texte sombre pour bon contraste sur fond clair */
-  color: #1f2937;
+  background: var(--bg);
+  color: var(--text);
 }
 
 /* ÉTOILES + PARTICULES */
@@ -54,68 +111,185 @@ body.light {
   50% { transform: scale(1.05); }
 }
 
-/* CONTAINER */
+@keyframes logoRotate {
+  0% { transform: scale(0.8) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
+  100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+/* CONTAINER WITH BETTER SPACING */
 .container {
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
-/* TITRE ROYAL */
-.royal-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 5.5rem;
-  font-weight: 900;
-  color: #F9B233;
-  animation: blinkGlow 2s ease-in-out infinite alternate;
-  text-shadow: 0 0 20px rgba(249, 178, 51, 0.8), 0 0 40px rgba(249, 178, 51, 0.6), 0 4px 8px rgba(0, 0, 0, 0.8);
+/* VISUAL RHYTHM AND SPACING */
+.content-spacing > * + * {
+  margin-top: 1.5rem;
 }
 
-@keyframes blinkGlow {
-  0% { 
-    opacity: 0.8;
-    text-shadow: 0 0 20px rgba(249, 178, 51, 0.6), 0 0 40px rgba(249, 178, 51, 0.4), 0 4px 8px rgba(0, 0, 0, 0.8);
-  }
-  100% { 
-    opacity: 1;
-    text-shadow: 0 0 30px rgba(249, 178, 51, 1), 0 0 60px rgba(249, 178, 51, 0.8), 0 4px 8px rgba(0, 0, 0, 0.8);
-  }
+.content-spacing h2 + p,
+.content-spacing h3 + p {
+  margin-top: 1rem;
 }
 
-/* SECTION TITLE */
-.section-title {
-  font-size: 3.2rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 3.5rem;
-  color: #F9B233;
+.content-spacing p + h2,
+.content-spacing p + h3 {
+  margin-top: 2.5rem;
+}
+
+/* 3D LUXURY HERO BACKGROUND */
+.hero-animated-bg {
+  background: var(--bg);
   position: relative;
-  display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
+  transform-style: preserve-3d;
+}
+
+.hero-animated-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, var(--glow) 50%, transparent 70%);
+  opacity: 0.05;
+  pointer-events: none;
+  animation: heroShimmer 8s ease-in-out infinite;
+}
+
+@keyframes heroShimmer {
+  0%, 100% { opacity: 0.05; transform: translateX(-100%); }
+  50% { opacity: 0.1; transform: translateX(100%); }
+}
+
+/* 3D GLASS EFFECT */
+.glass {
+  background: linear-gradient(135deg, var(--depth-1) 0%, var(--depth-2) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--depth-3);
+  transform-style: preserve-3d;
+}
+
+/* 3D GRADIENT TEXT */
+.gradient-text {
+  background: linear-gradient(135deg, var(--text) 0%, var(--gold) 50%, var(--text) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  text-shadow: 0 2px 4px var(--glow);
+}
+
+/* 3D LUXURY HERO TITLE */
+.royal-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.royal-title::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--depth-4);
+  transform: translateZ(-10px) translateY(2px) translateX(2px);
+  z-index: -1;
+}
+
+.royal-title .violet-accent {
+  color: var(--gold);
+  text-shadow: 0 0 20px var(--glow);
+}
+
+/* 3D LUXURY SECTION TITLES */
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--text);
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  transform-style: preserve-3d;
+}
+
+.section-title::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--depth-3);
+  transform: translateZ(-5px) translateY(1px) translateX(1px);
+  z-index: -1;
 }
 
 .section-title::after {
   content: '';
   position: absolute;
-  bottom: -15px;
+  bottom: -1rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  height: 5px;
-  background: linear-gradient(90deg, transparent, #F9B233, transparent);
-  border-radius: 3px;
-  box-shadow: 0 0 15px #F9B233;
+  width: 60px;
+  height: 3px;
+  background: var(--depth-3);
+  border-radius: 2px;
 }
 
-/* Logo carousel animation */
+
+
+body.light p,
+body.light li {
+  color: var(--depth-4);
+}
+
+/* 3D Logo carousel */
 .logo-carousel {
   overflow: hidden;
   white-space: nowrap;
   margin: 2rem 0;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255,255,255,0.1);
   padding: 1rem 0;
   border-radius: 10px;
+  border: 1px solid var(--depth-3);
+  box-shadow: var(--shadow-base);
+  transform-style: preserve-3d;
 }
 
 .logo-scroll {
@@ -128,14 +302,20 @@ body.light {
 
 .logo-scroll img {
   height: 60px;
-  width: auto;
+  width: 120px;
   object-fit: contain;
-  filter: brightness(0.8) contrast(1.2);
+  filter: none;
   flex-shrink: 0;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  background: rgba(255,255,255,0.05);
+  padding: 0.5rem;
+  border-radius: 8px;
 }
 
 .logo-scroll img:hover {
-  filter: brightness(1) contrast(1);
+  filter: none;
+  transform: translateZ(10px) scale(1.05);
 }
 
 @keyframes scroll {
@@ -143,139 +323,178 @@ body.light {
   100% { transform: translateX(-50%); }
 }
 
-/* BOUTONS ROYAUX */
+/* 3D LUXURY BUTTONS */
 .btn {
-  padding: 1.1rem 2.5rem;
-  border-radius: 50px;
-  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  display: inline-block;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  font-size: 1.1rem;
+  border: none;
   position: relative;
-  overflow: hidden;
-  z-index: 1;
-  border: 2px solid transparent;
+  min-height: 40px;
+  letter-spacing: 0.025em;
+  transform-style: preserve-3d;
 }
 
 .btn-gold {
-  background: linear-gradient(45deg, #F9B233, #f39c12);
-  color: #0A0F1C;
-  box-shadow: 0 10px 30px rgba(249, 178, 51, 0.5);
+  background: linear-gradient(135deg, var(--depth-3) 0%, var(--depth-4) 50%, var(--depth-3) 100%);
+  color: var(--text);
+  box-shadow: var(--shadow-base);
+  border: 1px solid var(--depth-4);
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-gold::before {
   content: '';
   position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  transition: 0.7s;
-  z-index: -1;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--glow), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-4px) rotateX(5deg);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--gold);
+  color: var(--gold);
 }
 
 .btn-gold:hover::before {
   left: 100%;
 }
 
-.btn-gold:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 20px 50px rgba(249, 178, 51, 0.7);
-  border-color: #F9B233;
-  animation: pulse 1.5s infinite;
+.btn:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
-/* CARDS GLASS */
+/* 3D LUXURY CARDS */
 .card {
-  background: var(--glass);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  padding: 2.2rem;
+  background: linear-gradient(135deg, var(--depth-1) 0%, var(--depth-2) 50%, var(--depth-1) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.5rem;
   border-radius: var(--radius);
-  border: 1px solid var(--border);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-  transition: all 0.6s ease;
+  border: 1px solid var(--depth-3);
+  box-shadow: var(--shadow-base);
+  transition: var(--transition);
   position: relative;
-  overflow: hidden;
+  z-index: 2;
+  transform-style: preserve-3d;
 }
 
 .card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: radial-gradient(circle at 30% 30%, rgba(249,178,51,0.2), transparent 70%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, var(--glow) 50%, transparent 70%);
+  border-radius: var(--radius);
   opacity: 0;
-  transition: 0.6s;
-  z-index: -1;
-}
-
-.card:hover::before {
-  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .card:hover {
-  transform: translateY(-15px) scale(1.03);
-  box-shadow: 0 30px 60px rgba(0, 74, 173, 0.5);
-  border-color: #F9B233;
+  transform: translateY(-8px) rotateX(2deg) rotateY(1deg);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--gold);
 }
 
-/* Responsive rules for tablets / mobiles */
+.card:hover::before {
+  opacity: 0.1;
+}
+
+/* 3D LUXURY SECTIONS */
+section {
+  padding: 4rem 2rem;
+  position: relative;
+  margin-bottom: 1.5rem;
+  transform-style: preserve-3d;
+}
+
+section:nth-child(even) {
+  background: linear-gradient(135deg, var(--bg) 0%, var(--depth-0) 50%, var(--bg) 100%);
+}
+
+section:nth-child(odd) {
+  background: linear-gradient(135deg, var(--depth-0) 0%, var(--bg) 50%, var(--depth-0) 100%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* 3D SECTION DIVIDERS */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--depth-3), var(--gold), var(--depth-3), transparent);
+  margin: 4rem 0;
+  border-radius: 1px;
+  box-shadow: 0 0 10px var(--glow);
+  transform: translateZ(5px);
+}
+
+body.light .section-divider {
+  background: linear-gradient(90deg, transparent, var(--depth-3), var(--gold), var(--depth-3), transparent);
+}
+
+/* Responsive Typography */
 @media (max-width: 1024px) {
-  .royal-title {
-    font-size: 4.2rem;
+  section {
+    padding: 3rem 1.5rem;
   }
 
-  .section-title {
-    font-size: 2.6rem;
-  }
-
-  .container {
-    padding: 0 1rem;
-  }
-
-  .main-nav {
-    gap: 1.2rem !important;
+  .card {
+    padding: 1.25rem;
   }
 }
 
 @media (max-width: 768px) {
-  .royal-title {
-    font-size: 3rem;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .main-nav {
-    gap: 0.8rem !important;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .main-nav a {
-    font-size: 0.95rem;
-  }
 
   .countdown {
-    gap: 0.9rem;
+    gap: 1rem;
   }
 
   .countdown-box {
-    min-width: 64px !important;
-    font-size: 1.4rem !important;
-    padding: 0.6rem !important;
-    border-radius: 12px !important;
+    min-width: 70px !important;
+    font-size: 1.5rem !important;
+    padding: 1rem 0.75rem !important;
+  }
+
+  section {
+    padding: 3rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
   }
 
   /* Stack hero buttons on mobile */
   section#accueil .btn {
     width: 100%;
-    max-width: 360px;
+    max-width: 320px;
     display: block;
-    margin: 0.6rem auto;
+    margin: 0.5rem auto;
+  }
+
+  .container {
+    padding: 0 1rem;
   }
 }
 
@@ -330,34 +549,23 @@ body.light {
 }
 
 @media (max-width: 420px) {
-  .royal-title {
-    font-size: 2.2rem;
-  }
-
-  .section-title {
-    font-size: 1.6rem;
-  }
 
   .countdown-box {
-    min-width: 56px !important;
-    font-size: 1.1rem !important;
-    padding: 0.5rem !important;
+    min-width: 60px !important;
+    font-size: 1.25rem !important;
+    padding: 0.875rem 0.625rem !important;
   }
 
-  /* Extra small screens perfect centering */
   section {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
+    padding: 2.5rem 0.75rem;
   }
 
-  section#accueil > div {
-    padding: 0 0.5rem;
+  .card {
+    padding: 0.875rem;
   }
 
-  /* Ensure no horizontal overflow */
-  * {
-    max-width: 100%;
-    box-sizing: border-box;
+  .container {
+    padding: 0 0.75rem;
   }
 }
 
@@ -369,14 +577,12 @@ body.light {
 }
 
 @media (min-width: 1025px) {
-  .main-nav {
-    gap: 2.4rem !important;
+  section {
+    padding: 5rem 2rem;
   }
 
-  .main-nav a {
-    margin: 0 0.6rem;
-    font-size: 1.05rem;
-    letter-spacing: 0.2px;
+  .card {
+    padding: 2rem;
   }
 }
 
@@ -469,24 +675,29 @@ body.light {
 }
 
 /* ========================================
-   LIGHT MODE STYLES
+   MONOCHROME LUXURY LIGHT MODE OVERRIDE
    ======================================== */
 
-/* Light mode card styles */
+/* Maintain monochrome luxury in light mode */
 body.light .card {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 74, 173, 0.2);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-  color: #1f2937;
+  background: linear-gradient(135deg, var(--depth-1) 0%, var(--depth-2) 50%, var(--depth-1) 100%);
+  border: 1px solid var(--depth-3);
+  box-shadow: var(--shadow-base);
+  color: var(--text);
+}
+
+body.light .card::before {
+  background: linear-gradient(45deg, transparent 30%, var(--glow) 50%, transparent 70%);
 }
 
 body.light .card:hover {
-  box-shadow: 0 30px 60px rgba(0, 74, 173, 0.2);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--gold);
 }
 
 /* Light mode section titles */
 body.light .section-title {
-  color: #004AAD;
+  color: var(--text);
 }
 
 /* Light mode text colors */
@@ -496,93 +707,317 @@ body.light h3,
 body.light h4,
 body.light h5,
 body.light h6 {
-  color: #1f2937;
+  color: var(--text);
 }
 
 body.light p {
-  color: #374151;
+  color: var(--text);
 }
 
-/* Light mode for countdown timer */
+/* Monochrome countdown timer */
 body.light .countdown-box {
-  background: rgba(255, 255, 255, 0.9) !important;
-  border: 2px solid rgba(0, 74, 173, 0.3) !important;
-  color: #004AAD !important;
-  box-shadow: 0 8px 25px rgba(0, 74, 173, 0.2) !important;
+  background: linear-gradient(135deg, var(--depth-2) 0%, var(--depth-3) 100%) !important;
+  border: 2px solid var(--depth-4) !important;
+  color: var(--text) !important;
+  box-shadow: var(--shadow-base) !important;
 }
 
 body.light .countdown small {
-  color: #6b7280 !important;
+  color: var(--text) !important;
 }
 
-/* Light mode for input fields */
+/* Monochrome input fields */
 body.light input,
 body.light textarea,
 body.light select {
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid rgba(0, 74, 173, 0.2);
-  color: #1f2937;
+  background: linear-gradient(135deg, var(--depth-1) 0%, var(--depth-2) 100%);
+  border: 2px solid var(--depth-3);
+  color: var(--text);
 }
 
 body.light input::placeholder,
 body.light textarea::placeholder {
-  color: #6b7280;
+  color: var(--text);
 }
 
-/* Light mode for buttons - keep gold buttons visible */
+/* Monochrome luxury buttons */
 body.light .btn-gold {
-  background: linear-gradient(45deg, #F9B233, #f39c12);
-  color: #0A0F1C;
-  box-shadow: 0 10px 30px rgba(249, 178, 51, 0.4);
+  background: linear-gradient(135deg, var(--depth-3) 0%, var(--depth-4) 50%, var(--depth-3) 100%);
+  color: var(--text);
+  box-shadow: var(--shadow-base);
+}
+
+body.light .btn-gold::before {
+  background: linear-gradient(90deg, transparent, var(--glow), transparent);
 }
 
 body.light .btn-gold:hover {
-  box-shadow: 0 20px 50px rgba(249, 178, 51, 0.6);
+  box-shadow: var(--shadow-lift);
+  color: var(--gold);
 }
 
-/* Light mode for footer */
+/* Monochrome footer */
 body.light footer {
-  background: rgba(255, 255, 255, 0.8) !important;
-  border-top: 1px solid rgba(0, 74, 173, 0.2) !important;
-  color: #1f2937 !important;
+  background: linear-gradient(135deg, var(--depth-0) 0%, var(--depth-1) 100%) !important;
+  border-top: 1px solid var(--depth-3) !important;
+  color: var(--text) !important;
 }
 
 body.light footer p {
-  color: #1f2937 !important;
+  color: var(--text) !important;
 }
 
-/* Light mode for links */
+/* Monochrome links */
 body.light a {
-  color: #004AAD;
+  color: var(--gold);
 }
 
 body.light a:hover {
-  color: #F9B233;
+  color: var(--text);
+  text-shadow: 0 0 10px var(--glow);
 }
 
-/* Light mode for modal overlay */
+/* Monochrome modal overlay */
 body.light .modal-overlay {
-  background: rgba(243, 244, 246, 0.85) !important;
+  background: rgba(0, 0, 0, 0.85) !important;
 }
 
-/* Light mode for modal inputs */
+/* Monochrome modal inputs */
 body.light .card input,
 body.light .card textarea,
 body.light .card select {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 2px solid rgba(0, 74, 173, 0.2) !important;
-  color: #1f2937 !important;
+  background: linear-gradient(135deg, var(--depth-1) 0%, var(--depth-2) 100%) !important;
+  border: 2px solid var(--depth-3) !important;
+  color: var(--text) !important;
 }
 
 body.light .card input::placeholder,
 body.light .card textarea::placeholder {
-  color: #6b7280 !important;
+  color: var(--text) !important;
 }
 
 body.light .card label {
-  color: #004AAD !important;
+  color: var(--gold) !important;
 }
 
 body.light .card h2 {
-  color: #F9B233 !important;
+  color: var(--text) !important;
+}
+
+/* ========================================
+   3D LUXURY MICRO-INTERACTIONS
+   ======================================== */
+
+/* 3D Hover Effects */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.card-3d:hover {
+  transform: translateY(-8px) rotateX(5deg) rotateY(2deg);
+}
+
+/* Violet Accent Letters */
+.violet-letter {
+  color: var(--gold);
+  text-shadow: 0 0 15px var(--glow);
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.violet-letter:hover {
+  transform: translateY(-2px) scale(1.1);
+  text-shadow: 0 0 25px var(--glow);
+}
+
+/* Premium Button Interactions */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.btn-premium::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.btn-premium:hover::after {
+  width: 200px;
+  height: 200px;
+}
+
+/* 3D Text Depth */
+.text-3d {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.text-3d::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--depth-3);
+  transform: translateZ(-2px) translateY(1px) translateX(1px);
+  z-index: -1;
+}
+
+/* Floating Animation */
+.float-3d {
+  animation: float3d 6s ease-in-out infinite;
+}
+
+@keyframes float3d {
+  0%, 100% { 
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg); 
+  }
+  25% { 
+    transform: translateY(-10px) rotateX(2deg) rotateY(1deg); 
+  }
+  50% { 
+    transform: translateY(-5px) rotateX(-1deg) rotateY(-1deg); 
+  }
+  75% { 
+    transform: translateY(-15px) rotateX(1deg) rotateY(2deg); 
+  }
+}
+
+/* Parallax Scroll Effect */
+.parallax-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+
+/* Glow Pulse Animation */
+.glow-pulse {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { 
+    box-shadow: var(--shadow-base);
+  }
+  50% { 
+    box-shadow: var(--shadow-lift), 0 0 30px var(--glow);
+  }
+}
+
+/* Interactive Depth Layers */
+.depth-layer-1 { transform: translateZ(10px); }
+.depth-layer-2 { transform: translateZ(20px); }
+.depth-layer-3 { transform: translateZ(30px); }
+.depth-layer-4 { transform: translateZ(40px); }
+.depth-layer-5 { transform: translateZ(50px); }
+
+/* Luxury Shimmer Effect */
+.shimmer-luxury {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-luxury::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--glow), transparent);
+  animation: shimmerLuxury 3s ease-in-out infinite;
+}
+
+@keyframes shimmerLuxury {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* 3D Navigation Hover */
+.nav-link-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+}
+
+.nav-link-3d:hover {
+  transform: translateY(-2px) translateZ(5px);
+  text-shadow: 0 0 15px var(--glow);
+}
+
+/* Luxury Focus States */
+.luxury-focus:focus {
+  outline: none;
+  box-shadow: var(--shadow-lift), 0 0 0 3px var(--glow);
+  transform: translateY(-2px);
+}
+
+/* Premium Loading Animation */
+.loading-luxury {
+  position: relative;
+}
+
+.loading-luxury::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--depth-3);
+  border-top: 2px solid var(--gold);
+  border-radius: 50%;
+  animation: spinLuxury 1s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spinLuxury {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Responsive 3D Adjustments */
+@media (max-width: 768px) {
+  .card-3d:hover {
+    transform: translateY(-4px) rotateX(2deg);
+  }
+  
+  .float-3d {
+    animation: none;
+  }
+  
+  .parallax-3d {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-3d,
+  .glow-pulse,
+  .shimmer-luxury::before {
+    animation: none;
+  }
+  
+  .card-3d:hover,
+  .nav-link-3d:hover {
+    transform: translateY(-2px);
+  }
+}
+
+
+/* Shine effect for partner cards */
+@keyframes shine {
+  0% { left: -100%; }
+  20% { left: 100%; }
+  100% { left: 100%; }
 }
