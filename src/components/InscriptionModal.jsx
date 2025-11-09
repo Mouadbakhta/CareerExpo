@@ -14,20 +14,24 @@ export default function InscriptionModal({ onClose }) {
     setError('');
 
     const formData = new FormData(e.target);
-    const [nom, prenom] = formData.get('nom').split(' ');
     
+    // Structure selon la documentation API
     const etudiantData = {
-      nom: nom || formData.get('nom'),
-      prenom: prenom || '',
-      etablissement: formData.get('etablissement') || 'ENSA',
+      nom: formData.get('nom'),
+      prenom: formData.get('prenom'),
+      etablissement: formData.get('etablissement'),
+      telephone: formData.get('email'), // Utilise email comme telephone temporairement
       niveau: formData.get('niveau'),
-      status: 'PENDING',
       competition: { id: 3 }
     };
 
     const apiFormData = new FormData();
     apiFormData.append('etudiant', JSON.stringify(etudiantData));
-    apiFormData.append('cv', formData.get('cv'));
+    apiFormData.append('cvPdf', formData.get('cv'));
+    
+    if (formData.get('video')) {
+      apiFormData.append('cvVideo', formData.get('video'));
+    }
 
     try {
       await studentAPI.create(apiFormData);
@@ -71,21 +75,35 @@ export default function InscriptionModal({ onClose }) {
           <X size={26} color="var(--violet)" />
         </button>
         <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--violet)', textAlign: 'center' }}>
-          S’inscrire au Forum
+          S'inscrire au Forum
         </h2>
         <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.2rem' }}>
           {error && <div style={{ color: '#f87171', fontSize: '0.9rem', textAlign: 'center' }}>{error}</div>}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--violet)', fontWeight: '600', fontSize: '0.95rem' }}>
+                Nom
+              </label>
+              <input name="nom" type="text" placeholder="Votre nom" required style={inputStyle} />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--violet)', fontWeight: '600', fontSize: '0.95rem' }}>
+                Prénom
+              </label>
+              <input name="prenom" type="text" placeholder="Votre prénom" required style={inputStyle} />
+            </div>
+          </div>
           <div>
             <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--violet)', fontWeight: '600', fontSize: '0.95rem' }}>
-              Nom complet
+              Email
             </label>
-            <input name="nom" type="text" placeholder="Entrez votre nom complet" required style={inputStyle} />
+            <input name="email" type="email" placeholder="votre.email@exemple.com" required style={inputStyle} />
           </div>
           <div>
             <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--violet)', fontWeight: '600', fontSize: '0.95rem' }}>
               Établissement
             </label>
-            <input name="etablissement" type="text" placeholder="Votre établissement" defaultValue="ENSA" required style={inputStyle} />
+            <input name="etablissement" type="text" placeholder="Votre établissement" defaultValue="ENSA Marrakech" required style={inputStyle} />
           </div>
           <div>
             <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--violet)', fontWeight: '600', fontSize: '0.95rem' }}>
@@ -93,9 +111,9 @@ export default function InscriptionModal({ onClose }) {
             </label>
             <select name="niveau" required style={{...inputStyle, color: 'var(--text)'}}>
               <option value="" style={{background: 'var(--depth-1)', color: 'var(--text)'}}>Sélectionnez votre niveau</option>
-              <option value="BAC +1" style={{background: 'var(--depth-1)', color: 'var(--text)'}}>BAC + 1</option>
-              <option value="BAC +2" style={{background: 'var(--depth-1)', color: 'var(--text)'}}>BAC + 2</option>
-              <option value="BAC +3" style={{background: 'var(--depth-1)', color: 'var(--text)'}}>BAC + 3</option>
+              <option value="Licence 1" style={{background: 'var(--depth-1)', color: 'var(--text)'}}>Licence 1</option>
+              <option value="Licence 2" style={{background: 'var(--depth-1)', color: 'var(--text)'}}>Licence 2</option>
+              <option value="Licence 3" style={{background: 'var(--depth-1)', color: 'var(--text)'}}>Licence 3</option>
               <option value="BAC +4" style={{background: 'var(--depth-1)', color: 'var(--text)'}}>BAC + 4</option>
               <option value="BAC +5" style={{background: 'var(--depth-1)', color: 'var(--text)'}}>BAC + 5</option>
             </select>
@@ -105,6 +123,15 @@ export default function InscriptionModal({ onClose }) {
               CV (PDF)
             </label>
             <input name="cv" type="file" accept=".pdf" required style={{ ...inputStyle, padding: '0.8rem' }} />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--violet)', fontWeight: '600', fontSize: '0.95rem' }}>
+              Vidéo de présentation (optionnel)
+            </label>
+            <input name="video" type="file" accept="video/*" style={{ ...inputStyle, padding: '0.8rem' }} />
+            <small style={{ color: 'var(--depth-4)', fontSize: '0.8rem', marginTop: '0.3rem', display: 'block' }}>
+              Formats acceptés: MP4, AVI, MOV (max 50MB)
+            </small>
           </div>
           <button type="submit" disabled={loading} className="btn btn-premium luxury-focus" style={{ marginTop: '1rem', background: 'var(--violet)', color: 'black', opacity: loading ? 0.6 : 1 }}>
             {loading ? 'Envoi en cours...' : 'Envoyer ma candidature'}

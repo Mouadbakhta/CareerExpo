@@ -40,13 +40,13 @@ export default function Home({ onAdminLogin }) {
   };
 
   const partners = [
-    { name: "Capgemini", logo: "/Logos/capgemini.png", website: "https://www.capgemini.com/" },
+    { name: "Capgemini", logo: "/Logos/Capgemini.png", website: "https://www.capgemini.com/" },
     { name: "Retain", logo: "/Logos/retain.png", website: "https://www.retain.com/" },
-    { name: "Bank of Africa", logo: "/Logos/BankOfAfrica.png", website: "https://www.bankofafrica.ma/" },
+    { name: "Bank of Africa", logo: "/Logos/BankofAfrica.png", website: "https://www.bankofafrica.ma/" },
     { name: "Istya Group", logo: "/Logos/istya.png", website: "https://www.istya.com/" },
-    { name: "Oriless Consulting", logo: "/Logos/oriless.png", website: "https://www.oriless.com/" },
+    { name: "Oriliss Consulting", logo: "/Logos/OrilissConsulting.png", website: "https://www.orilisconsulting.ma/" },
     { name: "Green Energy Park", logo: "/Logos/greenenergypark.png", website: "https://www.greenenergypark.ma/" },
-    { name: "Leyton", logo: "/Logos/Leyton.jpg", website: "https://www.leyton.com/" },
+    { name: "Leyton", logo: "/Logos/Leyton.png", website: "https://www.leyton.com/" },
     { name: "Lear", logo: "/Logos/lear.png", website: "https://www.lear.com/" },
     { name: "Université Cadi Ayyad", logo: "/Logos/uca.png", website: "https://www.uca.ma/" },
     { name: "ENSA Marrakech", logo: "/Logos/ensa.png", website: "http://www.ensa.ac.ma/" }
@@ -87,9 +87,24 @@ export default function Home({ onAdminLogin }) {
   ];
 
   const jury = [
-    { name: "M. Karim Lahlou", role: "Recruteur", company: "Capgemini", logo: "https://logo.clearbit.com/capgemini.com" },
-    { name: "Mme. Nadia Chraibi", role: "Talent", company: "BMCE", logo: "https://logo.clearbit.com/boabank.com" },
-    { name: "M. Reda Tazi", role: "HR Manager", company: "Attijariwafa", logo: "https://logo.clearbit.com/attijariwafabank.com" },
+    { 
+      name: "Fatine Elharouni", 
+      title: "Docteure, Maîtresse Assistante en Gestion de Projet et en Gestion de la Chaîne d'Approvisionnement à l'École Nationale des Sciences Appliquées de Marrakech", 
+      photo: "../public/jury/Jury1.jpeg",
+      linkedin: "https://www.linkedin.com/in/fatine-elharouni-5a727821/"
+    },
+    { 
+      name: "Abdellah Tajer", 
+      title: "Professeur assistant à l'École nationale des Sciences Appliquées de Marrakech", 
+      photo: "./public/jury/Jury2.jpeg",
+      linkedin: "https://www.linkedin.com/in/abdellah-tajer-744047155/"
+    },
+    { 
+      name: "Aissam Bekkari", 
+      title: "Enseignant chercheur à l'École Nationale des Sciences Appliquées de Marrakech", 
+      photo: "./public/jury/Jury3.jpeg",
+      linkedin: "https://www.linkedin.com/in/aissam-bekkari-979102177/"
+    }
   ];
 
   return (
@@ -251,7 +266,7 @@ export default function Home({ onAdminLogin }) {
           marginBottom: '1rem',
           textShadow: 'none'
         }}>
-          À propos
+          À PROPOS
         </h2>
         <div style={{
           width: '100px',
@@ -429,7 +444,7 @@ export default function Home({ onAdminLogin }) {
           marginBottom: '1rem',
           textShadow: 'none'
         }}>
-            Programme
+            PROGRAMME
           </h2>
           <div style={{
             width: '100px',
@@ -442,11 +457,14 @@ export default function Home({ onAdminLogin }) {
             margin: '0 auto',
             padding: '1.5rem'
           }}>
-            <h3 style={{ color: '#ffffff', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>
-              CAREER EXPO 5ème Edition
-            </h3>
+            <pre style={{ color: '#f0c76e', fontSize: '1.5rem', fontWeight: '1000', marginBottom: '0.5rem' }}>
+              C A R E E R   E X P O  -  5 È M E  É D I T I O N 
+            </pre>
             <p style={{ color: 'var(--depth-4)', fontSize: '0.875rem', lineHeight: '1.4', margin: 0 }}>
-              SOUS LE THÈME : "DE L'INGÉNIERIE À L'ENTREPRENEURIAT: L'IA COMME ACCÉLÉRATEUR D'INNOVATION"
+              <pre>S O U S   L E   T H È M E</pre> 
+              <br>
+              </br> 
+              <strong>L'INGÉNIERIE À L'ENTREPRENEURIAT : L'IA COMME ACCÉLÉRATEUR D'INNOVATION</strong>
             </p>
           </div>
         </motion.div>
@@ -664,7 +682,7 @@ export default function Home({ onAdminLogin }) {
           marginBottom: '1rem',
           textShadow: 'none'
         }}>
-            Conférenciers
+            CONFÉRENCIERS
           </h2>
           <div style={{
             width: '100px',
@@ -767,7 +785,7 @@ export default function Home({ onAdminLogin }) {
           marginBottom: '1rem',
           textShadow: 'none'
         }}>
-          Jury CV
+          JURY CV
         </h2>
         <div style={{
           width: '100px',
@@ -777,26 +795,77 @@ export default function Home({ onAdminLogin }) {
         }}></div>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '2rem'
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '2rem',
+          maxWidth: '1000px',
+          margin: '0 auto'
         }}>
           {jury.map((j, i) => (
             <motion.div
               key={i}
-              whileHover={{ y: -4 }}
-              className="card card-3d text-center"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="card card-3d"
+              style={{
+                padding: '1.5rem',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center',
+                minHeight: '320px'
+              }}
             >
-              <img
-                src={j.logo}
-                alt={j.company}
+              <motion.img
+                whileHover={{ scale: 1.1 }}
+                src={j.photo}
+                alt={j.name}
                 style={{
-                  height: '80px',
-                  margin: '0 auto 1rem',
-                  filter: 'brightness(0) invert(1)'
+                  width: '100px',
+                  height: '100px',
+                  borderRadius: '50%',
+                  border: '3px solid #f0c76e',
+                  objectFit: 'cover',
+                  boxShadow: '0 0 15px rgba(249,178,51,0.3)',
+                  marginBottom: '1rem'
                 }}
               />
-              <h4 style={{ color: '#ffffff', fontWeight: '600', fontSize: '0.875rem', margin: '0 0 0.5rem 0' }}>{j.name}</h4>
-              <p style={{ color: 'var(--depth-4)', fontSize: '1rem' }}>{j.role} • {j.company}</p>
+              <h3 style={{ 
+                color: '#ffffff', 
+                fontWeight: '600', 
+                fontSize: '0.875rem', 
+                margin: '0 0 0.75rem 0'
+              }}>{j.name}</h3>
+              <p style={{ 
+                color: 'var(--depth-4)', 
+                fontSize: '0.75rem', 
+                lineHeight: '1.4',
+                margin: '0 0 1rem 0',
+                flex: 1
+              }}>{j.title}</p>
+              <motion.a
+                href={j.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  background: '#0077B5',
+                  color: 'white',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '20px',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  fontSize: '0.75rem',
+                  transition: 'all 0.3s'
+                }}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                LinkedIn
+              </motion.a>
             </motion.div>
           ))}
         </div>
@@ -813,7 +882,7 @@ export default function Home({ onAdminLogin }) {
           marginBottom: '1rem',
           textShadow: 'none'
         }}>
-          Éditions Précédentes
+          ÉDITIONS PRÉCÉDENTES
         </h2>
         <div style={{
           width: '100px',
@@ -822,14 +891,14 @@ export default function Home({ onAdminLogin }) {
           margin: '0 auto 1rem'
         }}></div>
         <p style={{
-          textAlign: 'justify',
-          color: 'var(--depth-4)',
-          fontSize: '0.875rem',
-          maxWidth: '700px',
-          margin: '0 auto 4rem',
-          lineHeight: '1.6'
-        }}>
-          Découvrez les moments forts de nos éditions passées
+          fontSize: '1rem',
+            color: 'rgba(255,255,255,0.7)',
+            maxWidth: '700px',
+            margin: '0 auto 1.5rem',
+            lineHeight: '1.6',
+            textAlign: 'justify'
+          }}>
+            Découvrer les moments forts qui ont marqué les éditions précédentes de Career Expo
         </p>
         <div style={{
           display: 'grid',
@@ -971,7 +1040,7 @@ export default function Home({ onAdminLogin }) {
             marginBottom: '0.8rem',
             textShadow: 'none'
           }}>
-            Nos Partenaires
+            NOS PARTENAIRES
           </h2>
           
           <p style={{
@@ -997,10 +1066,9 @@ export default function Home({ onAdminLogin }) {
         <div style={{
           overflow: 'hidden',
           margin: '3rem 0',
-          background: 'linear-gradient(135deg, rgba(240,199,110,0.05), rgba(189,175,255,0.05))',
-          padding: '2rem 0',
-          borderRadius: '15px',
-          border: '1px solid rgba(240,199,110,0.2)',
+          background: 'white',
+          padding: '1rem 0',
+          borderRadius: '10px',
           position: 'relative',
           zIndex: 1
         }}>
@@ -1024,7 +1092,7 @@ export default function Home({ onAdminLogin }) {
         }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
             gap: '2rem'
           }}>
             {partners.map((p, i) => (
@@ -1038,11 +1106,11 @@ export default function Home({ onAdminLogin }) {
                 style={{ position: 'relative', cursor: 'pointer' }}
               >
                 <div style={{
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)',
+                  background: 'white',
                   borderRadius: '15px',
                   border: '2px solid rgba(240,199,110,0.2)',
                   overflow: 'hidden',
-                  height: '120px',
+                  height: '140px',
                   position: 'relative',
                   backdropFilter: 'blur(10px)',
                   boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
@@ -1071,8 +1139,8 @@ export default function Home({ onAdminLogin }) {
                       src={p.logo}
                       alt={p.name}
                       style={{
-                        maxWidth: '90%',
-                        maxHeight: '90%',
+                        width: p.name === 'Capgemini' || p.name === 'Bank of Africa' || p.name === 'Istya Group' ? '95%' : '85%',
+                        height: p.name === 'Capgemini' || p.name === 'Bank of Africa' || p.name === 'Istya Group' ? '95%' : '85%',
                         objectFit: 'contain',
                         filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.2))'
                       }}
@@ -1152,7 +1220,7 @@ export default function Home({ onAdminLogin }) {
           marginBottom: '1rem',
           textShadow: 'none'
         }}>
-          Contact
+          CONTACT
         </h2>
         <div style={{
           width: '100px',

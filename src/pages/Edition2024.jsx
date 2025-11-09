@@ -77,40 +77,42 @@ export default function Edition2024() {
           </p>
         </motion.div>
 
-        {/* Photos Gallery */}
+        {/* Photo principale */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-            marginBottom: '4rem'
+            marginBottom: '4rem',
+            display: 'flex',
+            justifyContent: 'center'
           }}
         >
-          {photos.map((photo, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05, y: -10 }}
-              className="card"
+          <motion.div
+            whileHover={{ scale: 1.02, y: -5 }}
+            className="card"
+            style={{
+              padding: '0',
+              overflow: 'hidden',
+              height: '400px',
+              width: '100%',
+              maxWidth: '800px',
+              background: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <img
+              src="/editions/careerexpoold.png"
+              alt="Logo Career Expo 2024"
               style={{
-                padding: '0',
-                overflow: 'hidden',
-                height: '250px'
+                maxWidth: '90%',
+                maxHeight: '90%',
+                objectFit: 'contain'
               }}
-            >
-              <img
-                src={photo}
-                alt={`Photo ${i + 1} - Édition 2024`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
-              />
-            </motion.div>
-          ))}
+            />
+          </motion.div>
         </motion.div>
 
         {/* Description */}
@@ -126,9 +128,10 @@ export default function Edition2024() {
         >
           <h2 style={{ 
             color: '#f0c76e', 
-            fontSize: '0.75rem', 
+            fontSize: '1.25rem', 
             marginBottom: '2rem',
-            textAlign: 'center'
+            textAlign: 'center',
+            fontWeight: '700'
           }}>
             À propos de l'édition 2024
           </h2>
@@ -139,25 +142,21 @@ export default function Edition2024() {
             textAlign: 'justify'
           }}>
             <p style={{ marginBottom: '1.5rem' }}>
-              L'édition 2024 a établi de nouveaux standards d'excellence avec une participation record de 
-              <strong style={{ color: '#f0c76e' }}> 450 étudiants</strong> et la présence de 
-              <strong style={{ color: '#f0c76e' }}> 28 entreprises leaders</strong> du secteur technologique et industriel.
-            </p>
-            <p style={{ marginBottom: '1.5rem' }}>
-              Cette édition s'est focalisée sur les technologies émergentes avec des ateliers pratiques sur 
-              <strong style={{ color: '#f0c76e' }}> l'Intelligence Artificielle</strong>, 
-              <strong style={{ color: '#f0c76e' }}> la cybersécurité</strong>, et 
-              <strong style={{ color: '#f0c76e' }}> les métiers du futur</strong>. 
-              Les étudiants ont pu découvrir les dernières innovations et tendances du marché de l'emploi.
-            </p>
-            <p style={{ marginBottom: '1.5rem' }}>
-              Les points forts de cette édition incluaient la présence d'experts internationaux, 
-              des démonstrations technologiques en direct, et des sessions de mentorat personnalisées. 
-              Plus de <strong style={{ color: '#f0c76e' }}>200 offres d'emploi et de stage</strong> ont été proposées.
-            </p>
-            <p>
-              L'événement s'est clôturé par une cérémonie de remise de prix récompensant l'innovation étudiante 
-              et les meilleures collaborations entreprise-école, consolidant ainsi les liens entre le monde académique et professionnel.
+          L'édition 2024 du <strong style={{ color: '#f0c76e' }}>Forum Career Expo</strong> à <strong>l’École Nationale des Sciences Appliquées de Marrakech</strong> s’est affirmée comme un événement phare pour inspirer les ingénieurs de demain et leur offrir des opportunités de développement de carrière à la hauteur de leurs ambitions.
+
+          Avec la participation active des étudiants, l'organisation de cette édition a été un véritable succès. Des entreprises et institutions prestigieuses, telles que <strong style={{ color: '#f0c76e' }}>Université Cadi Ayyad, ENSA Marrakech, Bank of Africa, AVL, Stellantis, Leyton, Akkodis, OG SBC, Capgemini, Reetain, Safy, et Webpick</strong>, étaient présentes pour présenter leurs offres de stages, d'emplois et de formations. Ces acteurs majeurs ont proposé des opportunités exceptionnelles aux étudiants, renforçant ainsi les liens entre le monde académique et le secteur privé.<br>
+          </br>
+          <br></br>
+
+          L'événement a permis de mettre en lumière des entreprises leaders dans des domaines aussi variés que l’innovation technologique, l’ingénierie, la transformation numérique, la sécurité d’entreprise et la finance. Les étudiants ont eu la chance d’échanger directement avec des recruteurs et de découvrir les attentes des entreprises pour le futur.
+
+           <strong style={{ color: '#f0c76e' }}> L'Université Cadi Ayyad et ENSA Marrakech</strong> ont, quant à elles, souligné l'importance de l’excellence académique et de l'innovation dans la formation des ingénieurs de demain. Des partenaires comme Bank of Africa ont mis en avant leur rôle clé en tant que support financier pour accompagner les jeunes talents dans leurs projets professionnels. <strong style={{ color: '#f0c76e' }}>AVL et Stellantis</strong> ont partagé leur vision de l’avenir avec des solutions technologiques innovantes, respectivement dans les domaines de l’ingénierie et de l’automobile.<br></br>
+           <br></br>
+            <strong style={{ color: '#f0c76e' }}>Leyton et Akkodis</strong> ont quant à eux mis l'accent sur l'accompagnement des entreprises dans leur transformation numérique et l'optimisation de leur performance. Des acteurs comme <strong style={{ color: '#f0c76e' }}>OG SBC </strong>ont présenté leurs solutions en matière de sécurité d’entreprise, tandis que <strong style={{ color: '#f0c76e' }}>Capgemini</strong> a offert des perspectives sur la transformation numérique dans divers secteurs d'activité.
+
+           Les étudiants ont également pu découvrir des solutions plus ciblées pour les aider à s'impliquer davantage dans des projets d'engagement client avec<strong style={{ color: '#f0c76e' }}> Reetain</strong>, ou à explorer de nouvelles solutions digitales et web avec<strong style={{ color: '#f0c76e' }}>Safy et Webpick. </strong>
+
+           Cette édition 2024 du Forum a été l’occasion idéale de tisser des liens solides, de renforcer l’employabilité des étudiants, et de favoriser l’insertion professionnelle dans un monde du travail en constante évolution.
             </p>
           </div>
         </motion.div>

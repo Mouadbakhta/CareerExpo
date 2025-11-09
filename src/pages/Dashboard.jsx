@@ -5,17 +5,17 @@ import { logout } from '../utils/auth';
 export default function Dashboard({ onLogout }) {
   const [activeTab, setActiveTab] = useState('cvs');
   const [partners, setPartners] = useState([
-    { id: 1, name: "Stellantis", logo: "/Logos/Stellantis.jpg", website: "https://www.stellantis.com/" },
-    { id: 2, name: "Oracle", logo: "/Logos/Oracle.png", website: "https://www.oracle.com/" },
-    { id: 3, name: "Akkodis", logo: "/Logos/akkodis.jpg", website: "https://www.akkodis.com/" },
-    { id: 4, name: "AVL", logo: "/Logos/avl.png", website: "https://www.avl.com/" },
-    { id: 5, name: "Bank of Africa", logo: "/Logos/BankOfAfrica.png", website: "https://www.bankofafrica.ma/" },
-    { id: 6, name: "Capgemini", logo: "/Logos/capgemini.png", website: "https://www.capgemini.com/" },
-    { id: 7, name: "Inwi", logo: "/Logos/inwi0.jpg", website: "https://www.inwi.ma/" },
+    { id: 1, name: "Bank of Africa", logo: "/Logos/BankOfAfrica.png", website: "https://www.bankofafrica.ma/" },
+    { id: 2, name: "Capgemini", logo: "/Logos/capgemini.png", website: "https://www.capgemini.com/" },
+    { id: 3, name: "ENSA", logo: "/Logos/ensa.png", website: "https://www.ensa.ac.ma/" },
+    { id: 4, name: "ENSAM", logo: "/Logos/ENSAM.png", website: "https://www.ensam.ac.ma/" },
+    { id: 5, name: "Green Energy Park", logo: "/Logos/greenenergypark.png", website: "https://www.greenenergypark.ma/" },
+    { id: 6, name: "ISTYA", logo: "/Logos/istya.png", website: "https://www.istya.ma/" },
+    { id: 7, name: "Lear Corporation", logo: "/Logos/lear.png", website: "https://www.lear.com/" },
     { id: 8, name: "Leyton", logo: "/Logos/Leyton.jpg", website: "https://www.leyton.com/" },
-    { id: 9, name: "Maroc Telecom", logo: "/Logos/MAROCTELECOM.jpg", website: "https://www.iam.ma/" },
-    { id: 10, name: "OCP Group", logo: "/Logos/ocpjpg.jpg", website: "https://www.ocpgroup.ma/" },
-    { id: 11, name: "Safy", logo: "/Logos/safy.png", website: "https://www.safy.ma/" }
+    { id: 9, name: "Oriliss Consulting", logo: "/Logos/OrilissConsulting.png", website: "https://www.orilissconsulting.com/" },
+    { id: 10, name: "Retain", logo: "/Logos/retain.png", website: "https://www.retain.ma/" },
+    { id: 11, name: "UCA", logo: "/Logos/uca.png", website: "https://www.uca.ma/" }
   ]);
   const [aboutPhotos, setAboutPhotos] = useState([
     { id: 1, url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400", title: "Photo 1" },
@@ -59,6 +59,7 @@ export default function Dashboard({ onLogout }) {
   const handleLogout = () => {
     logout();
     onLogout();
+    window.location.href = '/';
   };
 
   const addPartner = () => {
@@ -126,11 +127,11 @@ export default function Dashboard({ onLogout }) {
   };
 
   return (
-    <div style={{ paddingTop: '100px', minHeight: '100vh', padding: '2rem' }}>
+    <div style={{ paddingTop: '140px', minHeight: '100vh', padding: '2rem', position: 'relative', zIndex: 1001 }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-          <h1 style={{ color: 'var(--violet)', fontSize: '2.5rem', fontWeight: 'bold' }}>Dashboard Admin</h1>
-          <button onClick={handleLogout} className="btn btn-gold">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', position: 'relative', zIndex: 1002 }}>
+          <h1 style={{ color: 'var(--violet)', fontSize: '2.5rem', fontWeight: 'bold', position: 'relative', zIndex: 1002 }}>Dashboard Admin</h1>
+          <button onClick={handleLogout} className="btn btn-gold" style={{ position: 'relative', zIndex: 1002 }}>
             Déconnexion
           </button>
         </div>
@@ -320,7 +321,20 @@ export default function Dashboard({ onLogout }) {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
                 {partners.map(partner => (
                   <div key={partner.id} className="card" style={{ padding: '1rem' }}>
-                    <img src={partner.logo} alt={partner.name} style={{ width: '100%', height: '100px', objectFit: 'contain', marginBottom: '1rem' }} />
+                    <div style={{ width: '100%', height: '120px', backgroundColor: '#f0c76e', borderRadius: '8px', marginBottom: '1rem', overflow: 'hidden', border: '2px solid #f0c76e', position: 'relative' }}>
+                      <img 
+                        src={partner.logo} 
+                        alt={partner.name} 
+                        style={{ 
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          width: '100%', 
+                          height: '100%', 
+                          objectFit: 'fill'
+                        }}
+                      />
+                    </div>
                     <h3 style={{ color: 'var(--violet)', marginBottom: '0.5rem' }}>{partner.name}</h3>
                     <p style={{ fontSize: '0.9rem', marginBottom: '1rem', wordBreak: 'break-all' }}>{partner.website}</p>
                     <button onClick={() => deletePartner(partner.id)} style={{ background: '#dc3545', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '5px', cursor: 'pointer' }}>

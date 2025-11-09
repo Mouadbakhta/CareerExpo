@@ -15,14 +15,18 @@ export default function Footer() {
     }}>
       <div style={{
         maxWidth: '1200px',
-        margin: '0 auto'
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}>
         <p className="footer-text" style={{
           color: 'var(--text)',
           marginBottom: '1rem',
           textShadow: '0 2px 8px rgba(0,0,0,0.8)'
         }}>
-          © 2025 Forum CareerExpo Marrakech. Tous droits réservés.
+          2025 © Forum CareerExpo ENSA Marrakech.
         </p>
         <p className="footer-text shimmer-luxury" style={{
           fontWeight: 600,

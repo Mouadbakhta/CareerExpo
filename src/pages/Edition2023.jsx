@@ -77,40 +77,42 @@ export default function Edition2023() {
           </p>
         </motion.div>
 
-        {/* Photos Gallery */}
+        {/* Photo principale */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-            marginBottom: '4rem'
+            marginBottom: '4rem',
+            display: 'flex',
+            justifyContent: 'center'
           }}
         >
-          {photos.map((photo, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05, y: -10 }}
-              className="card"
+          <motion.div
+            whileHover={{ scale: 1.02, y: -5 }}
+            className="card"
+            style={{
+              padding: '0',
+              overflow: 'hidden',
+              height: '400px',
+              width: '100%',
+              maxWidth: '800px',
+              background: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <img
+              src="/editions/careerexpoold.png"
+              alt="Logo Career Expo 2023"
               style={{
-                padding: '0',
-                overflow: 'hidden',
-                height: '250px'
+                maxWidth: '90%',
+                maxHeight: '90%',
+                objectFit: 'contain'
               }}
-            >
-              <img
-                src={photo}
-                alt={`Photo ${i + 1} - Édition 2023`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
-              />
-            </motion.div>
-          ))}
+            />
+          </motion.div>
         </motion.div>
 
         {/* Description */}
@@ -126,9 +128,10 @@ export default function Edition2023() {
         >
           <h2 style={{ 
             color: '#f0c76e', 
-            fontSize: '0.75rem', 
+            fontSize: '1.25rem', 
             marginBottom: '2rem',
-            textAlign: 'center'
+            textAlign: 'center',
+            fontWeight: '700'
           }}>
             À propos de l'édition 2023
           </h2>
@@ -139,26 +142,13 @@ export default function Edition2023() {
             textAlign: 'justify'
           }}>
             <p style={{ marginBottom: '1.5rem' }}>
-              L'édition 2023 a établi de nouveaux standards d'excellence avec une participation record de 
-              <strong style={{ color: '#f0c76e' }}> 450 étudiants</strong> et la présence de 
-              <strong style={{ color: '#f0c76e' }}> 28 entreprises leaders</strong> du secteur technologique et industriel.
-            </p>
-            <p style={{ marginBottom: '1.5rem' }}>
-              Cette édition s'est focalisée sur les technologies émergentes avec des ateliers pratiques sur 
-              <strong style={{ color: '#f0c76e' }}> l'Intelligence Artificielle</strong>, 
-              <strong style={{ color: '#f0c76e' }}> la cybersécurité</strong>, et 
-              <strong style={{ color: '#f0c76e' }}> les métiers du futur</strong>. 
-              Les étudiants ont pu découvrir les dernières innovations et tendances du marché de l'emploi.
-            </p>
-            <p style={{ marginBottom: '1.5rem' }}>
-              Les points forts de cette édition incluaient la présence d'experts internationaux, 
-              des démonstrations technologiques en direct, et des sessions de mentorat personnalisées. 
-              Plus de <strong style={{ color: '#f0c76e' }}>200 offres d'emploi et de stage</strong> ont été proposées.
-            </p>
-            <p>
-              L'événement s'est clôturé par une cérémonie de remise de prix récompensant l'innovation étudiante 
-              et les meilleures collaborations entreprise-école, consolidant ainsi les liens entre le monde académique et professionnel.
-            </p>
+              L’édition de cette année du <strong style={{ color: '#f0c76e' }}>Forum Career Expo
+              </strong> à <strong>l’École Nationale des Sciences Appliquées de Marrakech</strong> a eu pour objectif d’encourager les ingénieurs de demain à transformer leurs rêves en réalité grâce à de nombreuses opportunités de développement de carrière.
+
+              De nombreux étudiants ont participé activement à l’organisation et au bon déroulement de cet événement, qui a rassemblé plusieurs entreprises et institutions de renom venues présenter leurs offres de stages, d’emplois et de formations.
+
+              Cette édition a permis de renforcer le lien entre <strong style={{ color: '#f0c76e' }}>le monde académique</strong> et <strong style={{ color: '#f0c76e' }}>le monde professionnel</strong>, tout en créant des opportunités de recrutement et de mise en valeur des talents émergents. Les étudiants ont pu échanger directement avec des recruteurs, élargir leur réseau et mieux appréhender les exigences du marché du travail, dans un contexte où l’innovation et la compétitivité sont plus que jamais au cœur des préoccupations.
+              </p>   
           </div>
         </motion.div>
 

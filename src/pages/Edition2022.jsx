@@ -77,40 +77,42 @@ export default function Edition2022() {
           </p>
         </motion.div>
 
-        {/* Photos Gallery */}
+        {/* Photo principale */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-            marginBottom: '4rem'
+            marginBottom: '4rem',
+            display: 'flex',
+            justifyContent: 'center'
           }}
         >
-          {photos.map((photo, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05, y: -10 }}
-              className="card"
+          <motion.div
+            whileHover={{ scale: 1.02, y: -5 }}
+            className="card"
+            style={{
+              padding: '0',
+              overflow: 'hidden',
+              height: '400px',
+              width: '100%',
+              maxWidth: '800px',
+              background: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <img
+              src="/editions/careerexpoold.png"
+              alt="Logo Career Expo 2022"
               style={{
-                padding: '0',
-                overflow: 'hidden',
-                height: '250px'
+                maxWidth: '90%',
+                maxHeight: '90%',
+                objectFit: 'contain'
               }}
-            >
-              <img
-                src={photo}
-                alt={`Photo ${i + 1} - Édition 2022`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
-              />
-            </motion.div>
-          ))}
+            />
+          </motion.div>
         </motion.div>
 
         {/* Description */}
@@ -126,9 +128,10 @@ export default function Edition2022() {
         >
           <h2 style={{ 
             color: '#f0c76e', 
-            fontSize: '0.75rem', 
+            fontSize: '1.25rem', 
             marginBottom: '2rem',
-            textAlign: 'center'
+            textAlign: 'center',
+            fontWeight: '700'
           }}>
             À propos de l'édition 2022
           </h2>
@@ -139,23 +142,13 @@ export default function Edition2022() {
             textAlign: 'justify'
           }}>
             <p style={{ marginBottom: '1.5rem' }}>
-              L'édition 2022 du Forum CareerExpo a marqué un tournant décisif dans l'histoire de notre événement. 
-              Avec plus de <strong style={{ color: '#f0c76e' }}>400 participants</strong> et 
-              <strong style={{ color: '#f0c76e' }}> 25 entreprises partenaires</strong>, cette édition a battu tous les records de participation.
+              L'édition 2022 du <strong style={{ color: '#f0c76e' }}>Forum Career Expo</strong>à <strong>l’École Nationale des Sciences Appliquées de Marrakech</strong> a eu pour objectif d’encourager les ingénieurs de demain à transformer leurs rêves en réalité grâce à de nombreuses opportunités de développement de carrière.
             </p>
             <p style={{ marginBottom: '1.5rem' }}>
-              Les étudiants ont eu l'opportunité de rencontrer des recruteurs de grandes entreprises nationales et internationales, 
-              de participer à des ateliers pratiques sur la rédaction de CV et les techniques d'entretien, 
-              et d'assister à des conférences inspirantes sur l'innovation technologique et l'entrepreneuriat.
+              De nombreux étudiants ont participé activement à l’organisation et au bon déroulement de cet événement, qui a rassemblé plusieurs entreprises et institutions de renom venues présenter leurs offres de stages, d’emplois et de formations.
             </p>
             <p style={{ marginBottom: '1.5rem' }}>
-              Cette édition s'est distinguée par la qualité des échanges entre étudiants et professionnels, 
-              avec un taux de satisfaction de <strong style={{ color: '#f0c76e' }}>95%</strong> et plus de 
-              <strong style={{ color: '#f0c76e' }}> 150 offres de stage</strong> proposées sur place.
-            </p>
-            <p>
-              Les moments forts incluaient la conférence d'ouverture sur "L'avenir du travail à l'ère numérique", 
-              les sessions de job dating express, et la remise des prix aux meilleurs projets étudiants.
+              Cette édition a permis de renforcer le lien entre le monde académique et le monde professionnel, et de favoriser le recrutement et la découverte de nouveaux talents. Elle a aussi offert aux étudiants une occasion unique d’échanger directement avec des recruteurs, d’élargir leur réseau et de mieux comprendre les attentes du marché du travail.
             </p>
           </div>
         </motion.div>
